@@ -1,0 +1,16 @@
+.fbtrex--visual-debug {
+    padding: 10px;
+
+    dl {
+        dt, dd {
+        }
+        dd {
+            margin-left: 0;
+            margin-bottom: 10px;
+            &:empty:before {
+                content: 'missing';
+                color: red;
+            }
+        }
+    }
+}
