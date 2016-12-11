@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
+
 # Userscript
 This directory contains the JavaScript code running in
 Tampermonkey/Greasemonkey and the build system to develop it and create
