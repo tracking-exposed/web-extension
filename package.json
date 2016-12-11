@@ -4,7 +4,7 @@
   "description": "facebook.tracking.exposed → browser extension to investigate personalization algorithms",
   "homepage": "https://github.com/tracking-exposed/facebook/",
   "bugs": "https://github.com/tracking-exposed/facebook/issues",
-  "license": "",
+  "license": "GPL-3.0",
   "author": "Alberto Granzotto, Claudio Agosti",
   "repository": {
     "type": "git",
