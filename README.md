@@ -1,21 +1,18 @@
 [![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
 
-# Userscript
-This directory contains the JavaScript code running in
-Tampermonkey/Greasemonkey and the build system to develop it and create
-distributions.
-
+# Intro
+This is the source code for the **tracking-exposed** extension.
 We use ECMAScript 2015, aka ES6, aka ECMAScript Harmony. The aim is to keep the
 code modular, easy to test, and beautiful.
 
 
-# Dependencies
-Requires Node 5+. Install [nvm](https://github.com/creationix/nvm) if you
-haven't already.
-
-
 ## Getting Started
 Setting up the dev environment is super easy.
+
+
+### Dependencies
+This project requires Node 5+. Install [nvm](https://github.com/creationix/nvm)
+if you haven't already.
 
 
 ### Set up your build system
@@ -48,13 +45,16 @@ If you want to specify a different chrome user than the default one, set the env
 variable `USER_DATA_DIR` to an existing directory.
 
 
-#### Ready to go!
+### Ready to go!
 Visit [Facebook](https://www.facebook.com/) and open the dev tools. You should
-see some logging messages by **escvi**.
+see some logging messages.
+
 
 ### Extend fixtures
 
- * You've to install the package `tidy` the last version in ubuntu is not working (we'll update the comment when fixed), use http://binaries.html-tidy.org/
+ * You've to install the package `tidy` the last version in ubuntu is not
+   working (we'll update the comment when fixed), use
+   http://binaries.html-tidy.org/
  * Copy the userContentWrapper Element
  * save in file.html
 
