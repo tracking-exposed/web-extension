@@ -27,7 +27,7 @@ const OnboardingBox = React.createClass({
                 </div>
 
                 <div className='fbtrex--onboarding-collapsed fbtrex--hide'>
-                    facebook.tracking.exposed onboarding is not completed yet. <button  className='fbtrex--onboarding-toggle'>More info.</button>
+                    facebook.tracking.exposed onboarding is not completed yet. <button className='fbtrex--onboarding-toggle'>More info.</button>
                 </div>
             </div>
         );
