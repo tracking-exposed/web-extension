@@ -1,6 +1,6 @@
 import cookie from 'cookie';
 
-import { getTimeISO8601, getParam, normalizeUrl } from './utils';
+import { getTimeISO8601, normalizeUrl } from './utils';
 
 export function scrape (elem) {
     const postType = (elem.find('.uiStreamSponsoredLink').length === 1) ? 'sponsored' : 'feed';

@@ -6,7 +6,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Nothing yet.
 
 ### Changed
-- Nothing yet.
+- Onboarding is now more prominent and can be closed.
+- `API` url is `https://facebook.tracking.exposed/`
 
 ### Fixed
 - Nothing yet.

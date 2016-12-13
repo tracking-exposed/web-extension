@@ -1,8 +1,29 @@
 .fbtrex--onboarding {
-    font-size: 120%;
-    margin: 20px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+}
+
+.fbtrex--onboarding-box,
+.fbtrex--onboarding-collapsed {
+    width: 700px;
+    margin: 0 auto;
     padding: 12px;
+
+    font-size: 120%;
+
+    border: 2px solid green;
     background-color: white;
+    border-radius: 2px;
+    border-bottom: 0;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.fbtrex--onboarding-box {
+    border-width: 5px;
 
     h1 {
         font-size: 26px;
@@ -11,15 +32,10 @@
 
     .fbtrex--copypaste {
         border: 1px solid #ccc;
+        font-size: 12px;
         padding: 12px;
         background-color: #fafafa;
         font-family: monospace;
-        width: 66%;
-    }
-
-    .fbtrex--note {
-        padding: 12px;
-        width: 66%;
     }
 }
 
