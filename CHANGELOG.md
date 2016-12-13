@@ -15,6 +15,11 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Nothing yet.
 
+## [1.0.4] - 2016-13-05
+### Fixed
+- A more robust onboard message and UX
+- removed `collector.` subdomain from the URL
+
 ## [1.0.3] - 2016-12-05
 ### Fixed
 - Add missing `startTime` to timeline event.
