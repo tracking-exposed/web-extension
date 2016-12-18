@@ -34,5 +34,9 @@
       "js": ["./app.js"],
       "css": ["./styles.css"]
     }
+  ],
+
+  "web_accessible_resources": [
+      "*.png"
   ]
 }

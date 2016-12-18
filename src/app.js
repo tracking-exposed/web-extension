@@ -68,7 +68,7 @@ function boot () {
             // Keep an eye if the onboarding box is still there.
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } else {
-            // Otherwise, we load all the components of the UI and the watchers.
+            // Load all the UI components and the watchers.
             render();
             timeline();
             prefeed();
@@ -234,4 +234,9 @@ function verify (status, response) {
     }
 }
 
-boot();
+// Before booting the app, we need to update the current configuration
+// with some values we can retrieve only from the `chrome`space.
+chrome.runtime.sendMessage({type: 'chromeConfig'}, (response) => {
+    Object.assign(config, response);
+    boot();
+});

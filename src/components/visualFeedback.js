@@ -4,6 +4,7 @@ import classNames from 'classnames';
 const VisualFeedback = React.createClass({
     render () {
         const isPublic = this.props.event.data.visibility === 'public';
+        const logo = this.props.logo;
         var badge;
         var message;
 
@@ -17,6 +18,10 @@ const VisualFeedback = React.createClass({
 
         return (
             <div className={classNames('fbtrex--visual-feedback', { 'fbtrex--visibility-public': isPublic })}>
+                <h1>
+                    <img src={logo} />
+                    facebook.tracking.exposed
+                </h1>
                 <span className='fbtrex--badge'>
                     {badge}
                 </span>
