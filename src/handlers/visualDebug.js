@@ -6,9 +6,12 @@ import VisualDebugBox from '../components/visualDebugBox';
 
 function eventHandler (type, e) {
     e.element.addClass('fbtrex--visibility-' + e.data.visibility);
-    e.element.append($(ReactDOMServer.renderToString(
-        <VisualDebugBox event={e} />
-    )));
+
+    if (e.data.visibility === 'public') {
+        e.element.prepend($(ReactDOMServer.renderToString(
+            <VisualDebugBox event={e} />
+        )));
+    }
 }
 
 export function register (hub) {

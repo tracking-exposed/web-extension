@@ -1,9 +1,9 @@
 import nacl from 'tweetnacl';
 import bs58 from 'bs58';
 
-import api from './api';
-import { isEmpty } from '../utils';
-import db from './db';
+import api from '../api';
+import { isEmpty } from '../../utils';
+import db from '../db';
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'userLookup') {

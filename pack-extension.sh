@@ -8,6 +8,7 @@ echo "Manually removing 'localhost:8000' from the manifest.json"
 sed '/localhost:8000/d' manifest.json > ./dist/manifest.json
 
 cp icons/* ./dist
+cp popup.html ./dist
 cd ./dist
 zip extension.zip *
 
