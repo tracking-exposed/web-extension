@@ -1,0 +1,22 @@
+.fbtrex--visual-feedback {
+    border-bottom: 1px solid #e5e6e9;
+    padding: 6px 12px;
+    background-color: #f6f7f9;
+
+    .fbtrex--badge {
+        color: red;
+        margin-right: 6px;
+    }
+
+    .fbtrex--message {
+    }
+}
+
+.fbtrex--visual-feedback.fbtrex--visibility-public {
+    .fbtrex--badge {
+        background-color: green;
+        color: white;
+        padding: 1px 3px;
+        border-radius: 50%;
+    }
+}
