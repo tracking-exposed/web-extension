@@ -6,7 +6,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Nothing yet.
 
 ### Changed
-- Nothing yey.
+- API endpoint is now `https://collector.facebook.tracking.exposed/`
 
 ### Fixed
 - Nothing yet.
