@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 import { isEmpty, isFunction } from '../utils';
 
-const backend = chrome.storage.local;
+const backend = chrome.storage.sync;
 
 function get (key, setIfMissing) {
     return new Promise((resolve, reject) => {
