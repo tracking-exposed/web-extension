@@ -12,12 +12,15 @@
   },
 
   "browser_action": {
-      "default_icon": "fbtrex16.png"
+      "default_icon": "fbtrex16.png",
+      "default_popup": "popup.html"
+
   },
 
   "permissions": [
     "tabs",
     "storage",
+    "cookies",
     "http://localhost:8000/",
     "https://*.facebook.com/",
     "https://*.tracking.exposed/"
