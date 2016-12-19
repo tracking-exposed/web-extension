@@ -3,7 +3,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Nothing yet.
+- when a post appears in the newsfeed, an info box is added at the top of the
+  post itself, so the user has a better understanding of what is scraped and
+  what is not.
 
 ### Changed
 - Nothing yey.
