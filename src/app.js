@@ -69,7 +69,6 @@ function boot () {
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } else {
             // Otherwise, we load all the components of the UI and the watchers.
-            render();
             timeline();
             prefeed();
             watch();
@@ -122,12 +121,6 @@ function prefeed () {
 
 function watch () {
     document.arrive('#contentCol .userContentWrapper', function () { processPost(this); });
-}
-
-function render () {
-    const rootElement = $('<div />', { 'id': 'fbtrex--root' });
-    $('body').append(rootElement);
-    ReactDOM.render((<StartButton userId={config.userId} />), document.getElementById('fbtrex--root'));
 }
 
 function flush () {
