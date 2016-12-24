@@ -43,7 +43,6 @@ import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
 
-import StartButton from './components/startButton';
 import OnboardingBox from './components/onboardingBox';
 
 // Boot the user script. This is the first function called.
