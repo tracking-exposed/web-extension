@@ -43,7 +43,6 @@ import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
 
-import StartButton from './components/startButton';
 import OnboardingBox from './components/onboardingBox';
 
 // Boot the user script. This is the first function called.
@@ -68,8 +67,7 @@ function boot () {
             // Keep an eye if the onboarding box is still there.
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } else {
-            // Load all the UI components and the watchers.
-            render();
+            // Otherwise, we load all the components of the UI and the watchers.
             timeline();
             prefeed();
             watch();
@@ -122,12 +120,6 @@ function prefeed () {
 
 function watch () {
     document.arrive('#contentCol .userContentWrapper', function () { processPost(this); });
-}
-
-function render () {
-    const rootElement = $('<div />', { 'id': 'fbtrex--root' });
-    $('body').append(rootElement);
-    ReactDOM.render((<StartButton userId={config.userId} />), document.getElementById('fbtrex--root'));
 }
 
 function flush () {
