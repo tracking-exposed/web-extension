@@ -17,7 +17,7 @@ var publicTrigger = {
 
 export function scrapePost (postType, elem) {
     // Skip if the post is not top level
-    if (elem.parents('.userContentWrapper').length) {
+    if (elem.parents('.fbUserContent').length) {
         console.log('Skipping post because nested');
         return null;
     }
