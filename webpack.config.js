@@ -18,7 +18,7 @@ const packageJSON = require('./package.json');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const PRODUCTION = NODE_ENV === 'production';
 const DEVELOPMENT = NODE_ENV === 'development';
-console.log("NODE_ENV [" + process.env.NODE_ENV + "] Prod:", PRODUCTION, "Devel: ", DEVELOPMENT);
+console.log('NODE_ENV [' + process.env.NODE_ENV + '] Prod:', PRODUCTION, 'Devel: ', DEVELOPMENT);
 const BUILD = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
 const PATHS = {
@@ -35,7 +35,7 @@ const PATHS = {
 const DEFINITIONS = {
     'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
-        API_ROOT: JSON.stringify((DEVELOPMENT ? 'http://localhost:8000/' : 'https://collector.facebook.tracking.exposed/') + 'api/v' + LAST_VERSION + '/'),
+        API_ROOT: JSON.stringify((DEVELOPMENT ? 'http://localhost:8000/' : 'https://facebook.tracking.exposed/') + 'api/v' + LAST_VERSION + '/'),
         VERSION: JSON.stringify(packageJSON.version + (DEVELOPMENT ? '-dev' : '')),
         BUILD: JSON.stringify(BUILD),
         FLUSH_INTERVAL: JSON.stringify(DEVELOPMENT ? 10000 : 20000)

@@ -1,22 +1,34 @@
 import React from 'react';
 
 const OnboardingBox = React.createClass({
+
     render () {
         const publicKey = this.props.publicKey;
 
         return (
             <div className='fbtrex--onboarding'>
-                <h1>Welcome in facebook.tracking.exposed!</h1>
-                <p>To get started, copy paste the following message in a new <strong>public post</strong>:</p>
-                <p className='fbtrex--copypaste'>
-                  Personalisation Algorithms are a collective issue, and can
-                  only be collectively addressed; today I am joining
-                  https://facebook.tracking.exposed and this technical
-                  message is necessary to link my user to this key: {publicKey}
-                </p>
-                <p className='fbtrex--note'>
-                  This box will disappear after we succesfully retrieve your key, <b>if do not disappear</b>, or if you would like do some algorithm experiment with us, join the <a href="https://www.facebook.com/personalizationalgorithm">facebook page</a> and check the <a href="https://facebook.tracking.exposed/beta" target="_blank">ß announcement</a>.
-                </p>
+                <div className='fbtrex--onboarding-box'>
+                    <h1>Welcome in facebook.tracking.exposed!</h1>
+                    <p>To get started, copy paste the following message in a new <strong>public post</strong>:</p>
+                    <p className='fbtrex--copypaste'>
+                      Personalisation Algorithms are a collective issue, and can
+                      only be collectively addressed; today I am joining
+                      https://facebook.tracking.exposed and this technical
+                      message is necessary to link my user to this key: {publicKey}
+                    </p>
+                    <p className='fbtrex--note'>
+                        This box will disappear after we successfully retrieve your key. 
+                            <b> The supported languages are: English, Italiano, Deutsch, Espanol & Português. </b>
+                        If you are using Facebook in a different language, please contact us on our <a href="https://www.facebook.com/personalizationalgorithm">community page</a> or open an <a href="https://github.com/tracking-exposed/web-extension/issues"> issue on github</a>.
+                    </p>
+                    <p>
+                        <button className='fbtrex--onboarding-toggle'>Close box.</button>
+                    </p>
+                </div>
+
+                <div className='fbtrex--onboarding-collapsed fbtrex--hide'>
+                    facebook.tracking.exposed onboarding is not completed yet. <button className='fbtrex--onboarding-toggle'>More info.</button>
+                </div>
             </div>
         );
     }

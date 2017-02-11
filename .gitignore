@@ -10,6 +10,8 @@
 *.sublime-workspace
 *.sublime-workspace
 
+extension.zip
+
 .env
 
 build/*

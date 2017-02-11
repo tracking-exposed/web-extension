@@ -65,6 +65,8 @@ function boot () {
         if (response.status === 'new') {
             // In the case the status is `new` then we need to onboard the user.
             onboarding(response.publicKey);
+            // Keep an eye if the onboarding box is still there.
+            window.setInterval(() => onboarding(response.publicKey), 1000);
         } else {
             // Otherwise, we load all the components of the UI and the watchers.
             render();
@@ -174,10 +176,23 @@ function processTimeline () {
 // 4. If the API call is successful, an **activity page** will update the
 //    status of the key from `new` to `verified`.
 function onboarding (publicKey) {
+    // Since this function can be called multiple times, we need to check
+    // if the message box is already there. If so, we just return
+
+    if ($('.fbtrex--onboarding').length) {
+        return;
+    }
+
     // The first action is to display the big information box.
     $('#mainContainer').prepend($(ReactDOMServer.renderToString(
         <OnboardingBox publicKey={publicKey} />
     )));
+
+    // Bind events to the onboarding box (this should not live here but in
+    // its own function.
+    $('.fbtrex--onboarding-toggle').on('click', () => {
+        $('.fbtrex--onboarding > div').toggle('fbtrex--hide');
+    });
 
     // Then we listen to all the new posts appearing on the user's timeline.
     document.arrive('#contentCol .userContentWrapper', function () {
