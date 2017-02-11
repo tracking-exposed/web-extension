@@ -117,11 +117,11 @@ function prefeed () {
     // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
-    Array(document.querySelectorAll('#contentCol .userContentWrapper')).forEach(processPost);
+    Array(document.querySelectorAll('#contentCol .fbUserContent')).forEach(processPost);
 }
 
 function watch () {
-    document.arrive('#contentCol .userContentWrapper', function () { processPost(this); });
+    document.arrive('#contentCol .fbUserContent', function () { processPost(this); });
 }
 
 function render () {
@@ -148,7 +148,7 @@ function processPost (elem) {
         data = scrape($elem);
     } catch (e) {
         /* this is not an .error because it is triggered when an
-         * .userContentWrapper has not a sharingLevel, and 'undefined'
+         * .fbUserContent has not a sharingLevel, and 'undefined'
          * get .split() */
         console.log(e, $elem);
     }
@@ -195,7 +195,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive('#contentCol .userContentWrapper', function () {
+    document.arrive('#contentCol .fbUserContent', function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.
