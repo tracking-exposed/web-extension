@@ -79,8 +79,15 @@ function boot () {
 // to get information about the current user from the browser storage
 // (the browser storage is unreachable from a **content script**).
 function userLookup (callback) {
-    // Extract the data from the DOM.
-    const basicInfo = scrapeUserData($('body'));
+    // Extract the data from the document.
+    const basicInfo = scrapeUserData();
+
+    // If the user is not logged in, return.
+    if (!basicInfo.id) {
+        console.log('User not logged in, bye for now');
+        return;
+    }
+
     // Set the `userId` in the global configuration object.
     config.userId = basicInfo.id;
     // Propagate the data to all the handlers interested in that event.
@@ -91,7 +98,8 @@ function userLookup (callback) {
         type: 'userLookup',
         payload: {
             userId: config.userId
-        }}, callback);
+        }
+    }, callback);
 }
 
 // This function will first trigger a `newTimeline` event and wait for a
@@ -179,7 +187,12 @@ function onboarding (publicKey) {
             // Extract the URL of the post and normalize it.
             var permalink = normalizeUrl($elem.find('[href^="/permalink.php"]').attr('href'));
 
-            console.log('permalink', permalink);
+            // sometimes, permalink don't happen. at the moment we are
+            // sending the HTML snippet to permit server side parsing.
+            // we can be sure, the post is intended to be scraped, because
+            // contains the key.
+            console.log('permalink', permalink, 'userId', config.userId,
+                'html size', $elem.html().length );
 
             // Kindly ask to verify the user's public key against the API.
             // Since this is a cross domain request, we need to delegate the
@@ -189,6 +202,7 @@ function onboarding (publicKey) {
             chrome.runtime.sendMessage({
                 type: 'userVerify',
                 payload: {
+                    html: $elem.html(),
                     userId: config.userId,
                     publicKey: publicKey,
                     permalink: permalink
@@ -203,7 +217,7 @@ function onboarding (publicKey) {
 // this application as well, but instead of the onboarding the app will start
 // scraping the posts.
 function verify (status, response) {
-    console.log('verify response', response);
+    console.log('verify response:', response);
     if (status === 'ok') {
         window.location.reload();
     }

@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "facebook.tracking.exposed",
-  "description": "Collaborative tool to supports investigation in personalisation algrithms",
-  "version": "1.0.0",
+  "description": "Collaborative tool to support investigation of personalisation algorithms.",
+  "version": "1.0.1",
 
   "icons": {
       "16": "fbtrex16.png",
@@ -19,7 +19,9 @@
     "tabs",
     "storage",
     "https://*.facebook.com/",
-    "http://localhost:8001/"
+    "http://localhost:8000/",
+    "https://facebook.tracking.exposed/",
+    "https://collector.facebook.tracking.exposed/"
   ],
 
   "background": {
