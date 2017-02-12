@@ -16,6 +16,12 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Nothing yet.
 
+## [1.0.5] - 2017-11-02
+### Fixed
+- Facebook changed the main class wrapping the newsfeed from
+  `.userContentWrapper` to `.fbUserContent`, the code has been changed to
+  reflect this change. See [Issue #25](https://github.com/tracking-exposed/web-extension/issues/25)
+
 ## [1.0.4] - 2016-13-05
 ### Fixed
 - Onboarding is now more prominent and can be closed.

@@ -30,8 +30,8 @@ describe('Scrape', function () {
     it('ignores a post that contains another post', function () {
         timeWarp.set(2016, 5, 6, 15, 0, 10, -120);
 
-        const post0 = loadFixture('posts/postCommentedByFriend').find('.userContentWrapper');
-        const post1 = loadFixture('posts/sponsoredPostLikedByFriends').find('.userContentWrapper');
+        const post0 = loadFixture('posts/postCommentedByFriend').find('.fbUserContent');
+        const post1 = loadFixture('posts/sponsoredPostLikedByFriends').find('.fbUserContent');
 
         assert.equal(scrape(post0), null);
         assert.equal(scrape(post1), null);
