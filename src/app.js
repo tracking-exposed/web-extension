@@ -140,9 +140,14 @@ function processPost (elem) {
         data = scrape($elem);
     } catch (e) {
         /* this is not an .error because it is triggered when an
-         * .fbUserContent has not a sharingLevel, and 'undefined'
-         * get .split() */
-        console.log(e, $elem);
+         * .fbUserContent has not a sharingLevel, for example
+         * "suggested friends", "see memories".
+         * so 'undefined' a .split() */
+        if(e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
+            console.error(e, $elem);
+        } else {
+            console.log("Post-type not recognized");
+        }
     }
 
     if (data) {
