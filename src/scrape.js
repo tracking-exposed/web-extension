@@ -2,22 +2,22 @@ import cookie from 'cookie';
 
 import { getTimeISO8601, normalizeUrl } from './utils';
 
-export function scrape (elem) {
-    const postType = (elem.find('.uiStreamSponsoredLink').length === 1) ? 'sponsored' : 'feed';
-    return scrapePost(postType, elem);
-}
-
 var publicTrigger = {
-    'english': 'Public',
-    'deutsch': 'Öffentlich',
-    'espanol': 'Público',
-    'italiano': 'Tutti',
-    'português': 'Público'
+    'français': 'Public',
+    'Română': 'Public',
+    'English': 'Public',
+    'Deutsch': 'Öffentlich',
+    'Espanol': 'Público',
+    'Italiano': 'Tutti',
+    'Português': 'Público',
+    'Nederlands': 'Openbaar',
+    'Nederlands (België)': 'ledereen'
 };
 
-export function scrapePost (postType, elem) {
+export function scrape (elem) {
+
     // Skip if the post is not top level
-    if (elem.parents('.fbUserContent').length) {
+    if (elem.parents('[role=article]').length) {
         console.log('Skipping post because nested');
         return null;
     }
