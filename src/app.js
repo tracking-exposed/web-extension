@@ -60,7 +60,6 @@ function boot () {
     userLookup(response => {
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
-        console.log(response);
         if (response.status === 'new') {
             // In the case the status is `new` then we need to onboard the user.
             onboarding(response.publicKey);
