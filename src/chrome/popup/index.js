@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import db from '../db';
-import InfoBox from './components/infoBox';
+import Popup from './components/popup';
 
 function main () {
     chrome.cookies.get({
@@ -12,9 +14,11 @@ function main () {
         const userId = cookie.value;
         db.get(userId).then(val =>
             ReactDOM.render(
-                <InfoBox
-                    userId={userId}
-                    publicKey={val.publicKey} />,
+                <MuiThemeProvider>
+                    <Popup
+                        userId={userId}
+                        publicKey={val.publicKey} />
+                </MuiThemeProvider>,
                 document.getElementById('main'))
         );
     });
