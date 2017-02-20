@@ -3,7 +3,7 @@
 
   "name": "facebook.tracking.exposed",
   "description": "Collaborative tool to support investigation of personalization algorithms.",
-  "version": "1.0.5",
+  "version": "1.0.6",
 
   "icons": {
       "16": "fbtrex16.png",
