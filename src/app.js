@@ -114,11 +114,11 @@ function prefeed () {
     // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
-    Array(document.querySelectorAll('#contentCol .fbUserContent')).forEach(processPost);
+    Array(document.querySelectorAll('[role="article"]')).forEach(processPost);
 }
 
 function watch () {
-    document.arrive('#contentCol .fbUserContent', function () { processPost(this); });
+    document.arrive('[role="article"]', function () { processPost(this); });
 }
 
 function flush () {
