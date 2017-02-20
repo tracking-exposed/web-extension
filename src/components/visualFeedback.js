@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import config from '../config';
 
 const VisualFeedback = React.createClass({
     render () {
@@ -15,7 +14,7 @@ const VisualFeedback = React.createClass({
 
         if (isPublic) {
             badge = '✔';
-            message = 'The content of this post will be shared with 
+            message = 'The content of this post will be shared with ';
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
@@ -31,7 +30,7 @@ const VisualFeedback = React.createClass({
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a href='{siteLink}'>facebook.tracking.exposed</a>, <a href='{actionLink}'>{actionText}</a>
+                    {message} <a href={siteLink}>facebook.tracking.exposed</a>, <a href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );

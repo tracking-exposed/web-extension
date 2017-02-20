@@ -45,6 +45,8 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
+const FB_POST_SELECTOR = '[role="article"]';
+
 // Boot the user script. This is the first function called.
 // Everything starts from here.
 function boot () {
@@ -114,19 +116,11 @@ function prefeed () {
     // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
-<<<<<<< HEAD
-    Array(document.querySelectorAll('[role="article"]')).forEach(processPost);
+    Array(document.querySelectorAll(FB_POST_SELECTOR)).forEach(processPost);
 }
 
 function watch () {
-    document.arrive('[role="article"]', function () { processPost(this); });
-=======
-    Array(document.querySelectorAll('#contentCol .fbUserContent')).forEach(processPost);
-}
-
-function watch () {
-    document.arrive('#contentCol .fbUserContent', function () { processPost(this); });
->>>>>>> easy-report
+    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
 }
 
 function flush () {
@@ -193,7 +187,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive('#contentCol .fbUserContent', function () {
+    document.arrive(FB_POST_SELECTOR, function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.
@@ -226,7 +220,7 @@ function onboarding (publicKey) {
 // this application as well, but instead of the onboarding the app will start
 // scraping the posts.
 function verify (status, response) {
-    console.log('verify response:', response);
+    console.log('verify response:', response, status);
     if (status === 'ok') {
         window.location.reload();
     }

@@ -15,7 +15,6 @@ var publicTrigger = {
 };
 
 export function scrape (elem) {
-
     // Skip if the post is not top level
     if (elem.parents('[role=article]').length) {
         console.log('Skipping post because nested');
