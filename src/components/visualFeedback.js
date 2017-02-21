@@ -5,16 +5,22 @@ const VisualFeedback = React.createClass({
     render () {
         const isPublic = this.props.event.data.visibility === 'public';
         const logo = this.props.logo;
-
         var badge;
         var message;
-        var siteLink = 'https://facebook.tracking.exposed';
-        var actionLink = '/realitycheck/recent';
-        var actionText = 'Manage it';
+
+        var actionLink = "";
+        var actionText = "";
+
+        if(this.props.event.data.supporterId) {
+            actionLink = 'https://facebook.tracking.exposed/realitycheck/' +  this.props.event.data.supporterId + '/recent';
+            actionText = '⦑ Last activities ⦒';
+        } else {
+            console.log("Odd, supporterId not available");
+        }
 
         if (isPublic) {
             badge = '✔';
-            message = 'The content of this post will be shared with ';
+            message = 'This post has been recorded';
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
@@ -30,7 +36,7 @@ const VisualFeedback = React.createClass({
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a href={siteLink}>facebook.tracking.exposed</a>, <a href={actionLink}>{actionText}</a>
+                    {message} <a href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );
