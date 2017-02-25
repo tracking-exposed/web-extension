@@ -17,9 +17,8 @@ const OnboardingBox = React.createClass({
                       message is necessary to link my account to this key: {publicKey}
                     </p>
                     <p className='fbtrex--note'>
-                        This box will disappear after we successfully retrieve your key. 
-                            <b> The supported languages are: English, Italiano, Deutsch, Español & Português. </b>
-                        If you are using Facebook in a different language, please contact us on our <a href="https://www.facebook.com/personalizationalgorithm">community page</a> or open an <a href="https://github.com/tracking-exposed/web-extension/issues"> issue on github</a>.
+                      This box will disappear after we successfully retrieve your key. 
+                      If something do not work, contact us on our <a href="https://www.facebook.com/personalizationalgorithm">facebook page</a> or open an <a href="https://github.com/tracking-exposed/web-extension/issues"> issue on github</a>.
                     </p>
                     <p>
                         <button className='fbtrex--onboarding-toggle'>Close box.</button>

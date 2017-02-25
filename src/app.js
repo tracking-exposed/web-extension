@@ -45,6 +45,8 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
+const FB_POST_SELECTOR = '[role="article"]';
+
 // Boot the user script. This is the first function called.
 // Everything starts from here.
 function boot () {
@@ -60,7 +62,6 @@ function boot () {
     userLookup(response => {
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
-        console.log(response);
         if (response.status === 'new') {
             // In the case the status is `new` then we need to onboard the user.
             onboarding(response.publicKey);
@@ -115,11 +116,14 @@ function prefeed () {
     // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
-    Array(document.querySelectorAll('[role="article"]')).forEach(processPost);
+    // @vrde, this approach was not working!
+
+    document.querySelectorAll(FB_POST_SELECTOR).forEach(processPost);
+    // Array(document.querySelectorAll(FB_POST_SELECTOR)).map(processPost);
 }
 
 function watch () {
-    document.arrive('[role="article"]', function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
 }
 
 function flush () {
@@ -139,10 +143,9 @@ function processPost (elem) {
     try {
         data = scrape($elem);
     } catch (e) {
-        /* this is not an .error because it is triggered when an
-         * .fbUserContent has not a sharingLevel, and 'undefined'
-         * get .split() */
-        console.log(e, $elem);
+        if(e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
+            console.error(e, $elem);
+        }
     }
 
     if (data) {
@@ -187,7 +190,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive('#contentCol .fbUserContent', function () {
+    document.arrive(FB_POST_SELECTOR, function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.
@@ -220,7 +223,7 @@ function onboarding (publicKey) {
 // this application as well, but instead of the onboarding the app will start
 // scraping the posts.
 function verify (status, response) {
-    console.log('verify response:', response);
+    console.log('verify response:', response, status);
     if (status === 'ok') {
         window.location.reload();
     }

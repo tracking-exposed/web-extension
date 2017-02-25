@@ -15,7 +15,6 @@ var publicTrigger = {
 };
 
 export function scrape (elem) {
-
     // Skip if the post is not top level
     if (elem.parents('[role=article]').length) {
         console.log('Skipping post because nested');
@@ -38,6 +37,7 @@ export function scrape (elem) {
     }
 
     return {
+        supporterId: cookie.parse(document.cookie).c_user,
         visibility: isPublic ? 'public' : 'private',
         visibilityInfo: sharingLevel,
         impressionTime: getTimeISO8601()

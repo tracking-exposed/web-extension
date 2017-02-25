@@ -8,9 +8,19 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
+        var actionLink = "";
+        var actionText = "";
+
+        if(this.props.event.data.supporterId) {
+            actionLink = 'https://facebook.tracking.exposed/realitycheck/' +  this.props.event.data.supporterId + '/recent';
+            actionText = '⦑ Last activities ⦒';
+        } else {
+            console.log("Odd, supporterId not available");
+        }
+
         if (isPublic) {
             badge = '✔';
-            message = 'The content of this post will be shared with facebook.tracking.exposed.';
+            message = 'This post has been recorded';
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
@@ -26,7 +36,7 @@ const VisualFeedback = React.createClass({
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a href='mailto:support@tracking.exposed'>Report</a>
+                    {message} <a href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );

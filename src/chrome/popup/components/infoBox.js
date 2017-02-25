@@ -1,45 +1,56 @@
 import React from 'react';
 
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+
 const InfoBox = React.createClass({
 
     render () {
+        const realitylink = "https://facebook.tracking.exposed/realitycheck/" + this.props.userId;
         return (
-            <div className='fbtrex--popup'>
-                <p>
-                    Dear friend,<br />
-                    thanks for supporting the <a href="https://facebook.tracking.exposed/" target="_blank">
-                    facebook.tracking.exposed</a> initiative.
-                </p>
+            <Card>
+                <CardHeader
+                    avatar={chrome.extension.getURL('fbtrex48.png')}
+                    title="Welcome to Facebook Tracking Exposed"
+                    subtitle="Public Service Announcement"
+                />
 
-                <p>
-                    We care a lot about your privacy and we want to be as
-                    transparent as possible, that's why:
-                </p>
+                <CardText>
+                    <p>
+                        Dear friend,<br />
+                        thanks for supporting the <a href="https://facebook.tracking.exposed/" target="_blank">
+                        facebook.tracking.exposed</a> initiative.
+                    </p>
 
-                <ul>
-                    <li>
-                        Your <em>Facebook newsfeed</em> highlights
-                        the <strong>public posts</strong> we collect.
-                    </li>
-                    <li>
-                        We have a <a href="https://facebook.tracking.exposed/privacy-statement" target="_blank">
-                        Privacy Statement</a> that describes what data
-                        we collect, and why.
-                    </li>
-                    <li>
-                        We release only <a href="https://www.github.com/tracking-exposed/" target="_blank">
-                        free, open source code</a> everyone can audit.
-                    </li>
-                </ul>
+                    <p>
+                        We care a lot about your privacy and we want to be as
+                        transparent as possible, that's why:
+                    </p>
 
-                <p>
-                    What about visualizations?
-                    Bear with us! We are working to collect data from our
-                    supporters and we have no visualization ready yet.
-                </p>
-            </div>
+                    <ul>
+                        <li>
+                            Your <em>Facebook newsfeed</em> highlights
+                            the <strong>public posts</strong> we collect.
+                        </li>
+                        <li>
+                            We have a <a href="https://facebook.tracking.exposed/privacy-statement" target="_blank">
+                            Privacy Statement</a> that describes what data
+                            we collect, and why.
+                        </li>
+                        <li>
+                            We release only <a href="https://www.github.com/tracking-exposed/" target="_blank">
+                            free, open source code</a> everyone can audit.
+                        </li>
+                        <li>
+                            <b>The <a href={realitylink} target="_blank">
+                            RealityCheck</a></b> is your page, check it to see what Facebook
+                            is showing you. In the 2017 will be improved with new visualizations.
+                        </li>
+                    </ul>
+                </CardText>
+            </Card>
         );
     }
+
 });
 
 export default InfoBox;
