@@ -1,11 +1,12 @@
 import React from 'react';
 
+import _ from 'lodash';
+import update from 'immutability-helper';
+
 import { Card, CardActions, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
-import update from 'immutability-helper';
 
 import db from '../../db';
 
@@ -13,20 +14,22 @@ export default class Settings extends React.Component {
 
     constructor (props) {
         super(props);
-        db.get(props.userId + '/settings', {tagId: null, lessInfo: false})
-          .then(settings => this.setState({oldSettings: settings,
-                                           settings: Object.assign({}, settings),
-                                           showTagId: settings.tagId !== null,
-                                           dirty: false}));
+        db
+            .get(props.userId + '/settings', {tagId: '', isStudyGroup: false, lessInfo: false})
+            .then(settings => this.setState({
+                oldSettings: settings,
+                settings: _.cloneDeep(settings)
+            }));
     }
 
     saveSettings () {
-        const userId = this.props.userId;
-        db.set(userId + '/settings', this.state.settings);
-        this.setState({dirty: false});
+        const newSettings = _.cloneDeepWith(this.state.settings, value => _.isString(value) ? _.trim(value): value);
+        db.set(this.props.userId + '/settings', this.state.settings)
+          .then(() => this.setState(update(this.state, {oldSettings: {$set: this.state.settings}})));
     }
 
     resetSettings () {
+        this.setState(update(this.state, {settings: {$set: this.state.oldSettings}}));
     }
 
     render () {
@@ -35,7 +38,9 @@ export default class Settings extends React.Component {
         }
 
         const state = this.state;
-        console.log(state.settings);
+
+        const showTagId = state.settings.tagId !== null;
+        const dirty = !_.isEqual(state.settings, state.oldSettings);
 
         return (
             <Card>
@@ -46,16 +51,14 @@ export default class Settings extends React.Component {
                         <Checkbox
                             label="I'm part of a study group"
                             labelPosition="left"
-                            checked={state.showTagId}
+                            checked={state.isStudyGroup}
                             onCheck={(_, val) => this.setState({showTagId: val})} />
 
                         {state.showTagId &&
                         <TextField
                             hintText="Tag ID"
                             value={state.settings.tagId}
-                            onChange={(_, val) =>
-                                this.setState(update(state,
-                                    {dirty: {$set: true}, settings: { tagId: { $set: val }}}))}
+                            onChange={(_, val) => this.setState(update(state, { settings: { tagId: { $set: val }}}))}
                         />
                         }
                     </div>
@@ -66,12 +69,11 @@ export default class Settings extends React.Component {
                             labelPosition="left"
                             checked={state.settings.lessInfo}
                             onCheck={(_, val) =>
-                                this.setState(update(state,
-                                    {dirty: {$set: true}, settings: { lessInfo: { $set: val }}}))}
+                                this.setState(update(state, { settings: { lessInfo: { $set: val }}}))}
                             />
                     </div>
 
-                    {state.dirty &&
+                    {dirty &&
                     <CardActions>
                         <RaisedButton
                             label="Save"
