@@ -14,7 +14,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         userId: userId,
 
                         // Expose only what we need
-                        settings: { lessInfo: settings.lessInfo },
+                        settings: {
+                            lessInfo: settings.lessInfo,
+                            tagId: settings.tagId,
+                            isStudyGroup: settings.isStudyGroup
+                        },
 
                         logo16: chrome.extension.getURL('fbtrex16.png'),
                         logo48: chrome.extension.getURL('fbtrex48.png'),

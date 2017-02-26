@@ -20,6 +20,11 @@ function handlePost (type, e) {
     if (post.visibility === 'public') {
         post.html = e.element.html();
     }
+
+    if (config.settings.isStudyGroup) {
+        post.tagId = config.settings.tagId;
+    }
+
     state.events.push(post);
 }
 
