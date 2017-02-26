@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import config from '../config';
+
 const VisualFeedback = React.createClass({
     render () {
         const isPublic = this.props.event.data.visibility === 'public';
@@ -8,9 +10,12 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
+        const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/recent`;
+        const actionText = '⦑ Last activities ⦒';
+
         if (isPublic) {
             badge = '✔';
-            message = 'The content of this post will be shared with facebook.tracking.exposed.';
+            message = 'This post has been recorded';
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
@@ -26,7 +31,7 @@ const VisualFeedback = React.createClass({
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a href='mailto:support@tracking.exposed'>Report</a>
+                    {message} <a href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );

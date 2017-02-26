@@ -45,6 +45,8 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
+const FB_POST_SELECTOR = '[role="article"]';
+
 // Boot the user script. This is the first function called.
 // Everything starts from here.
 function boot () {
@@ -114,11 +116,14 @@ function prefeed () {
     // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
-    Array(document.querySelectorAll('#contentCol .fbUserContent')).forEach(processPost);
+    // @vrde, this approach was not working!
+
+    document.querySelectorAll(FB_POST_SELECTOR).forEach(processPost);
+    // Array(document.querySelectorAll(FB_POST_SELECTOR)).map(processPost);
 }
 
 function watch () {
-    document.arrive('#contentCol .fbUserContent', function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
 }
 
 function flush () {
@@ -138,10 +143,9 @@ function processPost (elem) {
     try {
         data = scrape($elem);
     } catch (e) {
-        /* this is not an .error because it is triggered when an
-         * .fbUserContent has not a sharingLevel, and 'undefined'
-         * get .split() */
-        console.log(e, $elem);
+        if(e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
+            console.error(e, $elem);
+        }
     }
 
     if (data) {
@@ -186,7 +190,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive('#contentCol .fbUserContent', function () {
+    document.arrive(FB_POST_SELECTOR, function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.
@@ -219,7 +223,7 @@ function onboarding (publicKey) {
 // this application as well, but instead of the onboarding the app will start
 // scraping the posts.
 function verify (status, response) {
-    console.log('verify response:', response);
+    console.log('verify response:', response, status);
     if (status === 'ok') {
         window.location.reload();
     }

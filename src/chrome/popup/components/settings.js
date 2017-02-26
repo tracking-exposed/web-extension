@@ -37,6 +37,10 @@ export default class Settings extends React.Component {
             return null;
         }
 
+        /* Keeping temporarly out of visibilty */
+        return null;
+        /* ----------------------------------- */
+
         const state = this.state;
 
         const showTagId = state.settings.tagId !== null;
@@ -65,7 +69,7 @@ export default class Settings extends React.Component {
 
                     <div>
                         <Checkbox
-                            label="Show less information on Fbtrex activity"
+                            label="Hide the banner on top of the posts"
                             labelPosition="left"
                             checked={state.settings.lessInfo}
                             onCheck={(_, val) =>
