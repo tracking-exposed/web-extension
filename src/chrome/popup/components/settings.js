@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import update from 'immutability-helper';
 
-import { Card, CardActions, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -14,22 +14,26 @@ export default class Settings extends React.Component {
 
     constructor (props) {
         super(props);
+
         db
             .get(props.userId + '/settings', {tagId: '', isStudyGroup: false, lessInfo: false})
             .then(settings => this.setState({
-                oldSettings: settings,
-                settings: _.cloneDeep(settings)
+                oldSettings: _.cloneDeep(settings),
+                settings: settings
             }));
     }
 
     saveSettings () {
-        const newSettings = _.cloneDeepWith(this.state.settings, value => _.isString(value) ? _.trim(value): value);
-        db.set(this.props.userId + '/settings', this.state.settings)
-          .then(() => this.setState(update(this.state, {oldSettings: {$set: this.state.settings}})));
+        const settings = _.cloneDeepWith(this.state.settings, value => _.isString(value) ? _.trim(value) : value);
+
+        db
+            .set(this.props.userId + '/settings', settings)
+            .then(() => this.setState(update(this.state, {oldSettings: {$set: _.cloneDeep(settings)},
+                                                          settings: {$set: settings}})));
     }
 
     resetSettings () {
-        this.setState(update(this.state, {settings: {$set: this.state.oldSettings}}));
+        this.setState(update(this.state, {settings: {$set: _.cloneDeep(this.state.oldSettings)}}));
     }
 
     render () {
@@ -37,13 +41,9 @@ export default class Settings extends React.Component {
             return null;
         }
 
-        /* Keeping temporarly out of visibilty */
-        return null;
-        /* ----------------------------------- */
-
+        console.log('settings', this.state.settings);
         const state = this.state;
 
-        const showTagId = state.settings.tagId !== null;
         const dirty = !_.isEqual(state.settings, state.oldSettings);
 
         return (
@@ -55,14 +55,14 @@ export default class Settings extends React.Component {
                         <Checkbox
                             label="I'm part of a study group"
                             labelPosition="left"
-                            checked={state.isStudyGroup}
-                            onCheck={(_, val) => this.setState({showTagId: val})} />
+                            checked={state.settings.isStudyGroup}
+                            onCheck={(_, val) => this.setState(update(state, {settings: {isStudyGroup: {$set: val}}}))} />
 
-                        {state.showTagId &&
+                        {state.settings.isStudyGroup &&
                         <TextField
                             hintText="Tag ID"
                             value={state.settings.tagId}
-                            onChange={(_, val) => this.setState(update(state, { settings: { tagId: { $set: val }}}))}
+                            onChange={(_, val) => this.setState(update(state, {settings: {tagId: {$set: val }}}))}
                         />
                         }
                     </div>
@@ -73,7 +73,7 @@ export default class Settings extends React.Component {
                             labelPosition="left"
                             checked={state.settings.lessInfo}
                             onCheck={(_, val) =>
-                                this.setState(update(state, { settings: { lessInfo: { $set: val }}}))}
+                                this.setState(update(state, {settings: {lessInfo: {$set: val }}}))}
                             />
                     </div>
 
