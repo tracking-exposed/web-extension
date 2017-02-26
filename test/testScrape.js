@@ -22,7 +22,7 @@ describe('Scrape', function () {
                 var data = scrape(fixture);
                 assert.equal(data.visibility, payload.visibility);
             } catch (e) {
-                assert.equal(data, payload);
+                assert.equal(data, payload, e);
             }
         });
     });

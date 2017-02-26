@@ -37,7 +37,6 @@ export function scrape (elem) {
     }
 
     return {
-        supporterId: cookie.parse(document.cookie).c_user,
         visibility: isPublic ? 'public' : 'private',
         visibilityInfo: sharingLevel,
         impressionTime: getTimeISO8601()
