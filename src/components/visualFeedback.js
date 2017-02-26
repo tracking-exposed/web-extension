@@ -22,7 +22,7 @@ const VisualFeedback = React.createClass({
         }
 
         return (
-            <div className={classNames('fbtrex--visual-feedback', { 'fbtrex--visibility-public': isPublic })}>
+            <div className={classNames('fbtrex--visual-feedback', { 'fbtrex--visibility-public': isPublic, 'fbtrex--less-info': config.settings.lessInfo })}>
                 <h1>
                     <img src={logo} />
                     facebook.tracking.exposed

@@ -29,7 +29,11 @@ export default class Settings extends React.Component {
         db
             .set(this.props.userId + '/settings', settings)
             .then(() => this.setState(update(this.state, {oldSettings: {$set: _.cloneDeep(settings)},
-                                                          settings: {$set: settings}})));
+                                                          settings: {$set: settings},
+                                                          reloadBrowser: {$set: true}})));
+
+        chrome.tabs.query({url: 'https://*.facebook.com/*'},
+                          tabs => tabs.forEach(tab => chrome.tabs.reload(tab.id)));
     }
 
     resetSettings () {
@@ -80,7 +84,7 @@ export default class Settings extends React.Component {
                     {dirty &&
                     <CardActions>
                         <RaisedButton
-                            label="Save"
+                            label="Save and reload"
                             primary={true}
                             onClick={this.saveSettings.bind(this)}
                         />

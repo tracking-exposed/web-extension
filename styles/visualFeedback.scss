@@ -19,9 +19,20 @@
 
     .fbtrex--message {
     }
+
+    &.fbtrex--less-info {
+        padding: 0;
+        height: 0;
+        overflow: hidden;
+        border-bottom: none;
+        border-top-width: 2px;
+        border-top-style: solid;
+    }
 }
 
 .fbtrex--visual-feedback.fbtrex--visibility-public {
+    border-top-color: #94ca94;
+
     .fbtrex--badge {
         background-color: green;
         color: white;
