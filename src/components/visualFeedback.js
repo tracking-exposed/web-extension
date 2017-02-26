@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import config from '../config';
+
 const VisualFeedback = React.createClass({
     render () {
         const isPublic = this.props.event.data.visibility === 'public';
@@ -8,15 +10,8 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
-        var actionLink = "";
-        var actionText = "";
-
-        if(this.props.event.data.supporterId) {
-            actionLink = 'https://facebook.tracking.exposed/realitycheck/' +  this.props.event.data.supporterId + '/recent';
-            actionText = '⦑ Last activities ⦒';
-        } else {
-            console.log("Odd, supporterId not available");
-        }
+        const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/recent`;
+        const actionText = '⦑ Last activities ⦒';
 
         if (isPublic) {
             badge = '✔';
