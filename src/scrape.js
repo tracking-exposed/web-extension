@@ -1,5 +1,3 @@
-import cookie from 'cookie';
-
 import { getTimeISO8601, normalizeUrl } from './utils';
 
 var publicTrigger = {
@@ -41,17 +39,6 @@ export function scrape (elem) {
         visibilityInfo: sharingLevel,
         impressionTime: getTimeISO8601()
     };
-}
-
-export function scrapeUserData () {
-    const id = cookie.parse(document.cookie).c_user;
-
-    const parsedInfo = {
-        id: id,
-        href: `https://www.facebook.com/profile.php?id=${id}`
-    };
-
-    return parsedInfo;
 }
 
 export function scrapePermalink (elem) {

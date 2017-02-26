@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { TimeWarp, listFixtures, loadFixture, loadPayload } from './utils';
 
-import { scrape, scrapeUserData, scrapePermalink } from '../src/scrape';
+import { scrape, scrapePermalink } from '../src/scrape';
 
 describe('Scrape', function () {
     const fixtures = listFixtures('posts/');

@@ -36,7 +36,7 @@ import ReactDOMServer from 'react-dom/server';
 import uuid from 'uuid';
 import $ from 'jquery';
 import 'arrive';
-import { scrape, scrapeUserData, scrapePermalink } from './scrape';
+import { scrape, scrapePermalink } from './scrape';
 
 import config from './config';
 import hub from './hub';
@@ -81,20 +81,12 @@ function boot () {
 // to get information about the current user from the browser storage
 // (the browser storage is unreachable from a **content script**).
 function userLookup (callback) {
-    // Extract the data from the document.
-    const basicInfo = scrapeUserData();
-
-    // If the user is not logged in, return.
-    if (!basicInfo.id) {
+    if (!config.userId) {
         console.log('User not logged in, bye for now');
         return;
     }
 
-    // Set the `userId` in the global configuration object.
-    config.userId = basicInfo.id;
-    // Propagate the data to all the handlers interested in that event.
-    hub.event('user', basicInfo);
-    // Finally, retrieve the user from the browser storage. This is achieved
+    // Retrieve the user from the browser storage. This is achieved
     // sending a message to the `chrome.runtime`.
     chrome.runtime.sendMessage({
         type: 'userLookup',
@@ -143,7 +135,7 @@ function processPost (elem) {
     try {
         data = scrape($elem);
     } catch (e) {
-        if(e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
+        if (e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
             console.error(e, $elem);
         }
     }
