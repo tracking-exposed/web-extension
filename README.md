@@ -31,18 +31,22 @@ it anyway. It's also a nice way to check if the installation succeeded.
 `npm start` will build the application using `webpack` and watch for changes.
 
 
-### Prepare your browser
-If you wish to autoreload your extension every time a build succeeds, you need
-first to install [Extension Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid).
-
+### Set up your browser
 To install the extension go to **settings**, select **extensions**, and enable
 **Developer mode**. Click on **Load unpacked extension** and select the
 `extension/build` directory contained in this repo.
 
 Keep `npm start` running in the background to take advantage of the autoreload.
 
-If you want to specify a different chrome user than the default one, set the env
-variable `USER_DATA_DIR` to an existing directory.
+#### Note on autoreloading the extension
+By running `npm start`, the extension will work in `DEVELOPMENT` mode. This
+means that every time you reload `facebook.com`, the extension will automatically
+reload itself using the `chrome.runtime.reload()` method.
+
+Note that before we were using [Extension
+Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid)
+to autoreload your extension every time a build succeeds.
+This dependency is no longer needed.
 
 
 ### Ready to go!

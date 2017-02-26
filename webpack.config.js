@@ -9,7 +9,8 @@ const webpack = require('webpack');
 const autoPrefixer = require('autoprefixer');
 const combineLoaders = require('webpack-combine-loaders');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackOnBuildPlugin = require('on-build-webpack');
+const WebpackNotifierPlugin = require('webpack-notifier');
+
 
 require('dotenv').load({ silent: true });
 
@@ -35,6 +36,7 @@ const PATHS = {
 /** EXTERNAL DEFINITIONS INJECTED INTO APP **/
 const DEFINITIONS = {
     'process.env': {
+        DEVELOPMENT: JSON.stringify(DEVELOPMENT),
         NODE_ENV: JSON.stringify(NODE_ENV),
         API_ROOT: JSON.stringify((DEVELOPMENT ? 'http://localhost:8000/' : 'https://collector.facebook.tracking.exposed/') + 'api/v' + LAST_VERSION + '/'),
         VERSION: JSON.stringify(packageJSON.version + (DEVELOPMENT ? '-dev' : '')),
@@ -69,11 +71,14 @@ const PROD_PLUGINS = [
 ];
 
 const DEV_PLUGINS = [
-    new WebpackOnBuildPlugin(function (stats) {
-        const target = process.env.USER_DATA_DIR ? '--user-data-dir=' + process.env.USER_DATA_DIR : '';
-        const command = 'chromium-browser ' + target + ' http://reload.extensions';
-        console.log(command);
-        exec(command);
+    new WebpackNotifierPlugin({
+        // My notification daemon displays "critical" messages only.
+        // Dunno if this is the case for every Ubuntu machine.
+        urgency: 'critical',
+        title: 'fbtrex',
+        contentImage: path.join(__dirname, 'icons', 'fbtrex128.png'),
+        timeout: 2,
+        alwaysNotify: true
     })
 ];
 
