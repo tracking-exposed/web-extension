@@ -25,13 +25,14 @@
         height: 0;
         overflow: hidden;
         border-bottom: none;
-        border-top-width: 2px;
-        border-top-style: solid;
+        border-top: none;
     }
 }
 
 .fbtrex--visual-feedback.fbtrex--visibility-public {
-    border-top-color: #94ca94;
+    &.fbtrex--less-info {
+        border-top: 2px solid #94ca94;
+    }
 
     .fbtrex--badge {
         background-color: green;
