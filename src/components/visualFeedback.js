@@ -24,6 +24,7 @@ const VisualFeedback = React.createClass({
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
+            actionLink = actionText = '';
         }
 
         return (
@@ -36,7 +37,7 @@ const VisualFeedback = React.createClass({
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a href={actionLink}>{actionText}</a>
+                    {message} <a target='_blank' href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );
