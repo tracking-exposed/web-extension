@@ -36,7 +36,8 @@ export function scrape (elem) {
 
     return {
         visibility: isPublic ? 'public' : 'private',
-        visibilityInfo: sharingLevel,
+        /* this can be enabled whenever we're debugging languages */
+        /* visibilityInfo: sharingLevel, */
         impressionTime: getTimeISO8601()
     };
 }
