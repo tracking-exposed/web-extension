@@ -19,7 +19,6 @@ const VisualFeedback = React.createClass({
         } else {
             badge = '⛔️';
             message = 'The content of this post will be kept private.';
-            actionLink = actionText = '';
         }
 
         return (
