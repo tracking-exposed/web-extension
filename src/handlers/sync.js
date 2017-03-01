@@ -12,17 +12,13 @@ function handlePost (type, e) {
     var post = Object.assign({
         impressionOrder: state.position++,
         visibility: type,
-        visibilityInfo: e.visibilityInfo,
+        visibilityInfo: e.visibilityInfo, // unset from scrape.js
         type: 'impression',
         timelineId: state.timeline.id
     }, e.data);
 
     if (post.visibility === 'public') {
         post.html = e.element.html();
-    }
-
-    if (config.settings.isStudyGroup) {
-        post.tagId = config.settings.tagId;
     }
 
     state.events.push(post);
@@ -36,6 +32,11 @@ function handleTimeline (type, e) {
         startTime: e.startTime,
         location: window.location.href
     };
+
+    if (config.settings.isStudyGroup) {
+        state.timeline.tagId = config.settings.tagId;
+    }
+
     state.events.push(state.timeline);
 }
 
