@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 const InfoBox = React.createClass({
 
     render () {
-        const realitylink = "https://facebook.tracking.exposed/realitycheck/" + this.props.userId;
+        const realitylink = "https://facebook.tracking.exposed/realitycheck/" + this.props.userId + "/data";
         return (
             <Card>
                 <CardHeader
@@ -41,9 +41,8 @@ const InfoBox = React.createClass({
                             free, open source code</a> everyone can audit.
                         </li>
                         <li>
-                            <b>The <a href={realitylink} target="_blank">
-                            RealityCheck</a></b> is your page, check it to see what Facebook
-                            is showing you. In the 2017 will be improved with new visualizations.
+                            Here you have <a href={realitylink} target="_blank">
+                            your data</a>, available to be downloaded or consulted (is a work in progress!). It contains what Facebook is showing you. In the 2017 will be improved with new visualizations and will become private. 
                         </li>
                     </ul>
                 </CardText>

@@ -1,20 +1,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+
+## [1.1.0] - 2017-03-02
+### Added
+- Popup with settings configuration (hide banner, specify tagId)
+
+## [1.0.6] - 2017-02-20
 ### Added
 - when a post appears in the newsfeed, an info box is added at the top of the
   post itself, so the user has a better understanding of what is scraped and
   what is not.
 
-### Changed
-- API endpoint is now `https://collector.facebook.tracking.exposed/`
-
 ### Fixed
-- Nothing yet.
-
-### Removed
-- Nothing yet.
+- The CSS selector used to spot the facebook post is changed again.
 
 ## [1.0.5] - 2017-11-02
 ### Fixed
