@@ -4,7 +4,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0] - 2017-03-02
 ### Added
-- Popup with settings configuration (hide banner, specify tagId)
+- Popup with settings configuration to: 1) display less information on the news
+  feed; 2) specify tagId if the user is part of a study group.
 
 ## [1.0.6] - 2017-02-20
 ### Added
