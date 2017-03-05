@@ -1,41 +1,39 @@
 import { getTimeISO8601, normalizeUrl } from './utils';
 
-var publicTrigger = {
-    'français': 'Public',
-    'Română': 'Public',
-    'English': 'Public',
-    'Deutsch': 'Öffentlich',
-    'Espanol': 'Público',
-    'Italiano': 'Tutti',
-    'Português': 'Público',
-    'Nederlands': 'Openbaar',
-    'Nederlands (België)': 'ledereen'
-};
+// TODO: in order to extract the visibility of a post,
+// we analyze the last word in the "aria-label" of the post itself.
+// This part should be improved because there might be some really
+// weird corner cases, for example if someone's first name is one
+// of the `publicWords`, then we might detect a wrong visibility.
+// See #42.
+var publicWords = [
+    'public',       // Français, Română, English,
+    'öffentlich',   // Deutsch
+    'público',      // Espanol
+    'tutti',        // Italiano
+    'público',      // Português
+    'openbaar',     // 'Nederlands',
+    'ledereen'      // 'Nederlands (België)'
+];
 
 export function scrape (elem) {
     // Skip if the post is not top level
     if (elem.parents('[role=article]').length) {
-        console.log('Skipping post because nested');
         return null;
     }
-
-    var isPublic = false;
 
     var sharingLevel = elem
       .find('[data-hover="tooltip"][role][aria-label][data-tooltip-content]')
       .attr('aria-label')
-      .split(':')
+      .trim()
+      .split(' ')
       .pop()
-      .trim();
+      .toLowerCase();
 
-    for (var lang in publicTrigger) {
-        if (publicTrigger[lang] === sharingLevel) {
-            isPublic = true;
-        }
-    }
+    var visibility = publicWords.indexOf(sharingLevel) !== -1 ? 'public' : 'private';
 
     return {
-        visibility: isPublic ? 'public' : 'private',
+        visibility: visibility,
         /* this can be enabled whenever we're debugging languages */
         /* visibilityInfo: sharingLevel, */
         impressionTime: getTimeISO8601()
