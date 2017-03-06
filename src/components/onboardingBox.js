@@ -8,7 +8,7 @@ const OnboardingBox = React.createClass({
         return (
             <div className='fbtrex--onboarding'>
                 <div className='fbtrex--onboarding-box'>
-                    <h1>Yay!!Welcome to facebook.tracking.exposed!</h1>
+                    <h1>Yay!! Welcome to facebook.tracking.exposed!</h1>
                     <p>This is awesome, thanks for contributing. One last thing before we start. We need you to post your public key, so we can associate it with your contributions. Copy and paste the following message as new <strong>public post</strong>:</p>
                     <p className='fbtrex--copypaste'>
                       Personalisation Algorithms are a collective issue, and can
