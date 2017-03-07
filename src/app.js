@@ -135,7 +135,7 @@ function processPost (elem) {
     try {
         data = scrape($elem);
     } catch (e) {
-        if (e.toString() !== "TypeError: Cannot read property 'split' of undefined") {
+        if (e.toString() !== "TypeError: Cannot read property 'trim' of undefined") {
             console.error(e, $elem);
         }
     }
