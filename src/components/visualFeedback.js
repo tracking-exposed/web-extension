@@ -10,7 +10,7 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
-        const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/recent`;
+        const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/data`;
         const actionText = '⦑ Last activities ⦒';
 
         if (isPublic) {
