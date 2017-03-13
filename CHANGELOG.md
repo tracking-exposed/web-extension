@@ -1,6 +1,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2017-03-09
+### Fixed
+- landing page link is not to /recent but to /data
+- noisy error in console
+
 ## [1.1.1] - 2017-03-03
 ### Fixed
 - onBoarding text changed to be more userfriendly
