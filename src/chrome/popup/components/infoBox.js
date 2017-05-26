@@ -41,8 +41,8 @@ const InfoBox = React.createClass({
                             free, open source code</a> everyone can audit.
                         </li>
                         <li>
-                            Here you have <a href={realitylink} target="_blank">
-                            your data</a>, available to be downloaded or consulted (is a work in progress!). It contains what Facebook is showing you. In the 2017 will be improved with new visualizations and will become private. 
+                            <b>Access to <a href={realitylink} target="_blank">
+                            your data</a></b>, available to be downloaded or consulted (is a work in progress!). It contains what Facebook is showing you. In the 2017 will be improved with new visualizations and functionalities. 
                         </li>
                     </ul>
                 </CardText>
