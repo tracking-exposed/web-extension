@@ -1,3 +1,4 @@
+import { FB_POST_SELECTOR } from './app';
 import { getTimeISO8601, normalizeUrl } from './utils';
 
 // TODO: in order to extract the visibility of a post,
@@ -18,7 +19,7 @@ var publicWords = [
 
 export function scrape (elem) {
     // Skip if the post is not top level
-    if (elem.parents('[role=article]').length) {
+    if (elem.parents(FB_POST_SELECTOR).length) {
         return null;
     }
 
