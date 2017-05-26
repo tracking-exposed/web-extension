@@ -45,7 +45,8 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
-const FB_POST_SELECTOR = '[role="article"]';
+// const FB_POST_SELECTOR = '[role="article"]';
+export const FB_POST_SELECTOR = '.fbUserContent';
 
 // Boot the user script. This is the first function called.
 // Everything starts from here.
