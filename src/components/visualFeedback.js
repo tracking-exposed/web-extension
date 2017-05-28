@@ -11,27 +11,29 @@ const VisualFeedback = React.createClass({
         var message;
 
         const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/data`;
-        const actionText = '⦑ Last activities ⦒';
+        const actionText = 'Your data';
 
         if (isPublic) {
             badge = '✔';
             message = 'This post has been recorded';
         } else {
             badge = '⛔️';
-            message = 'The content of this post will be kept private.';
+            message = 'This post will be kept private';
         }
 
         return (
             <div className={classNames('fbtrex--visual-feedback', { 'fbtrex--visibility-public': isPublic, 'fbtrex--less-info': config.settings.lessInfo })}>
-                <h1>
-                    <img src={logo} />
-                    facebook.tracking.exposed
-                </h1>
                 <span className='fbtrex--badge'>
                     {badge}
                 </span>
                 <span className='fbtrex--message'>
-                    {message} <a target='_blank' href={actionLink}>{actionText}</a>
+                    {message} 
+                </span>
+                <span className='fbtrex--logo'>
+                    <img src={logo} />
+                </span>
+                <span className='fbtrex--message'>
+                    <a target='_blank' href={actionLink}>{actionText}</a>
                 </span>
             </div>
         );
