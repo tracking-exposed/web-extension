@@ -13,11 +13,16 @@ const OnboardingBox = React.createClass({
                     <T tag='h1' msg='onboardingTitle' />
                     <T msg='onboardingIntro' />
 
-                    <T tag='p' className='fbtrex--copypaste' msg='onboardingCopyPaste' args={publicKey} />
-                    <T tag='p' className='fbtrex--note' msg='onboardingNote' />
+                    <p className='fbtrex--copypaste'>
+                        {t('onboardingCopyPaste', publicKey)}
+                    </p>
+
+                    <T className='fbtrex--note' msg='onboardingNote' />
 
                     <p>
-                        <T tag='button' className='fbtrex--onboarding-toggle' msg='onboardingReduceBox' />
+                        <button className='fbtrex--onboarding-toggle'>
+                            {t('onboardingReduceBox')}
+                        </button>
                     </p>
                 </div>
 

@@ -18,7 +18,7 @@
     },
 
     "onboardingCopyPaste": {
-        "message": "Personalisation Algorithms are a collective issue, and can only be collectively addressed; today I am joining https://facebook.tracking.exposed and this technical this message is necessary to link my account to the following key: $publickey$",
+        "message": "Personalisation Algorithms are a collective issue, and can only be collectively addressed; today I am joining https://facebook.tracking.exposed and this technical message is necessary to link my account to the following key: $publickey$",
         "placeholders": {
             "publickey": {
                 "content": "$1"
