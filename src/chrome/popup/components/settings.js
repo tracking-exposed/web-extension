@@ -8,6 +8,8 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { t } from '../../../i18n';
+
 import db from '../../db';
 
 export default class Settings extends React.Component {
@@ -53,19 +55,19 @@ export default class Settings extends React.Component {
 
         return (
             <Card>
-                <CardHeader title="Settings" />
+                <CardHeader title={t('settingsTitle')} />
 
                 <CardText>
                     <div>
                         <Checkbox
-                            label="I'm part of a study group"
+                            label={t('settingsStudyGroup')}
                             labelPosition="left"
                             checked={state.settings.isStudyGroup}
                             onCheck={(_, val) => this.setState(update(state, {settings: {isStudyGroup: {$set: val}}}))} />
 
                         {state.settings.isStudyGroup &&
                         <TextField
-                            hintText="Tag ID"
+                            hintText={t('settingsTagId')}
                             value={state.settings.tagId}
                             onChange={(_, val) => this.setState(update(state, {settings: {tagId: {$set: val }}}))}
                         />
@@ -74,7 +76,7 @@ export default class Settings extends React.Component {
 
                     <div>
                         <Checkbox
-                            label="Hide the banner on top of the posts"
+                            label={t('settingsHideBanner')}
                             labelPosition="left"
                             checked={state.settings.lessInfo}
                             onCheck={(_, val) =>
@@ -85,12 +87,12 @@ export default class Settings extends React.Component {
                     {dirty &&
                     <CardActions>
                         <RaisedButton
-                            label="Save and reload"
+                            label={t('settingsSaveAndReload')}
                             primary={true}
                             onClick={this.saveSettings.bind(this)}
                         />
                         <RaisedButton
-                            label="Cancel"
+                            label={t('settingsCancel')}
                             secondary={true}
                             onClick={this.resetSettings.bind(this)}
                         />
