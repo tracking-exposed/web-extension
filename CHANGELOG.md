@@ -1,6 +1,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.4] - 2017-06-12
+### Added 
+- i18n support
+- messages translated in PT\_br
+
 ## [1.1.3] - 2017-05-26
 ### Fixed
 - Update selector for posts
