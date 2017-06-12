@@ -59,7 +59,7 @@
     },
 
     "popupHighlight": {
-        "message": "Your *Facebook newsfeed* highlights the **public posts** we collect."
+        "message": "The extension only see and collects the **public posts**. You will know that public posts are being recorded by a notification highlighting them in your newsfeed."
     },
 
     "popupPrivacy": {

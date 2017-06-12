@@ -59,19 +59,19 @@
     },
 
     "popupHighlight": {
-        "message": "O seu *feed de notícias do Facebook* destace as **postagens públicas** que coletamos."
+        "message": "Apenas temos acesso e coletamos informação dos seus **posts públicos**, aqueles que você escolhe compartilhar abertamente com qualquer um que entra no seu perfil, mesmo quem não é seu amigo. Você será lembrado que **posts públicos** estão sendo gravados por meio de uma notificação destacando-os na sua timeline."
     },
 
     "popupPrivacy": {
-        "message": "Nós temos uma [Declaração de Privacidade](https://facebook.tracking.exposed/privacy-statement) que descreve quais dados nós coletamos e por quê."
+        "message": "Nossa [Política de Privacidade](https://facebook.tracking.exposed/privacy-statement) descreve quais dados coletamos e por quê."
     },
 
     "popupFree": {
-        "message": "Nós liberamos [o código-fonte livre e aberto](https://www.github.com/tracking-exposed/) que todes podem auditar."
+        "message": "O [o código-fonte livre e aberto](https://www.github.com/tracking-exposed/) da extensão també está disponível para quem quiser auditar."
     },
 
     "popupReality": {
-        "message": "**Os [seus dados]($realitylink$)**, estão disponíveis para download ou consulta (ainda é um trabalho em andamento!). Isso contem o que o Facebook mostra para você. Em 2017 será melhorado com novas visualizações e funções.",
+        "message": "** [Seus dados coletados]($realitylink$)** também estão disponíveis para download ou consulta. Eles são o resultado do seu experimeto. Estamos trabalhando para melhorar a maneira como você visualiza e acessa esses dados.",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
