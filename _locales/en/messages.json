@@ -39,7 +39,7 @@
     },
 
     "onboardingReopen": {
-        "message": "Reopen box."
+        "message": "Reopen box"
     },
 
     "popupTitle": {
@@ -63,7 +63,7 @@
     },
 
     "popupPrivacy": {
-        "message": "We have a [Privacy Statement](https://facebook.tracking.exposed/privacy-statement)</a> that describes what data we collect, and why."
+        "message": "We have a [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) that describes what data we collect, and why."
     },
 
     "popupFree": {
