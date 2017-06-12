@@ -9,6 +9,7 @@ sed '/localhost:8000/d' manifest.json > ./dist/manifest.json
 
 cp icons/* ./dist
 cp popup.html ./dist
+cp -r _locales ./dist
 cd ./dist
-zip extension.zip *
+zip extension.zip * _locales/*/*.json
 
