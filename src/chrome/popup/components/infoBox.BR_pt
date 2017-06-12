@@ -1,0 +1,54 @@
+import React from 'react';
+
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+
+const InfoBox = React.createClass({
+
+    render () {
+        const realitylink = "https://facebook.tracking.exposed/realitycheck/" + this.props.userId + "/data";
+        return (
+            <Card>
+                <CardHeader
+                    avatar={chrome.extension.getURL('fbtrex48.png')}
+                    title="Bem-vinde ao Facebook Tracking Exposed"
+                    subtitle="Anúncio de Serviço Público"
+                />
+
+                <CardText>
+                    <p>
+                        Olá,<br />
+                        Obrigada por apoiar a iniciativa <a href="https://facebook.tracking.exposed/" target="_blank">
+                        facebook.tracking.exposed</a>.
+                    </p>
+
+                    <p>
+                        Nos preocupamos muito com a sua privacidade e queremos 
+                        ser o mais transparente possível, por isso:
+                    </p>
+                    <ul>
+                        <li>
+                            O seu <em>feed de notícias do Facebook</em> destaca 
+                            as <strong>postagens públicas</strong> que coletamos.
+
+                        </li>
+                        <li>
+                            Nós temos uma <a href="https://facebook.tracking.exposed/privacy-statement" target="_blank">
+                            Declaração de Privacidade</a> que descreve quais dados
+                            nós coletamos e por quê.
+
+                        </li>
+                        <li>
+                            Nós liberamos <a href="https://www.github.com/tracking-exposed/" target="_blank">
+                            o código-fonte livre e aberto </a> que todes podem auditar.
+                        </li>
+                        <li>
+			                      <b>Os <a href={realitylink} target="_blank">
+                            seus dados</a></b> estão disponíveis para download ou consulta (ainda é um trabalho em andamento!). Isso contem o que o Facebook mostra para você. Em 2017 será melhorado com novas visualizações e funções. 
+                        </li>
+                    </ul>
+                </CardText>
+            </Card>
+        );
+    }
+});
+export default InfoBox;
