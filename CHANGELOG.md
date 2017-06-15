@@ -1,6 +1,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.5] - 2017-06-15
+### Added 
+- Norvegian and Slovenian languages
+- multiple W3C selectors for new posts
+
 ## [1.1.4] - 2017-06-12
 ### Added 
 - i18n support

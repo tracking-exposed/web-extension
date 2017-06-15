@@ -1,4 +1,4 @@
-import { FB_POST_SELECTOR } from './app';
+import { FB_POST_SELECTOR1, FB_POST_SELECTOR2, FB_POST_SELECTOR3 } from './app';
 import { getTimeISO8601, normalizeUrl } from './utils';
 
 // TODO: in order to extract the visibility of a post,
@@ -10,6 +10,8 @@ import { getTimeISO8601, normalizeUrl } from './utils';
 var publicWords = [
     'public',       // Français, Română, English,
     'öffentlich',   // Deutsch
+    'offentlig',    // Norsk (bokmål)
+    'verejné',      // Slovenčina
     'público',      // Espanol
     'tutti',        // Italiano
     'público',      // Português
@@ -19,7 +21,9 @@ var publicWords = [
 
 export function scrape (elem) {
     // Skip if the post is not top level
-    if (elem.parents(FB_POST_SELECTOR).length) {
+    if ( elem.parents(FB_POST_SELECTOR1).length || 
+         elem.parents(FB_POST_SELECTOR2).length ||
+         elem.parents(FB_POST_SELECTOR3).length) {
         return null;
     }
 

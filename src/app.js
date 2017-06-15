@@ -46,7 +46,10 @@ import { registerHandlers } from './handlers/index';
 import OnboardingBox from './components/onboardingBox';
 
 // const FB_POST_SELECTOR = '[role="article"]';
-export const FB_POST_SELECTOR = '.fbUserContent';
+export const FB_POST_SELECTOR1 = '.fbUserContent';
+export const FB_POST_SELECTOR2 = '.UserContent';
+export const FB_POST_SELECTOR3 = '.userContentWrapper';
+// Has to be find a professional robust way for this!
 
 // Boot the user script. This is the first function called.
 // Everything starts from here.
@@ -101,6 +104,8 @@ function userLookup (callback) {
 // new refresh.
 function timeline () {
     processTimeline();
+    /* this is not OK anymore, the selector is outdated,
+     * still it is working fine, because it is call when refresh */
     document.arrive('#feedx_container', processTimeline);
 }
 
@@ -110,13 +115,17 @@ function prefeed () {
     // instances, Firefox 49.0 seems to not support it, that's why we have to
     // wrap it in an `Array`.
     // @vrde, this approach was not working!
-
-    document.querySelectorAll(FB_POST_SELECTOR).forEach(processPost);
     // Array(document.querySelectorAll(FB_POST_SELECTOR)).map(processPost);
+
+    document.querySelectorAll(FB_POST_SELECTOR1).forEach(processPost);
+    document.querySelectorAll(FB_POST_SELECTOR2).forEach(processPost);
+    document.querySelectorAll(FB_POST_SELECTOR3).forEach(processPost);
 }
 
 function watch () {
-    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR1, function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR2, function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR3, function () { processPost(this); });
 }
 
 function flush () {
