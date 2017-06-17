@@ -1,4 +1,4 @@
-import { FB_POST_SELECTOR1, FB_POST_SELECTOR2, FB_POST_SELECTOR3 } from './app';
+import { FB_POST_SELECTOR1, FB_POST_SELECTOR2, FB_POST_SELECTOR3, FB_POST_SELECTOR4 } from './app';
 import { getTimeISO8601, normalizeUrl } from './utils';
 
 // TODO: in order to extract the visibility of a post,
@@ -21,9 +21,10 @@ var publicWords = [
 
 export function scrape (elem) {
     // Skip if the post is not top level
-    if ( elem.parents(FB_POST_SELECTOR1).length || 
+    if ( elem.parents(FB_POST_SELECTOR1).length /* ||
          elem.parents(FB_POST_SELECTOR2).length ||
-         elem.parents(FB_POST_SELECTOR3).length) {
+         elem.parents(FB_POST_SELECTOR3).length ||
+         elem.parents(FB_POST_SELECTOR4).length */ ) {
         return null;
     }
 
@@ -34,6 +35,8 @@ export function scrape (elem) {
       .split(' ')
       .pop()
       .toLowerCase();
+
+    console.log("Extracted sharingLevel:", sharingLevel);
 
     var visibility = publicWords.indexOf(sharingLevel) !== -1 ? 'public' : 'private';
 

@@ -1,6 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.6] - 2017-06-17
+### Fixed
+- onboarding was broken since 1.1.5, revert selector
+
 ## [1.1.5] - 2017-06-15
 ### Added 
 - Norvegian and Slovenian languages

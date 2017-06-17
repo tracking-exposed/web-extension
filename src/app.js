@@ -49,6 +49,7 @@ import OnboardingBox from './components/onboardingBox';
 export const FB_POST_SELECTOR1 = '.fbUserContent';
 export const FB_POST_SELECTOR2 = '.UserContent';
 export const FB_POST_SELECTOR3 = '.userContentWrapper';
+export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
 // Has to be find a professional robust way for this!
 
 // Boot the user script. This is the first function called.
@@ -118,14 +119,34 @@ function prefeed () {
     // Array(document.querySelectorAll(FB_POST_SELECTOR)).map(processPost);
 
     document.querySelectorAll(FB_POST_SELECTOR1).forEach(processPost);
-    document.querySelectorAll(FB_POST_SELECTOR2).forEach(processPost);
-    document.querySelectorAll(FB_POST_SELECTOR3).forEach(processPost);
+    //document.querySelectorAll(FB_POST_SELECTOR2).forEach(processPost);
+    //document.querySelectorAll(FB_POST_SELECTOR3).forEach(processPost);
+    //document.querySelectorAll(FB_POST_SELECTOR4).forEach(processPost);
+    //document.querySelectorAll('a[data-tooltip-content]').forEach(testx);
+}
+
+function testx(e) {
+    console.log("begin");
+    for(var i = 0 ; i < 9; i++) {
+        if(e) {
+            if(e.innerHTML) {
+                console.log(i, " + ", e.innerHTML.length);
+            }
+            if(e.parent) {
+                console.log("dio");
+                e = e.parent;
+            }
+        }
+        console.log("done", i);
+    }
 }
 
 function watch () {
     document.arrive(FB_POST_SELECTOR1, function () { processPost(this); });
-    document.arrive(FB_POST_SELECTOR2, function () { processPost(this); });
-    document.arrive(FB_POST_SELECTOR3, function () { processPost(this); });
+    //document.arrive(FB_POST_SELECTOR2, function () { processPost(this); });
+    //document.arrive(FB_POST_SELECTOR3, function () { processPost(this); });
+    //document.arrive(FB_POST_SELECTOR4, function () { processPost(this); });
+    //document.querySelectorAll('a[data-tooltip-content]').forEach(testx);
 }
 
 function flush () {
@@ -139,6 +160,7 @@ function processPost (elem) {
         console.log('Skip post, not in main feed', window.location.pathname);
         return;
     }
+    console.log("processing post");
 
     const $elem = $(elem).parent();
     var data;
@@ -192,7 +214,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive(FB_POST_SELECTOR, function () {
+    document.arrive(FB_POST_SELECTOR1, function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.
