@@ -45,6 +45,9 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
+// hack for firefox
+const chrome = chrome || browser;
+
 // const FB_POST_SELECTOR = '[role="article"]';
 export const FB_POST_SELECTOR1 = '.fbUserContent';
 export const FB_POST_SELECTOR2 = '.UserContent';

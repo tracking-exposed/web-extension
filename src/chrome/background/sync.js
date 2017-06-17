@@ -1,4 +1,6 @@
 import api from '../api';
+const chrome = chrome || browser;
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'sync') {
