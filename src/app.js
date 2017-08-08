@@ -23,9 +23,6 @@
 // Import the styles for the app.
 require('../styles/app.scss');
 
-// Install any necessary polyfills into global, such as es6, stage/3, stage/4, etc. as needed
-import 'core-js/es6';
-
 // Import the react toolkit.
 // Seems like importing 'react-dom' is not enough, we need to import 'react' as well.
 import React from 'react';
