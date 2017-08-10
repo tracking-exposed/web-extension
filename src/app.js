@@ -45,11 +45,12 @@ import { registerHandlers } from './handlers/index';
 
 import OnboardingBox from './components/onboardingBox';
 
-// const FB_POST_SELECTOR = '[role="article"]';
-export const FB_POST_SELECTOR1 = '.fbUserContent';
-export const FB_POST_SELECTOR2 = '.UserContent';
-export const FB_POST_SELECTOR3 = '.userContentWrapper';
-export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
+export const FB_POST_SELECTOR1 = '.fbUserPost';
+export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
+// export const FB_POST_SELECTOR1 = '.fbUserContent';
+// export const FB_POST_SELECTOR2 = '.UserContent';
+// export const FB_POST_SELECTOR3 = '.userContentWrapper';
+// export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
 // Has to be find a professional robust way for this!
 
 // Boot the user script. This is the first function called.
@@ -107,7 +108,7 @@ function timeline () {
     processTimeline();
     /* this is not OK anymore, the selector is outdated,
      * still it is working fine, because it is call when refresh */
-    document.arrive('#feedx_container', processTimeline);
+    document.arrive(FB_TIMELINE_SELECTOR, processTimeline);
 }
 
 function prefeed () {
@@ -203,7 +204,7 @@ function onboarding (publicKey) {
     }
 
     // The first action is to display the big information box.
-    $('#mainContainer').prepend($(ReactDOMServer.renderToString(
+    $('body').prepend($(ReactDOMServer.renderToString(
         <OnboardingBox publicKey={publicKey} />
     )));
 
