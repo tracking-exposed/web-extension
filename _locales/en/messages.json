@@ -27,7 +27,7 @@
     },
 
     "onboardingNote": {
-        "message": "We need you to post this key so we can associate it with yout contributions. After you post the key above, this post will disappear.\nIf something does not work, contact us on our [facebook page](https://www.facebook.com/personalizationalgorithm) or open an [issue on github](https://github.com/tracking-exposed/web-extension/issues)."
+        "message": "We need you to post this key so we can associate it with your contributions. After you post the key above, this post will disappear.\nIf something does not work, contact us on our [facebook page](https://www.facebook.com/personalizationalgorithm) or open an [issue on github](https://github.com/tracking-exposed/web-extension/issues)."
     },
 
     "onboardingReduceBox": {
