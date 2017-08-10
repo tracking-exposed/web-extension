@@ -1,4 +1,6 @@
 import db from '../db';
+const chrome = chrome || browser;
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'chromeConfig') {
@@ -6,7 +8,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             url: 'https://www.facebook.com/',
             name: 'c_user'
         }, cookie => {
-            const userId = cookie.value;
+            const userId = cookie ? cookie.value : "loggedOut";
             db
                 .get(userId + '/settings')
                 .then(settings => {

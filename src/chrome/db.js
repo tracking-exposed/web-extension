@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 import { isEmpty, isFunction } from '../utils';
 
+const chrome = chrome || browser;
 const backend = chrome.storage.local;
 
 function get (key, setIfMissing) {

@@ -23,9 +23,6 @@
 // Import the styles for the app.
 require('../styles/app.scss');
 
-// Install any necessary polyfills into global, such as es6, stage/3, stage/4, etc. as needed
-import 'core-js/es6';
-
 // Import the react toolkit.
 // Seems like importing 'react-dom' is not enough, we need to import 'react' as well.
 import React from 'react';
@@ -52,6 +49,10 @@ export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 // export const FB_POST_SELECTOR3 = '.userContentWrapper';
 // export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
 // Has to be find a professional robust way for this!
+
+
+// hack for firefox
+const chrome = chrome || browser;
 
 // Boot the user script. This is the first function called.
 // Everything starts from here.
