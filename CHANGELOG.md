@@ -1,17 +1,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.7] - 2017-08-11
+### Fixed
+- Update selector for posts
+- Onboarding was adding a weird margin to the main feed, so we changed the
+  anchor point
+
 ## [1.1.6] - 2017-06-17
 ### Fixed
 - onboarding was broken since 1.1.5, revert selector
 
 ## [1.1.5] - 2017-06-15
-### Added 
+### Added
 - Norvegian and Slovenian languages
 - multiple W3C selectors for new posts
 
 ## [1.1.4] - 2017-06-12
-### Added 
+### Added
 - i18n support
 - messages translated in PT\_br
 
