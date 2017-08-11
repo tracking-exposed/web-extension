@@ -88,7 +88,7 @@ function boot () {
 // to get information about the current user from the browser storage
 // (the browser storage is unreachable from a **content script**).
 function userLookup (callback) {
-    if (!config.userId) {
+    if (!config.userId || config.userId === 'loggedOut') {
         console.log('User not logged in, bye for now');
         return;
     }
