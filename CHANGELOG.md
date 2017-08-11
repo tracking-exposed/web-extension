@@ -1,7 +1,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.7] - 2017-08-11
+## [1.1.8] - 2017-08-11
+### Added
+- Firefox support
+### Fixed
+- a typo in EN localization template
+
+## [1.1.7] - 2017-08-10
 ### Fixed
 - Update selector for posts
 - Onboarding was adding a weird margin to the main feed, so we changed the
