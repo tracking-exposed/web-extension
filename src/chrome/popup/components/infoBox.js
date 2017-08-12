@@ -12,7 +12,7 @@ const InfoBox = React.createClass({
         return (
             <Card>
                 <CardHeader
-                    avatar={chrome.extension.getURL('fbtrex48.png')}
+                    avatar={bo.extension.getURL('fbtrex48.png')}
                     title={t('popupTitle')}
                     subtitle={t('popupSubTitle')}
                 />

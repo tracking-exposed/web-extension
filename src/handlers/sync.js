@@ -1,4 +1,5 @@
 import config from '../config';
+const bo = chrome || browser;
 
 const INTERVAL = config.FLUSH_INTERVAL;
 
@@ -44,7 +45,7 @@ function sync (hub) {
     if (state.events.length) {
         // Send timelines to the page handling the communication with the API.
         // This might be refactored using something compatible to the HUB architecture.
-        chrome.runtime.sendMessage({ type: 'sync', payload: state.events, userId: config.userId },
+        bo.runtime.sendMessage({ type: 'sync', payload: state.events, userId: config.userId },
                                    (response) => hub.event('syncResponse', response));
 
         state.events = [];

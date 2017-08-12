@@ -1,7 +1,7 @@
-const chrome = chrome || browser;
+const bo = chrome || browser;
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+bo.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'reloadExtension') {
-        chrome.runtime.reload();
+        bo.runtime.reload();
     }
 });

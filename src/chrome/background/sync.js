@@ -1,8 +1,8 @@
 import api from '../api';
-const chrome = chrome || browser;
+const bo = chrome || browser;
 
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+bo.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'sync') {
         api
             .postEvents(request.payload, request.userId)

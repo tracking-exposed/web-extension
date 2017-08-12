@@ -2,14 +2,14 @@ import $ from 'jquery';
 
 import { isEmpty, isFunction } from '../utils';
 
-const chrome = chrome || browser;
-const backend = chrome.storage.local;
+const bo = chrome || browser;
+const backend = bo.storage.local;
 
 function get (key, setIfMissing) {
     return new Promise((resolve, reject) => {
         backend.get(key, val => {
-            if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError);
+            if (bo.runtime.lastError) {
+                reject(bo.runtime.lastError);
             } else if (isEmpty(val) && !isEmpty(setIfMissing)) {
                 var newVal = isFunction(setIfMissing) ? setIfMissing(key) : setIfMissing;
                 backend.set(newVal, () => resolve(newVal));
@@ -25,8 +25,8 @@ function set (key, value) {
         var newVal = {};
         newVal[key] = isFunction(value) ? value(key) : value;
         backend.set(newVal, () => {
-            if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError);
+            if (bo.runtime.lastError) {
+                reject(bo.runtime.lastError);
             } else {
                 resolve(newVal[key]);
             }

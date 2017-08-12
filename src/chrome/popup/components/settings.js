@@ -34,9 +34,7 @@ export default class Settings extends React.Component {
                                                           settings: {$set: settings},
                                                           reloadBrowser: {$set: true}})));
 
-        chrome.tabs.reload();
-        /* chrome.tabs.query({url: 'https://*.facebook.com/*'},
-                          tabs => tabs.forEach(tab => chrome.tabs.reload(tab.id))); */
+        bo.tabs.reload();
     }
 
     resetSettings () {

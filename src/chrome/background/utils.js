@@ -1,10 +1,10 @@
 import db from '../db';
-const chrome = chrome || browser;
+const bo = chrome || browser;
 
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+bo.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'chromeConfig') {
-        chrome.cookies.get({
+        bo.cookies.get({
             url: 'https://www.facebook.com/',
             name: 'c_user'
         }, cookie => {
@@ -26,9 +26,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                             isStudyGroup: false
                         },
 
-                        logo16: chrome.extension.getURL('fbtrex16.png'),
-                        logo48: chrome.extension.getURL('fbtrex48.png'),
-                        logo128: chrome.extension.getURL('fbtrex128.png')
+                        logo16: bo.extension.getURL('fbtrex16.png'),
+                        logo48: bo.extension.getURL('fbtrex48.png'),
+                        logo128: bo.extension.getURL('fbtrex128.png')
                     });
                 });
         });

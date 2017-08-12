@@ -7,7 +7,7 @@ import db from '../db';
 import Popup from './components/popup';
 
 function main () {
-    chrome.cookies.get({
+    bo.cookies.get({
         url: 'https://www.facebook.com/',
         name: 'c_user'
     }, cookie => {

@@ -39,6 +39,7 @@ import config from './config';
 import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
+import statscompute from './internalstats';
 
 import OnboardingBox from './components/onboardingBox';
 
@@ -51,8 +52,8 @@ export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 // Has to be find a professional robust way for this!
 
 
-// hack for firefox
-const chrome = chrome || browser;
+// bo is the browser object, in chrom is named 'chrome', in firefox is 'browser'
+const bo = chrome || browser;
 
 // Boot the user script. This is the first function called.
 // Everything starts from here.
@@ -95,7 +96,7 @@ function userLookup (callback) {
 
     // Retrieve the user from the browser storage. This is achieved
     // sending a message to the `chrome.runtime`.
-    chrome.runtime.sendMessage({
+    bo.runtime.sendMessage({
         type: 'userLookup',
         payload: {
             userId: config.userId
@@ -162,7 +163,6 @@ function processPost (elem) {
         console.log('Skip post, not in main feed', window.location.pathname);
         return;
     }
-    console.log("processing post");
 
     const $elem = $(elem).parent();
     var data;
@@ -174,8 +174,14 @@ function processPost (elem) {
         }
     }
 
+    statscompute.add(data);
+
     if (data) {
         hub.event('newPost', { element: $elem, data: data });
+    }
+
+    if (statscompute.isWarning() ) {
+        hub.event('scrapingError', { 'billtheberg': true });
     }
 }
 
@@ -231,7 +237,7 @@ function onboarding (publicKey) {
             // call to an **action page**. If the call is successful, the action
             // page handling the event will update the status of the key in the
             // database. It will call the `verify` callback function as well.
-            chrome.runtime.sendMessage({
+            bo.runtime.sendMessage({
                 type: 'userVerify',
                 payload: {
                     html: $elem.html(),
@@ -257,7 +263,7 @@ function verify (status, response) {
 
 // Before booting the app, we need to update the current configuration
 // with some values we can retrieve only from the `chrome`space.
-chrome.runtime.sendMessage({type: 'chromeConfig'}, (response) => {
+bo.runtime.sendMessage({type: 'chromeConfig'}, (response) => {
     Object.assign(config, response);
     boot();
 });

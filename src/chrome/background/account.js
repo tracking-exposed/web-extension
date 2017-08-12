@@ -5,9 +5,9 @@ import api from '../api';
 import { isEmpty } from '../../utils';
 import db from '../db';
 
-const chrome = chrome || browser;
+const bo = chrome || browser;
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+bo.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'userLookup') {
         userLookup(request.payload, sendResponse);
 

@@ -6,7 +6,7 @@ import { getTimeISO8601, normalizeUrl } from './utils';
 // This part should be improved because there might be some really
 // weird corner cases, for example if someone's first name is one
 // of the `publicWords`, then we might detect a wrong visibility.
-// See #42.
+// See https://github.com/tracking-exposed/web-extension/issues/42
 var publicWords = [
     'public',       // Français, Română, English,
     'öffentlich',   // Deutsch
@@ -20,11 +20,7 @@ var publicWords = [
 ];
 
 export function scrape (elem) {
-    // Skip if the post is not top level
-    if ( elem.parents(FB_POST_SELECTOR1).length /* ||
-         elem.parents(FB_POST_SELECTOR2).length ||
-         elem.parents(FB_POST_SELECTOR3).length ||
-         elem.parents(FB_POST_SELECTOR4).length */ ) {
+    if ( elem.parents(FB_POST_SELECTOR1).length ) {
         return null;
     }
 
@@ -36,7 +32,7 @@ export function scrape (elem) {
       .pop()
       .toLowerCase();
 
-    console.log("Extracted sharingLevel:", sharingLevel);
+    // console.log("Extracted sharingLevel:", sharingLevel);
 
     var visibility = publicWords.indexOf(sharingLevel) !== -1 ? 'public' : 'private';
 
