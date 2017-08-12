@@ -174,18 +174,18 @@ function processPost (elem) {
         }
     }
 
-    statscompute.add(data);
-
     if (data) {
         hub.event('newPost', { element: $elem, data: data });
     }
 
+    statscompute.add(data);
     if (statscompute.isWarning() ) {
-        hub.event('scrapingError', { 'billtheberg': true });
+        hub.event('languageUnsupported', {} );
     }
 }
 
 function processTimeline () {
+    statscompute.reset();
     hub.event('newTimeline', {
         uuid: uuid.v4(),
         startTime: getTimeISO8601()
