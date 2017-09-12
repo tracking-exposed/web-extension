@@ -39,17 +39,16 @@ import config from './config';
 import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
-import statscompute from './internalstats';
+import internalstats from './internalstats';
 
 import OnboardingBox from './components/onboardingBox';
 
 export const FB_POST_SELECTOR1 = '.fbUserPost';
-export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 // export const FB_POST_SELECTOR1 = '.fbUserContent';
 // export const FB_POST_SELECTOR2 = '.UserContent';
 // export const FB_POST_SELECTOR3 = '.userContentWrapper';
 // export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
-// Has to be find a professional robust way for this!
+export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 
 
 // bo is the browser object, in chrom is named 'chrome', in firefox is 'browser'
@@ -114,18 +113,7 @@ function timeline () {
 }
 
 function prefeed () {
-    // Although the method `forEach` should be exposed by
-    // [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
-    // instances, Firefox 49.0 seems to not support it, that's why we have to
-    // wrap it in an `Array`.
-    // @vrde, this approach was not working!
-    // Array(document.querySelectorAll(FB_POST_SELECTOR)).map(processPost);
-
     document.querySelectorAll(FB_POST_SELECTOR1).forEach(processPost);
-    //document.querySelectorAll(FB_POST_SELECTOR2).forEach(processPost);
-    //document.querySelectorAll(FB_POST_SELECTOR3).forEach(processPost);
-    //document.querySelectorAll(FB_POST_SELECTOR4).forEach(processPost);
-    //document.querySelectorAll('a[data-tooltip-content]').forEach(testx);
 }
 
 function testx(e) {
@@ -146,10 +134,6 @@ function testx(e) {
 
 function watch () {
     document.arrive(FB_POST_SELECTOR1, function () { processPost(this); });
-    //document.arrive(FB_POST_SELECTOR2, function () { processPost(this); });
-    //document.arrive(FB_POST_SELECTOR3, function () { processPost(this); });
-    //document.arrive(FB_POST_SELECTOR4, function () { processPost(this); });
-    //document.querySelectorAll('a[data-tooltip-content]').forEach(testx);
 }
 
 function flush () {
@@ -178,14 +162,15 @@ function processPost (elem) {
         hub.event('newPost', { element: $elem, data: data });
     }
 
-    statscompute.add(data);
-    if (statscompute.isWarning() ) {
+    internalstats.add(data);
+    if (internalstats.isWarning() ) {
         hub.event('languageUnsupported', {} );
     }
 }
 
 function processTimeline () {
-    statscompute.reset();
+    internalstats.newTimeline();
+    internalstats.reset();
     hub.event('newTimeline', {
         uuid: uuid.v4(),
         startTime: getTimeISO8601()
@@ -257,6 +242,10 @@ function onboarding (publicKey) {
 function verify (status, response) {
     console.log('verify response:', response, status);
     if (status === 'ok') {
+        window.location.reload();
+    } else {
+        console.error('sendMessage on userVerify gave back an error?',
+            response, status);
         window.location.reload();
     }
 }

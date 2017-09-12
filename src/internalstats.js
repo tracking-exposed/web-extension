@@ -15,6 +15,15 @@ class StatsCounter {
             this.restricted++;
     }
 
+    newTimeline () {
+        if(this.previous === 0 && this.visible === 0) {
+            console.error("Test, check teh selector");
+        }
+        this.previous = this.visible;
+        console.log("newTimeline registered in internalstats",
+            this.previous);
+    }
+
     reset () {
         this.visibile = 0;
         this.restricted = 0;
@@ -22,6 +31,9 @@ class StatsCounter {
         this.blocked = false;
     }
 
+    /* this warning trigger `true` if restricted audience appears 
+     * more than 10 times and zero visible post. It normally means 
+     * we are facing an unsupported language */
     isWarning () {
         if(this.blocked)
             return false;
@@ -36,6 +48,6 @@ class StatsCounter {
     }
 }
 
-const statscompute = new StatsCounter();
+const internalstats = new StatsCounter();
 
-export default statscompute;
+export default internalstats;
