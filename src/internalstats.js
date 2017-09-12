@@ -9,8 +9,6 @@ class StatsCounter {
         if(!this.begin)
             this.begin = scrapedData.impressionTime;
 
-        console.log("scrapedData", scrapedData);
-
         if(scrapedData.visibility === 'public') 
             this.visible++;
         else
