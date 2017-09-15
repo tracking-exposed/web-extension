@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import db from '../db';
 import Popup from './components/popup';
 
+const bo = chrome || browser;
+
 function main () {
     bo.cookies.get({
         url: 'https://www.facebook.com/',

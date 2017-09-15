@@ -1,3 +1,5 @@
+const bo = chrome || browser;
+
 function handleReload (hub) {
     bo.runtime.sendMessage({ type: 'reloadExtension' },
                              response => console.log('Reloading Extension'));

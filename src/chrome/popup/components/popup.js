@@ -2,6 +2,7 @@ import React from 'react';
 import InfoBox from './infoBox';
 import Settings from './settings';
 
+const bo = chrome || browser;
 const Popup = React.createClass({
 
     render () {

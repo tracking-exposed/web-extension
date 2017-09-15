@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
 import { T, t } from '../../../i18n';
 
+const bo = chrome || browser;
 const InfoBox = React.createClass({
 
     render () {
