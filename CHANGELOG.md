@@ -1,6 +1,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.9] - 2017-09-15
+### Added
+- Statistics improvement
+
+### Fixed
+- not displayed popup
+
 ## [1.1.8] - 2017-08-11
 ### Added
 - Firefox support
