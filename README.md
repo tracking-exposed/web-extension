@@ -1,3 +1,7 @@
+# Download for your browser
+
+Stable version: **1.1.9**, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi)
+
 [![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
 
 # Intro
