@@ -1,10 +1,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.9] - 2017-09-15
+## [1.1.9] - 2017-09-19
 ### Added
-- Statistics improvement
-
+- Anomaly detection first prototype
 ### Fixed
 - not displayed popup
 
