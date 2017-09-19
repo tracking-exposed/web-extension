@@ -41,6 +41,11 @@ function handleTimeline (type, e) {
     state.events.push(state.timeline);
 }
 
+function handleWarning (type, e) {
+    console.log("handleWarning", type, e);
+    state.events.push({ 'warning': true });
+}
+
 function sync (hub) {
     if (state.events.length) {
         // Send timelines to the page handling the communication with the API.
@@ -56,5 +61,6 @@ export function register (hub) {
     hub.register('newPost', handlePost);
     hub.register('newTimeline', handleTimeline);
     hub.register('windowUnload', sync.bind(null, hub));
+    hub.register('warning', handleWarning);
     window.setInterval(sync.bind(null, hub), INTERVAL);
 }

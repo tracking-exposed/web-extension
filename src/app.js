@@ -149,13 +149,15 @@ function processPost (elem) {
     }
 
     const $elem = $(elem).parent();
-    var data;
+    var data = null;;
     try {
         data = scrape($elem);
     } catch (e) {
+        console.log("Unable to scrape post");
+        /*
         if (e.toString() !== "TypeError: Cannot read property 'trim' of undefined") {
             console.error(e, $elem);
-        }
+        } */
     }
 
     if (data) {
@@ -164,7 +166,7 @@ function processPost (elem) {
 
     internalstats.add(data);
     if (internalstats.isWarning() ) {
-        hub.event('languageUnsupported', {} );
+        hub.event('warning', { stats: internalstats, element: $elem } );
     }
 }
 

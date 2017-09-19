@@ -32,8 +32,6 @@ export function scrape (elem) {
       .pop()
       .toLowerCase();
 
-    // console.log("Extracted sharingLevel:", sharingLevel);
-
     var visibility = publicWords.indexOf(sharingLevel) !== -1 ? 'public' : 'private';
 
     return {

@@ -6,6 +6,14 @@ class StatsCounter {
     }
 
     add ( scrapedData ) {
+
+        this.total += 1;
+
+        if(!scrapedData)  {
+            this.notpost += 1;
+            return;
+        }
+
         if(!this.begin)
             this.begin = scrapedData.impressionTime;
 
@@ -13,38 +21,83 @@ class StatsCounter {
             this.visible++;
         else
             this.restricted++;
+
+        // this.debug();
     }
 
     newTimeline () {
-        if(this.previous === 0 && this.visible === 0) {
-            console.error("Test, check teh selector");
-        }
-        this.previous = this.visible;
+
+        this.debug();
+        console.log("newTimeline");
+
+        if(this.previous &&
+            this.total > 5 &&
+            this.previous.total > 5 &&
+            this.previous.visible === 0 &&
+            this.visible === 0) console.error("Ops!, check teh selector?");
+
+        this.backupPrevious();
+
         console.log("newTimeline registered in internalstats",
             this.previous);
     }
 
+    backupPrevious() {
+        this.previous = {
+            total: this.total,
+            visible: this.visible,
+            restricted: this.restricted,
+            notpost: this.notpost,
+            begin: this.begin,
+            blocked: this.blocked
+        };
+    }
+
     reset () {
-        this.visibile = 0;
+        console.log("reset");
+        this.total = 0;
+        this.visible = 0;
         this.restricted = 0;
+        this.notpost = 0;
         this.begin = null;
         this.blocked = false;
     }
 
+    debug () {
+        console.log("# ", this.total,
+                    "Public ", this.visible,
+                    "Restricted ", this.restricted,
+                    "!P ", this.notpost,
+                    "B ", this.begin,
+                    "stop ", this.blocked);
+    }
+
     /* this warning trigger `true` if restricted audience appears 
      * more than 10 times and zero visible post. It normally means 
-     * we are facing an unsupported language */
+     * we are facing an unsupported language or any other condition */
     isWarning () {
-        if(this.blocked)
-            return false;
 
-        if(this.restricted > 10 && !this.visible) {
+        var retVal = false;
+
+        if(this.blocked)
+            return retVal;
+
+        if(this.visible === 0 &&
+           this.restricted > 10 && (this.total - this.restricted) < 3) {
             console.log("This language is not supported!");
             this.blocked = true;
+            retVal = true;
+            this.debug();
         }
-        /* TODO can be done statistics here, about frequency ? */
 
-        return (this.restricted > 10 && !this.visible);
+        if(this.total > 20 && this.restricted === 0) {
+            console.log("Selector changed");
+            this.blocked = true;
+            retVal = true;
+            this.debug();
+        }
+
+        return retVal;
     }
 }
 
