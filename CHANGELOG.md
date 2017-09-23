@@ -1,6 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.10] - 2017-09-23
+### Fixed
+- selector
+
 ## [1.1.9] - 2017-09-19
 ### Added
 - Anomaly detection first prototype

@@ -43,8 +43,8 @@ import internalstats from './internalstats';
 
 import OnboardingBox from './components/onboardingBox';
 
-export const FB_POST_SELECTOR1 = '.fbUserPost';
-// export const FB_POST_SELECTOR1 = '.fbUserContent';
+// export const FB_POST_SELECTOR1 = '.fbUserPost';
+export const FB_POST_SELECTOR1 = '.fbUserContent';
 // export const FB_POST_SELECTOR2 = '.UserContent';
 // export const FB_POST_SELECTOR3 = '.userContentWrapper';
 // export const FB_POST_SELECTOR4 = 'div[data-insertion-position]';
