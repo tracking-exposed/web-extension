@@ -1,6 +1,6 @@
 // This code could be used to stop unsupported language, after some internal stats will 
 // spot the presence of an anomalously sequence of 10 private post with 0 public.
-class StatsCounter {
+class SelectorChecker {
     constructor () {
         this.reset();
     }
@@ -101,6 +101,35 @@ class StatsCounter {
     }
 }
 
-const internalstats = new StatsCounter();
+export const internalstats = new SelectorChecker();
 
-export default internalstats;
+export function selectorFetch() {
+    console.log("selectorFetch");
+
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        const url = config.API_ROOT + '/api/v1/selector';
+
+        xhr.setRequestHeader('X-Fbtrex-Version', config.VERSION);
+        xhr.setRequestHeader('X-Fbtrex-Build', config.BUILD);
+
+        xhr.open('GET', url, true);
+        xhr.send();
+
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                console.log("con");
+                resolve(this.response);
+            } else {
+                console.log("bad -- x");
+                reject(this.statusText);
+            }
+        };
+
+        xhr.onerror = function () {
+            console.log("bad");
+            reject(this.statusText);
+        };
+    })
+    .catch(error => reject(error));
+};

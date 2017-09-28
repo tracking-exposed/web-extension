@@ -39,13 +39,13 @@ import config from './config';
 import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
-import internalstats from './internalstats';
+import { internalstats, selectorFetch } from './selector';
 
 import OnboardingBox from './components/onboardingBox';
 
 // export const FB_POST_SELECTOR1 = '.fbUserPost';
 // export const FB_POST_SELECTOR1 = '.fbUserContent';
-export const FB_POST_SELECTOR1 = '.fbUserStory';
+export var FB_POST_SELECTOR1 = null;
 export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 
 // bo is the browser object, in chrom is named 'chrome', in firefox is 'browser'
@@ -92,12 +92,16 @@ function userLookup (callback) {
 
     // Retrieve the user from the browser storage. This is achieved
     // sending a message to the `chrome.runtime`.
+    FB_POST_SELECTOR1 = selectorFetch() || '.fbUserStory';
+    console.log("Using as selector", FB_POST_SELECTOR1);
+
     bo.runtime.sendMessage({
         type: 'userLookup',
         payload: {
             userId: config.userId
         }
     }, callback);
+
 }
 
 // This function will first trigger a `newTimeline` event and wait for a
