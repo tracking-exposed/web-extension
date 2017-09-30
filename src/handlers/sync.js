@@ -57,10 +57,16 @@ function sync (hub) {
     }
 }
 
+function fetchSelector () {
+    console.log("fetchSelector");
+    bo.runtime.sendMessage({ type: 'selectorFetch', version: config.version });
+}
+
 export function register (hub) {
     hub.register('newPost', handlePost);
     hub.register('newTimeline', handleTimeline);
     hub.register('windowUnload', sync.bind(null, hub));
     hub.register('warning', handleWarning);
+    hub.register('selectorFetch', fetchSelector);
     window.setInterval(sync.bind(null, hub), INTERVAL);
 }

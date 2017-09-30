@@ -39,14 +39,15 @@ import config from './config';
 import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
-import { internalstats, selectorFetch } from './selector';
+import selector from './selector';
 
 import OnboardingBox from './components/onboardingBox';
 
-// export const FB_POST_SELECTOR1 = '.fbUserPost';
-// export const FB_POST_SELECTOR1 = '.fbUserContent';
-export var FB_POST_SELECTOR1 = null;
-export const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
+// export const FB_POST_SELECTOR = '.fbUserStory';
+// export const FB_POST_SELECTOR = '.fbUserPost';
+// export const FB_POST_SELECTOR = '.fbUserContent';
+
+const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 
 // bo is the browser object, in chrom is named 'chrome', in firefox is 'browser'
 const bo = chrome || browser;
@@ -61,6 +62,12 @@ function boot () {
     // An event handler is a piece of code responsible for a specific task.
     // You can learn more in the [`./handlers`](./handlers/index.html) directory.
     registerHandlers(hub);
+
+    // Retrieve the selector from the backend, it is set as side-effect
+    bo.runtime.sendMessage({
+        type: 'selectorFetch'
+    });
+    // XXX is it a race condition with 'prefeed()' below ? */
 
     // Lookup the current user and decide what to do.
     userLookup(response => {
@@ -90,11 +97,6 @@ function userLookup (callback) {
         return;
     }
 
-    // Retrieve the user from the browser storage. This is achieved
-    // sending a message to the `chrome.runtime`.
-    FB_POST_SELECTOR1 = selectorFetch() || '.fbUserStory';
-    console.log("Using as selector", FB_POST_SELECTOR1);
-
     bo.runtime.sendMessage({
         type: 'userLookup',
         payload: {
@@ -108,13 +110,15 @@ function userLookup (callback) {
 // new refresh.
 function timeline () {
     processTimeline();
-    /* this is not OK anymore, the selector is outdated,
-     * still it is working fine, because it is call when refresh */
     document.arrive(FB_TIMELINE_SELECTOR, processTimeline);
 }
 
 function prefeed () {
-    document.querySelectorAll(FB_POST_SELECTOR1).forEach(processPost);
+    /* this is set here to win the race condition just in case, if it change and the /selector
+     * API hasn't answer yet */
+    if(!selector.FB_POST_SELECTOR)
+        selector.selectorSetter({ info: 'default', rensponse: selector.DEFAULT_SELECTOR });
+    document.querySelectorAll(selector.FB_POST_SELECTOR).forEach(processPost);
 }
 
 function testx(e) {
@@ -134,7 +138,7 @@ function testx(e) {
 }
 
 function watch () {
-    document.arrive(FB_POST_SELECTOR1, function () { processPost(this); });
+    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
 }
 
 function flush () {
@@ -165,15 +169,15 @@ function processPost (elem) {
         hub.event('newPost', { element: $elem, data: data });
     }
 
-    internalstats.add(data);
-    if (internalstats.isWarning() ) {
-        hub.event('warning', { stats: internalstats, element: $elem } );
+    selector.internalstats.add(data);
+    if (selector.internalstats.isWarning() ) {
+        hub.event('warning', { stats: selector.internalstats, element: $elem } );
     }
 }
 
 function processTimeline () {
-    internalstats.newTimeline();
-    internalstats.reset();
+    selector.internalstats.newTimeline();
+    selector.internalstats.reset();
     hub.event('newTimeline', {
         uuid: uuid.v4(),
         startTime: getTimeISO8601()
@@ -210,7 +214,7 @@ function onboarding (publicKey) {
     });
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive(FB_POST_SELECTOR1, function () {
+    document.arrive(FB_POST_SELECTOR, function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.

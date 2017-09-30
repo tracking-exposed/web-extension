@@ -1,4 +1,4 @@
-import { FB_POST_SELECTOR1, FB_POST_SELECTOR2, FB_POST_SELECTOR3, FB_POST_SELECTOR4 } from './app';
+import { FB_POST_SELECTOR } from './selector';
 import { getTimeISO8601, normalizeUrl } from './utils';
 
 // TODO: in order to extract the visibility of a post,
@@ -20,7 +20,7 @@ var publicWords = [
 ];
 
 export function scrape (elem) {
-    if ( elem.parents(FB_POST_SELECTOR1).length ) {
+    if ( elem.parents(FB_POST_SELECTOR).length ) {
         return null;
     }
 
