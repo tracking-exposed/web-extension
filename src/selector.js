@@ -105,13 +105,12 @@ const DEFAULT_SELECTOR = '.fbUserStory';
 var FB_POST_SELECTOR = null;
 
 function get() {
-    console.log("selector.get", FB_POST_SELECTOR, DEFAULT_SELECTOR);
     return !FB_POST_SELECTOR ? DEFAULT_SELECTOR : FB_POST_SELECTOR;
 }
 
 function set(input) {
-    console.log("selector.set", input.info, "=", input.response);
-    FB_POST_SELECTOR = info.response;
+    console.log("selector.set", input);
+    FB_POST_SELECTOR = input;
 }
 
 const selector = {

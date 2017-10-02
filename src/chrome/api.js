@@ -49,17 +49,13 @@ function post (apiUrl, data, userId) {
     });
 }
 
-function selectorGet (version, userId) {
-    console.log("*", userId, version);
+function get(apiUrl, version, userId) {
     return new Promise((resolve, reject) => {
         db.get(userId).then(keypair => {
             const xhr = new XMLHttpRequest();
-            console.log("selectorGet", apiUrl);
             const url = config.API_ROOT + apiUrl;
 
             xhr.open('GET', url, true);
-
-            console.log("Into the promis of selectorGet");
 
             xhr.setRequestHeader('X-Fbtrex-Version', version);
             xhr.send();
@@ -85,7 +81,7 @@ function selectorGet (version, userId) {
 const api = {
     postEvents: post.bind(null, 'events'),
     validate: post.bind(null, 'validate'),
-    selectorGet: selectorGet
+    selector: get.bind(null, 'selector')
 };
 
 export default api;

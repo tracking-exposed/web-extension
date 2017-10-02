@@ -71,15 +71,18 @@ function boot () {
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } 
 
-        if(!selector)
-            console.error("wtf2");
         // Onboarding is not mandatory.
         // we manage TOFU server side.
         // we give the control to user accessing to their fbtrex page.
         // Retrieve the selector from the backend, it is set as side-effect
-        bo.runtime.sendMessage({ type: 'selectorFetch' }, (nothing => {
-            if(!selector)
-                console.error("wtf");
+        bo.runtime.sendMessage({
+            type: 'selectorFetch',
+            payload: {
+                userId: config.userId,
+                version: config.VERSION
+            }
+        }, (response => {
+            selector.set(JSON.parse(response.response).selector);
             console.log("Begin collection and analysis, [using:", selector.get(), "]");
             timeline();
             prefeed();

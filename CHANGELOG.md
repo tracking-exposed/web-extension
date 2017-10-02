@@ -5,9 +5,10 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.11] - 2017-09-28
 ### Added
 - support for selector API
-
 ### Fixed
 - selector
+- onboarding is not mandatory anymore
+- onboarding show up reduced
 
 ## [1.1.10] - 2017-09-23
 ### Fixed
