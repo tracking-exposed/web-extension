@@ -49,33 +49,37 @@ function post (apiUrl, data, userId) {
     });
 }
 
-function selectorGet (version) {
+function selectorGet (version, userId) {
+    console.log("*", userId, version);
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        const url = config.API_ROOT + apiUrl;
+        db.get(userId).then(keypair => {
+            const xhr = new XMLHttpRequest();
+            console.log("selectorGet", apiUrl);
+            const url = config.API_ROOT + apiUrl;
 
-        xhr.open('GET', url, true);
+            xhr.open('GET', url, true);
 
-        console.log("Into the promis of selectorGet");
+            console.log("Into the promis of selectorGet");
 
-        xhr.setRequestHeader('X-Fbtrex-Version', version);
-        xhr.send();
-        xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300) {
-                console.log(this.response);
-                resolve(this.response);
-            } else {
-                console.log("Load error", this.statusText);
+            xhr.setRequestHeader('X-Fbtrex-Version', version);
+            xhr.send();
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    console.log(this.response);
+                    resolve(this.response);
+                } else {
+                    console.log("Load error", this.statusText);
+                    reject(this.statusText);
+                }
+            };
+
+            xhr.onerror = function () {
+                console.log("onerror", this.statusText);
                 reject(this.statusText);
-            }
-        };
-
-        xhr.onerror = function () {
-            console.log("onerror", this.statusText);
-            reject(this.statusText);
-        };
-    })
-    .catch(error => reject(error));
+            };
+        })
+        .catch(error => reject(error));
+    });
 }
 
 const api = {

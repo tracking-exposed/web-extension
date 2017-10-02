@@ -43,10 +43,6 @@ import selector from './selector';
 
 import OnboardingBox from './components/onboardingBox';
 
-// export const FB_POST_SELECTOR = '.fbUserStory';
-// export const FB_POST_SELECTOR = '.fbUserPost';
-// export const FB_POST_SELECTOR = '.fbUserContent';
-
 const FB_TIMELINE_SELECTOR = '#newsFeedHeading';
 
 // bo is the browser object, in chrom is named 'chrome', in firefox is 'browser'
@@ -63,14 +59,9 @@ function boot () {
     // You can learn more in the [`./handlers`](./handlers/index.html) directory.
     registerHandlers(hub);
 
-    // Retrieve the selector from the backend, it is set as side-effect
-    bo.runtime.sendMessage({
-        type: 'selectorFetch'
-    });
-    // XXX is it a race condition with 'prefeed()' below ? */
-
     // Lookup the current user and decide what to do.
     userLookup(response => {
+
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
         if (response.status === 'new') {
@@ -78,13 +69,23 @@ function boot () {
             onboarding(response.publicKey);
             // Keep an eye if the onboarding box is still there.
             window.setInterval(() => onboarding(response.publicKey), 1000);
-        } else {
-            // Otherwise, we load all the components of the UI and the watchers.
+        } 
+
+        if(!selector)
+            console.error("wtf2");
+        // Onboarding is not mandatory.
+        // we manage TOFU server side.
+        // we give the control to user accessing to their fbtrex page.
+        // Retrieve the selector from the backend, it is set as side-effect
+        bo.runtime.sendMessage({ type: 'selectorFetch' }, (nothing => {
+            if(!selector)
+                console.error("wtf");
+            console.log("Begin collection and analysis, [using:", selector.get(), "]");
             timeline();
             prefeed();
             watch();
             flush();
-        }
+        }));
     });
 }
 
@@ -114,11 +115,7 @@ function timeline () {
 }
 
 function prefeed () {
-    /* this is set here to win the race condition just in case, if it change and the /selector
-     * API hasn't answer yet */
-    if(!selector.FB_POST_SELECTOR)
-        selector.selectorSetter({ info: 'default', rensponse: selector.DEFAULT_SELECTOR });
-    document.querySelectorAll(selector.FB_POST_SELECTOR).forEach(processPost);
+    document.querySelectorAll(selector.get()).forEach(processPost);
 }
 
 function testx(e) {
@@ -138,7 +135,7 @@ function testx(e) {
 }
 
 function watch () {
-    document.arrive(FB_POST_SELECTOR, function () { processPost(this); });
+    document.arrive(selector.get(), function () { processPost(this); });
 }
 
 function flush () {
@@ -154,25 +151,22 @@ function processPost (elem) {
     }
 
     const $elem = $(elem).parent();
-    var data = null;;
     try {
-        data = scrape($elem);
+        var data = scrape($elem);
+
+        hub.event('newPost', { element: $elem, data: data });
+
+        selector.internalstats.add(data);
+        if (selector.internalstats.isWarning() ) {
+            // This has to be a sendMessage and not event() 
+            // hub.event('warning', { stats: selector.internalstats, element: $elem } );
+            console.log("Warning detected!", selector.internalstats.debug());
+        }
     } catch (e) {
         console.log("Unable to scrape post");
-        /*
-        if (e.toString() !== "TypeError: Cannot read property 'trim' of undefined") {
-            console.error(e, $elem);
-        } */
+        console.log($elem.html());
     }
 
-    if (data) {
-        hub.event('newPost', { element: $elem, data: data });
-    }
-
-    selector.internalstats.add(data);
-    if (selector.internalstats.isWarning() ) {
-        hub.event('warning', { stats: selector.internalstats, element: $elem } );
-    }
 }
 
 function processTimeline () {
@@ -197,7 +191,6 @@ function processTimeline () {
 function onboarding (publicKey) {
     // Since this function can be called multiple times, we need to check
     // if the message box is already there. If so, we just return
-
     if ($('.fbtrex--onboarding').length) {
         return;
     }
@@ -212,9 +205,10 @@ function onboarding (publicKey) {
     $('.fbtrex--onboarding-toggle').on('click', () => {
         $('.fbtrex--onboarding > div').toggle('fbtrex--hide');
     });
+    $('.fbtrex--onboarding > div').toggle('fbtrex--hide');
 
     // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive(FB_POST_SELECTOR, function () {
+    document.arrive(selector.get(), function () {
         const $elem = $(this).parent();
 
         // Process the post only if its html contains the user's public key.

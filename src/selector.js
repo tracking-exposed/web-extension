@@ -1,9 +1,6 @@
 import config from './config';
 const bo = chrome || browser;
 
-export const DEFAULT_SELECTOR = '.fbUserStory';
-export var FB_POST_SELECTOR = null;
-
 // This code could be used to stop unsupported language, after some internal stats will 
 // spot the presence of an anomalously sequence of 10 private post with 0 public.
 class SelectorChecker {
@@ -12,14 +9,12 @@ class SelectorChecker {
     }
 
     add ( scrapedData ) {
-
         this.total += 1;
 
         if(!scrapedData)  {
             this.notpost += 1;
             return;
         }
-
         if(!this.begin)
             this.begin = scrapedData.impressionTime;
 
@@ -32,7 +27,6 @@ class SelectorChecker {
     }
 
     newTimeline () {
-
         this.debug();
         console.log("newTimeline");
 
@@ -106,22 +100,24 @@ class SelectorChecker {
         return retVal;
     }
 }
-export const internalstats = new SelectorChecker();
 
-bo.runtime.onMessage.addListener((request) => {
-    console.log("?", request);
-    if(request.type === 'selectorFetch') {
-        console.log("!");
-        api
-            .selectorGet(config.version)
-            .then(response => selectorSetter({info: 'fetch', response: response }))
-            .catch(error => selectorSetter({info: 'default', response: DEFAULT_SELECTOR }))
-        return true;
-    };
-});
+const DEFAULT_SELECTOR = '.fbUserStory';
+var FB_POST_SELECTOR = null;
 
-export function selectorSetter(info) {
-    console.log("selectorSetter", info.info, "=", info.response);
+function get() {
+    console.log("selector.get", FB_POST_SELECTOR, DEFAULT_SELECTOR);
+    return !FB_POST_SELECTOR ? DEFAULT_SELECTOR : FB_POST_SELECTOR;
+}
+
+function set(input) {
+    console.log("selector.set", input.info, "=", input.response);
     FB_POST_SELECTOR = info.response;
-};
+}
 
+const selector = {
+    get: get,
+    set: set,
+    internalstats: new SelectorChecker()
+}
+
+export default selector;
