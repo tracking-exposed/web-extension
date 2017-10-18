@@ -15,12 +15,11 @@ Setting up the dev environment is super easy.
 
 
 ### Dependencies
-This project requires Node 5+. Install [nvm](https://github.com/creationix/nvm)
-if you haven't already.
+This project requires Node 5+. Install [nvm](https://github.com/creationix/nvm) for easy version maintaining. Alternatively install Nodejs from a package, but make sure it's the right version and install npm as well for package management.  
 
 
 ### Set up your build system
-The build system uses a simple `package.json` file to describe the tasks.
+The build system uses a simple `package.json` file to describe the tasks, you can check it out to find out the packages that we rely on to make this extension available or for troubleshooting.
 
 To get started run:
 ```
@@ -31,16 +30,20 @@ npm start
 
 The second line (`npm test`) is optional, but testing is cool and you should do
 it anyway. It's also a nice way to check if the installation succeeded.
+If npm test fails, don't worry and try npm start nonetheless, it might be due to facebook frequent html structure changes or nodejs extensions incompatibility, please report it back to us if this is the case.  
 
 `npm start` will build the application using `webpack` and watch for changes.
 
+Keep `npm start` running in the background to take advantage of the autoreload.
 
-### Set up your browser
+
+### Set up your browser (for Chromium / Google Chrome)
 To install the extension go to **settings**, select **extensions**, and enable
 **Developer mode**. Click on **Load unpacked extension** and select the
 `extension/build` directory contained in this repo.
 
-Keep `npm start` running in the background to take advantage of the autoreload.
+### Set up your browser (for Firefox)
+As standard practice, firefox doesn't allow unpacked extension to be loaded. However, it does allow developers to test unpacked extensions **temporarily**. To accomplish this just visit [about:debugging], click **Load Temporary Add-on** and select `extension/build` directory contained in this repo.
 
 #### Note on autoreloading the extension
 By running `npm start`, the extension will work in `DEVELOPMENT` mode. This
@@ -73,5 +76,3 @@ tidy -i -m -w 0 -utf8 file.html
 # Thanks
 [@sohkai](https://github.com/sohkai) for the amazing [js-reactor
 boilerplate](https://github.com/bigchaindb/js-reactor).
-
-
