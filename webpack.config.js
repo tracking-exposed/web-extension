@@ -34,11 +34,13 @@ const PATHS = {
 };
 
 /** EXTERNAL DEFINITIONS INJECTED INTO APP **/
+var local = 'http://localhost:8000/';
+// var local = 'http://192.168.223.133:8000/';
 const DEFINITIONS = {
     'process.env': {
         DEVELOPMENT: JSON.stringify(DEVELOPMENT),
         NODE_ENV: JSON.stringify(NODE_ENV),
-        API_ROOT: JSON.stringify((DEVELOPMENT ? 'http://localhost:8000/' : 'https://collector.facebook.tracking.exposed/') + 'api/v' + LAST_VERSION + '/'),
+        API_ROOT: JSON.stringify((DEVELOPMENT ? local : 'https://collector.facebook.tracking.exposed/') + 'api/v' + LAST_VERSION + '/'),
         VERSION: JSON.stringify(packageJSON.version + (DEVELOPMENT ? '-dev' : '')),
         BUILD: JSON.stringify(BUILD),
         FLUSH_INTERVAL: JSON.stringify(DEVELOPMENT ? 10000 : 20000)
