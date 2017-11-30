@@ -1,6 +1,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.12] - 2017-11-30
+### Fixed
+- onboarding box not display anymore #68
 
 ## [1.1.11] - 2017-09-28
 ### Added

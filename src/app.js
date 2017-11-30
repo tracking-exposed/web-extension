@@ -64,12 +64,16 @@ function boot () {
 
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
+
+        // SPECIAL -- this is temporarly disabled 
+        /*
         if (response.status === 'new') {
             // In the case the status is `new` then we need to onboard the user.
             onboarding(response.publicKey);
             // Keep an eye if the onboarding box is still there.
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } 
+        */
 
         // Onboarding is not mandatory.
         // we manage TOFU server side.
