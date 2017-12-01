@@ -101,7 +101,7 @@ class SelectorChecker {
     }
 }
 
-const DEFAULT_SELECTOR = '.fbUserStory';
+const DEFAULT_SELECTOR = '.userContentWrapper';
 var FB_POST_SELECTOR = null;
 
 function get() {

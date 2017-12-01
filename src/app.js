@@ -86,12 +86,19 @@ function boot () {
                 version: config.VERSION
             }
         }, (response => {
-            selector.set(JSON.parse(response.response).selector);
-            console.log("Begin collection and analysis, [using:", selector.get(), "]");
-            timeline();
-            prefeed();
-            watch();
-            flush();
+            try {
+                /* this could raise an exception if JSON.parse fails, but
+                 * there is a default hardcoded in the extension */
+                selector.set(JSON.parse(response.response).selector);
+            } catch(e) {
+                console.log("selector retrieve fail:", e.description);
+            } finally {
+                console.log("Begin collection and analysis [using:", selector.get(), "]");
+                timeline();
+                prefeed();
+                watch();
+                flush();
+            }
         }));
     });
 }

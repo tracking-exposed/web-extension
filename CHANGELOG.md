@@ -3,7 +3,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.12] - 2017-11-30
 ### Fixed
-- onboarding box not display anymore #68
+- onboarding box not display anymore [#68](https://github.com/tracking-exposed/web-extension/issues/68).
+- changed color in the facebook banner, totally not [#63](https://github.com/tracking-exposed/web-extension/issues/63).
 
 ## [1.1.11] - 2017-09-28
 ### Added
