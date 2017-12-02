@@ -1,6 +1,6 @@
 # Install web-extion in your browser
 
-Stable version: **1.1.9**, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi). You should read our [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) or look the [latest explanatory video](https://media.ccc.de/v/SHA2017-127-the_quest_for_algorithm_diversity)
+Stable version: **1.1.12**, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi). You should read our [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) or look the [latest explanatory video](https://media.ccc.de/v/SHA2017-127-the_quest_for_algorithm_diversity)
 
 [![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
 
