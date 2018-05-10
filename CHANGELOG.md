@@ -1,6 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.13] - 2018-05-09
+### Fixed
+- small rename, because we got the extension take down for trademark infringment on Google store [#72](https://github.com/tracking-exposed/web-extension/issues/72)
+
 ## [1.1.12] - 2017-11-30
 ### Fixed
 - onboarding box not display anymore [#68](https://github.com/tracking-exposed/web-extension/issues/68).

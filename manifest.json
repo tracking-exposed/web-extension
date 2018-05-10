@@ -3,7 +3,7 @@
 
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "author": "Alberto Granzotto, Claudio Agosti, https://facebook.tracking.exposed",
 
   "default_locale": "en",
