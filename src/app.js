@@ -40,6 +40,7 @@ import hub from './hub';
 import { getTimeISO8601 } from './utils';
 import { registerHandlers } from './handlers/index';
 import selector from './selector';
+import token from './token';
 
 import OnboardingBox from './components/onboardingBox';
 
@@ -51,7 +52,7 @@ const bo = chrome || browser;
 // Boot the user script. This is the first function called.
 // Everything starts from here.
 function boot () {
-    console.log(`Fbtrex version ${config.VERSION} build ${config.BUILD} loading.`);
+    console.log(`fbtrex version ${config.VERSION} build ${config.BUILD} loading.`);
     console.log('Config:', config);
 
     // Register all the event handlers.
@@ -65,35 +66,42 @@ function boot () {
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
 
-        // SPECIAL -- this is temporarly disabled 
         /*
+         * OnBoarding, disabled: we should find new way to link a true fb user to the fbtrex (or not?)
         if (response.status === 'new') {
             // In the case the status is `new` then we need to onboard the user.
             onboarding(response.publicKey);
             // Keep an eye if the onboarding box is still there.
             window.setInterval(() => onboarding(response.publicKey), 1000);
         } 
-        */
+         */
 
         // Onboarding is not mandatory.
         // we manage TOFU server side.
         // we give the control to user accessing to their fbtrex page.
-        // Retrieve the selector from the backend, it is set as side-effect
+        // Retrieve the selector and the accessToken from the server, (as side-effect of this promise)
+        let uniqueMsg = `¼ #${response.publicKey}# key of #${config.userId}#, uniq: ` + Math.random();
+        // this can be used to verify presente of privateKey associated to our own publicKey
         bo.runtime.sendMessage({
-            type: 'selectorFetch',
+            type: 'userInfo',
             payload: {
+                message: uniqueMsg,
                 userId: config.userId,
-                version: config.VERSION
-            }
+                version: config.VERSION,
+                publicKey: response.publicKey
+            },
+            userId: config.userId
         }, (response => {
             try {
                 /* this could raise an exception if JSON.parse fails, but
                  * there is a default hardcoded in the extension */
                 selector.set(JSON.parse(response.response).selector);
+                token.set(JSON.parse(response.response).token);
             } catch(e) {
                 console.log("selector retrieve fail:", e.description);
             } finally {
                 console.log("Begin collection and analysis [using:", selector.get(), "]");
+                console.log("Token received is [", token.get(), "]");
                 timeline();
                 prefeed();
                 watch();
@@ -130,22 +138,6 @@ function timeline () {
 
 function prefeed () {
     document.querySelectorAll(selector.get()).forEach(processPost);
-}
-
-function testx(e) {
-    console.log("begin");
-    for(var i = 0 ; i < 9; i++) {
-        if(e) {
-            if(e.innerHTML) {
-                console.log(i, " + ", e.innerHTML.length);
-            }
-            if(e.parent) {
-                console.log("dio");
-                e = e.parent;
-            }
-        }
-        console.log("done", i);
-    }
 }
 
 function watch () {

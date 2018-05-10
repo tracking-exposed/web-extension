@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import config from '../config';
+import token from '../token';
 
 const VisualFeedback = React.createClass({
     render () {
@@ -10,7 +11,7 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
-        const actionLink = `https://facebook.tracking.exposed/realitycheck/${config.userId}/data`;
+        const actionLink = `https://facebook.tracking.exposed/personal/${token.get()}/data`;
         const actionText = 'Your data';
 
         if (isPublic) {

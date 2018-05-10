@@ -30,6 +30,8 @@ function post (apiUrl, data, userId) {
                 xhr.setRequestHeader('X-Fbtrex-UserId', userId);
                 xhr.setRequestHeader('X-Fbtrex-PublicKey', keypair.publicKey);
                 xhr.setRequestHeader('X-Fbtrex-Signature', bs58.encode(signature));
+            } else {
+                reject('Developer: you forget userId, this is an HTTP POST, it is required');
             }
 
             xhr.send(payload);
@@ -81,7 +83,7 @@ function get(apiUrl, version, userId) {
 const api = {
     postEvents: post.bind(null, 'events'),
     validate: post.bind(null, 'validate'),
-    selector: get.bind(null, 'selector')
+    selector: post.bind(null, 'userInfo')
 };
 
 export default api;
