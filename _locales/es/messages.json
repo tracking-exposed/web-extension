@@ -1,0 +1,105 @@
+{
+    "extensionName": {
+        "message": "tracking.exposed: Investigando algoritmos",
+        "description": "Extension name"
+    },
+
+    "extensionDescription": {
+        "message": "Herramienta colaborativa para apoyar la investigación sobre los algoritmos de personalización.",
+        "description": "Extension description"
+    },
+
+    "onboardingTitle": {
+        "message": "Yay!! Bienvenido a facebook.tracking.exposed!"
+    },
+
+    "onboardingIntro": {
+        "message": "Necesitamos que publiques to llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Luego de un minuto puedes eliminarlo."
+    },
+
+    "onboardingCopyPaste": {
+        "message": "Los algoritmos de personalización son un problema social, y solo pueden ser confrontados de manera colectiva. Desde hoy me he aliado a https://facebook.tracking.exposed y este mensaje con mi clave pública es necesario para vincular mi cuenta con el proyecto: $publickey$",
+        "placeholders": {
+            "publickey": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "onboardingNote": {
+        "message": "Necesitamos publicar esta llave pública para asociarla con tus contribuciones. Luego de publicarla esta noticia desaparecerá.\nSi algo no funciona, contáctanos a traves de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o dinos tu problema en [github](https://github.com/tracking-exposed/web-extension/issues)."
+    },
+
+    "onboardingReduceBox": {
+        "message": "Reducir el recuadro"
+    },
+
+    "onboardingReduced": {
+        "message": "El registro a facebook.tracking.exposed no ha sido completado."
+    },
+
+    "onboardingReopen": {
+        "message": "Reabrir el recuadro"
+    },
+
+    "popupTitle": {
+        "message": "Bienvenido a Facebook Tracking Exposed"
+    },
+
+    "popupSubTitle": {
+        "message": "Anuncio al servicio de la comunidad"
+    },
+
+    "popupHello": {
+        "message": "Estimado amigo,\ngracias por apoyar la iniciativa de [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
+    },
+
+    "popupIntro": {
+        "message": "Respetamos y cuidamos mucho tu privacidad y deseamos ser tan transparentes como sea posible, por eso:"
+    },
+
+    "popupHighlight": {
+        "message": "Esta extensión solo puede ver y recolectar tus **publicaciones públicas**. Somo sumamente explícitos y te mostramos cuales noticias son capturadas con una clara notificación en tu línea de noticias."
+    },
+
+    "popupPrivacy": {
+        "message": "Tenemos una [política de privaciada](https://facebook.tracking.exposed/privacy-statement) donde describimos cuales son los datos recogemos y por qué."
+    },
+
+    "popupFree": {
+        "message": "Solo usamos y publicamos [software libre y de código abierto](https://www.github.com/tracking-exposed/) el cual puede ser auditado por cualquiera a todo momento."
+    },
+
+    "popupReality": {
+        "message": "**[Acceso a tus datos]($realitylink$)**. Está disponible para descargar o consular en linea (todavía es un trabajo en proceso). Contiene todo lo que Facebook está mostrandote. Estamos trabajando en maneras de mejorar la visualización y formas de estudiar tus datos.",
+        "placeholders": {
+            "realitylink": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "settingsTitle": {
+        "message": "Configuración"
+    },
+
+    "settingsStudyGroup": {
+        "message": "Soy parte de un grupo de estudio"
+    },
+
+    "settingsTagId": {
+        "message": "Tag ID"
+    },
+
+    "settingsHideBanner": {
+        "message": "Ocultar el banner encima de cada publicación"
+    },
+
+    "settingsSaveAndReload": {
+        "message": "Guardar y recargar"
+    },
+
+    "settingsCancel": {
+        "message": "Cancelar"
+    }
+}
