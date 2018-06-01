@@ -1,4 +1,6 @@
 import React from 'react';
+import config from '../../../config';
+import token from '../../../token';
 
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
@@ -8,7 +10,9 @@ const bo = chrome || browser;
 const InfoBox = React.createClass({
 
     render () {
-        const realitylink = 'https://facebook.tracking.exposed/realitycheck/' + this.props.userId + '/data';
+        const realitylink = config.WEB_ROOT + '/personal/' + token.get() + '/data';
+        console.error("-Debug: " + realitylink);
+        console.error("+Debug: " + config);
 
         return (
             <Card>

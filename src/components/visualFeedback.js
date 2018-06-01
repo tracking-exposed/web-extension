@@ -11,7 +11,7 @@ const VisualFeedback = React.createClass({
         var badge;
         var message;
 
-        const actionLink = `https://facebook.tracking.exposed/personal/${token.get()}/data`;
+        const actionLink = `${config.WEB_ROOT}/personal/${token.get()}/data`;
         const actionText = 'Your data';
 
         if (isPublic) {
