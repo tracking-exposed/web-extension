@@ -13,8 +13,8 @@ bo.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         // Make the call asynchronous.
         return true;
-    } else if (request.type === 'userVerify') {
-        userVerify(request.payload, sendResponse);
+    } else if (request.type === 'optIn') {
+        updateSettings(request.payload, sendResponse);
 
         // Make the call asynchronous.
         return true;
@@ -34,17 +34,16 @@ function userLookup ({ userId }, sendResponse) {
                 sendResponse({ publicKey: val.publicKey, status: val.status });
             });
         } else {
-            sendResponse({ publicKey: val.publicKey, status: val.status });
+            sendResponse({ publicKey: val.publicKey, status: val.status, optin: val.optin });
         }
     });
 };
 
-function userVerify ({ permalink, publicKey, userId, html }, sendResponse) {
-    api.validate({ permalink, publicKey, userId, html })
-        .then(response => {
-            db.update(userId, { status: 'verified' })
-                .then(response => sendResponse('ok', response))
-                .catch(response => sendResponse('error', response));
-        })
-        .catch(response => sendResponse('error', response));
+function updateSettings ({ infoDiet, dataReuse, userId }, sendResponse) {
+    db.get(userId).then(val => {
+        Object.assign(val, { status: 'accepted', optin: { infoDiet: infoDiet, dataReuse: dataReuse }});
+        db.update(userId, val)
+            .then(response => sendResponse('ok', response))
+            .catch(response => sendResponse('error', response));
+    });
 };

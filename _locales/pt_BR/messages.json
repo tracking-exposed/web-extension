@@ -101,5 +101,10 @@
 
     "settingsCancel": {
         "message": "Cancelar"
-    }
+    },
+
+    "optinIntroduction": { "message": "missing" },
+    "optinInfoDiet": { "message": "missing" },
+    "optinNote": { "message": "missing" },
+    "optinNoteLink": { "message": "missing" }
 }

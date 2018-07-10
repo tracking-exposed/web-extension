@@ -101,5 +101,21 @@
 
     "settingsCancel": {
         "message": "Cancel"
+    },
+
+    "infoDietDesc": {
+        "message": "To let FbTREX work, you should opt-in in the forms of data-reuse you want us to enable. A more extensive explanation can be found at the page "
+    },
+
+    "InfoDietButton": {
+        "message": "Give us the right to process a copy of your Facebook timeline (public data only)." 
+    },
+
+    "dataReuseDesc": {
+        "message": "The data you provide, could be reused, anonymized and not linked to any of your activity, to collectively understand the society connected to Facebook and how the algorithm has influence. All the tests are "
+    },
+
+    "dataReuseButton": {
+        "message": "Join the collective analysis of social network phenomena, please note: people are protected. you, and anyone else"
     }
 }
