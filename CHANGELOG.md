@@ -1,6 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.15] - 2018-07-10
+### Added
+- optIn procedure
+
 ## [1.1.14] - 2018-06-01 -- not released yet 
 ### Fixed
 - link generated is not anymore to `realitycheck` which get discontinued, but to `personal`
