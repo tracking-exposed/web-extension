@@ -34,8 +34,8 @@ const OnboardingBox = React.createClass({
                         {t('dataReuseButton')}
                     </button>
 
-                    <h2 className="fbtrex--next" id="cc">Close and Continue →</h2>
-                    <h2 className="fbtrex--next fbtrex--info" id="ccDesc">(You should opt-in at least at the first button to get rid of this box)</h2>
+                    <h2 className="fbtrex--next" id="cc">{t('closeAndContinue')}→</h2>
+                    <h2 className="fbtrex--next fbtrex--info" id="ccDesc">{t('optInAtLeast')}</h2>
 
                 </div>
 

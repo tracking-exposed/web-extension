@@ -117,5 +117,13 @@
 
     "dataReuseButton": {
         "message": "Join the collective analysis of social network phenomena, please note: people are protected. you, and anyone else"
+    },
+
+    "closeAndContinue": {
+        "message": "Close and Continue"
+    },
+
+    "optInAtLeast": {
+        "message": "(You should opt-in at least at the first button to get rid of this box)"
     }
 }
