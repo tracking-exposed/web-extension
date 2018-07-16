@@ -65,21 +65,17 @@ function boot () {
 
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
-
-        /*
-         * OnBoarding, disabled: we should find new way to link a true fb user to the fbtrex (or not?)
-        if (response.status === 'new') {
-            // In the case the status is `new` then we need to onboard the user.
-            onboarding(response.publicKey);
-            // Keep an eye if the onboarding box is still there.
-            window.setInterval(() => onboarding(response.publicKey), 1000);
+        console.log("userLookup responded:", response);
+        if (response.status !== 'accepted' || !response.optin || !response.optin.infoDiet) {
+            // The optin(s) are missing then we need to onboard the user.
+            onboarding(response);
+            window.setInterval(() => onboarding(response), 1000);
         } 
-         */
 
-        // Onboarding is not mandatory.
-        // we manage TOFU server side.
-        // we give the control to user accessing to their fbtrex page.
-        // Retrieve the selector and the accessToken from the server, (as side-effect of this promise)
+        // The user compose this unique message and is signed with their PGP key
+        // we returns the most update CSS selector for the public posts and 
+        // an authentication token, necessary to log-in into the personal page
+        // selector is returned, accessToken is saved as side-effect (it could be cleaner)
         let uniqueMsg = `¼ #${response.publicKey}# key of #${config.userId}#, uniq: ` + Math.random();
         // this can be used to verify presente of privateKey associated to our own publicKey
         bo.runtime.sendMessage({
@@ -88,7 +84,8 @@ function boot () {
                 message: uniqueMsg,
                 userId: config.userId,
                 version: config.VERSION,
-                publicKey: response.publicKey
+                publicKey: response.publicKey,
+                optin: response.optin
             },
             userId: config.userId
         }, (response => {
@@ -184,22 +181,19 @@ function processTimeline () {
     });
 }
 
-// The function `onboarding` guides the user through the public key
-// registration.
-// The flow is the following:
-// 1. display a message at the top of the page. The message includes the
-//    a public key and it prompts the user to copy paste it in a
-//    new public post.
-// 2. Wait until a post appears in the timeline.
-// 3. Once the post appears, extract its permalink and send it to the API.
-// 4. If the API call is successful, an **activity page** will update the
-//    status of the key from `new` to `verified`.
+// The function `onboarding` guides the user through the 
+// opt-in process.
+//
+// TODO, it should guide also through the public key registration.
+// that part of code and description got removed at 
+// 0927f2b6040dac4c8ef0232a1de7713d601dfef9
+//
 function onboarding (publicKey) {
+
     // Since this function can be called multiple times, we need to check
     // if the message box is already there. If so, we just return
-    if ($('.fbtrex--onboarding').length) {
+    if ($('.fbtrex--onboarding').length)
         return;
-    }
 
     // The first action is to display the big information box.
     $('body').prepend($(ReactDOMServer.renderToString(
@@ -211,50 +205,41 @@ function onboarding (publicKey) {
     $('.fbtrex--onboarding-toggle').on('click', () => {
         $('.fbtrex--onboarding > div').toggle('fbtrex--hide');
     });
-    $('.fbtrex--onboarding > div').toggle('fbtrex--hide');
 
-    // Then we listen to all the new posts appearing on the user's timeline.
-    document.arrive(selector.get(), function () {
-        const $elem = $(this).parent();
+    $('#info-diet-button').on('click', () => {
+        $('#info-diet-button').toggleClass('welcome-opt-in');
+        $('#cc').toggleClass('enabled');
+    });
 
-        // Process the post only if its html contains the user's public key.
-        if ($elem.html().indexOf(publicKey) !== -1) {
-            // Extract the URL from the post
-            var permalink = scrapePermalink($elem);
+    $('#data-reuse-button').on('click', () => {
+        $('#data-reuse-button').toggleClass('welcome-opt-in');
+    });
 
-            console.log('Permalink for verification', permalink);
+    $('#cc').on('click', () => {
+        if($('#cc').hasClass('enabled')) {
 
-            // Kindly ask to verify the user's public key against the API.
-            // Since this is a cross domain request, we need to delegate the
-            // call to an **action page**. If the call is successful, the action
-            // page handling the event will update the status of the key in the
-            // database. It will call the `verify` callback function as well.
+            var dataReuse = $('#data-reuse-button').hasClass('welcome-opt-in');
+            $("#cc").text("Saving...");
+
             bo.runtime.sendMessage({
-                type: 'userVerify',
+                type: 'optIn',
                 payload: {
-                    html: $elem.html(),
-                    userId: config.userId,
-                    publicKey: publicKey,
-                    permalink: permalink
+                    infoDiet: true,
+                    dataReuse: dataReuse,
+                    userId: config.userId
                 }
-            }, verify);
+            }, (response => {
+                window.location.reload();
+            }));
+
+        } else {
+            $('#info-diet-button').addClass('warning');
+            window.setInterval(() => {
+                $('#info-diet-button').removeClass('warning');
+            }, 500);
         }
     });
-}
 
-// This function checks the response from the verification API call.
-// If the call is successful, it will reload the browser. This will restart
-// this application as well, but instead of the onboarding the app will start
-// scraping the posts.
-function verify (status, response) {
-    console.log('verify response:', response, status);
-    if (status === 'ok') {
-        window.location.reload();
-    } else {
-        console.error('sendMessage on userVerify gave back an error?',
-            response, status);
-        window.location.reload();
-    }
 }
 
 // Before booting the app, we need to update the current configuration

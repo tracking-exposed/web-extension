@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _ from 'lodash';
 import { T, t } from '../i18n';
 
 const OnboardingBox = React.createClass({
@@ -9,29 +10,43 @@ const OnboardingBox = React.createClass({
 
         return (
             <div className='fbtrex--onboarding'>
+
                 <div className='fbtrex--onboarding-box'>
+
                     <T tag='h1' msg='onboardingTitle' />
-                    <T msg='onboardingIntro' />
 
-                    <p className='fbtrex--copypaste'>
-                        {t('onboardingCopyPaste', publicKey)}
+                    <p className="fbtrex--opt-in">
+                        {t('infoDietDesc')}
+                        <a href="https://facebook.tracking.exposed/privacy-statement" target="_blank">privacy statement</a>
+                        .
+                    </p>
+                    <button className='default-opt-out' id='info-diet-button'>
+                        {t('infoDietButton')}
+                    </button>
+
+                    <p className="fbtrex--opt-in">
+                        {t('dataReuseDesc')}
+                        <a href="https://facebook.tracking.exposed/data" target="_blank">documented and transparent</a>
+                        .
                     </p>
 
-                    <T className='fbtrex--note' msg='onboardingNote' />
+                    <button className='default-opt-out' id='data-reuse-button'>
+                        {t('dataReuseButton')}
+                    </button>
 
-                    <p>
-                        <button className='fbtrex--onboarding-toggle'>
-                            {t('onboardingReduceBox')}
-                        </button>
-                    </p>
+                    <h2 className="fbtrex--next" id="cc">{t('closeAndContinue')}→</h2>
+                    <h2 className="fbtrex--next fbtrex--info" id="ccDesc">{t('optInAtLeast')}</h2>
+
                 </div>
 
                 <div className='fbtrex--onboarding-collapsed fbtrex--hide'>
                     {t('onboardingReduced')} <button className='fbtrex--onboarding-toggle'>{t('onboardingReopen')}</button>
                 </div>
+
             </div>
         );
     }
+
 });
 
 export default OnboardingBox;

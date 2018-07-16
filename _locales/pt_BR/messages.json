@@ -101,5 +101,29 @@
 
     "settingsCancel": {
         "message": "Cancelar"
+    },
+
+    "infoDietDesc": {
+        "message": "Para que FbTREX funcione, você deve aceitar as formas de reuso de dados que você quer que estejam ativadas. Uma explicação mais abrangente pode ser encontrada na página "
+    },
+
+    "InfoDietButton": {
+        "message": "dê-nos o direito de processar uma cópia da sua timeline pública do Facebook (apenas dados públicos)." 
+    },
+
+    "dataReuseDesc": {
+        "message": "os dados que você compartilha podem ser reutilizados, anonimamente e não ligados a sua atividade, para compreender de maneira coletiva a sociedade conectada ao Facebook e como o algoritmo a influência. Todos os testes são "
+    },
+
+    "dataReuseButton": {
+        "message": "Junte-se à análise coletiva dos fenômenos de rede social. Por favor, tenha em mente: pessoas estão protegidas. Você e todos os outros."
+    },
+    
+    "closeAndContinue": {
+        "message": "Fechar e continuar"
+    },
+    
+    "optInAtLeast": {
+        "message": "Você deve aceitar pelo menos a primeira opção para deixar de ver essa mensagem"
     }
 }
