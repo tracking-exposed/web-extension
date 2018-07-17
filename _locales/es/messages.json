@@ -104,26 +104,26 @@
     },
 
     "infoDietDesc": {
-        "message": "translate from EN"
+        "message": "Para permitir a FbTREX de funcionar, tienes que hacer opt-in de las formas de datos que nos quieres dejar utilizar. Una explicación mas extensiva se encuentra en la pagina "
     },
 
     "InfoDietButton": {
-        "message": "dê-nos o direito de processar uma cópia da sua timeline pública do Facebook (apenas dados públicos)." 
+        "message": "Den nos los derechos de procesar una copia de tu timeline Facebook (solamente datos públicos)."
     },
 
     "dataReuseDesc": {
-        "message": "os dados que você compartilha podem ser reutilizados, anonimamente e não ligados a sua atividade, para compreender de maneira coletiva a sociedade conectada ao Facebook e como o algoritmo a influência. Todos os testes são "
+        "message": "Los datos que nos das pueden ser reutilizados, anónimamente y si conexión con tus actividades, para comprender de manera colectiva la sociedad conectada a Facebook y como el algoritmo la influencia. Todos los tests son "
     },
 
     "dataReuseButton": {
-        "message": "Junte-se à análise coletiva dos fenômenos de rede social. Por favor, tenha em mente: pessoas estão protegidas. Você e todos os outros."
+        "message": "Júntense a la análisis colectiva de los fenómenos de la redes sociales. Por favor, tengas en mente: la personas están protegidas. Tu, yo todos los demás"
     },
 
     "closeAndContinue": {
-        "message": "Fechar e continuar"
+        "message": "Cerrar y continuar"
     },
 
     "optInAtLeast": {
-        "message": "ver essa mensagem"
+        "message": "(Tienes que hacer opt-in por lo menos al primer botón para borrar este mensaje)"
     }
 }
