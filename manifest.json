@@ -2,9 +2,10 @@
   "manifest_version": 2,
 
   "name": "__MSG_extensionName__",
+  "short_name": "FbTREX",
   "description": "__MSG_extensionDescription__",
-  "version": "1.1.15",
-  "author": "Alberto Granzotto, Claudio Agosti, https://facebook.tracking.exposed",
+  "version": "1.1.16",
+  "author": "Alberto Granzotto, Claudio Agosti, and the contributors in https://github.com/tracking-exposed/web-extension",
 
   "default_locale": "en",
 

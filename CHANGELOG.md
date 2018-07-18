@@ -1,6 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.16] - 2018-07-18
+### Fixed
+- lack of short\_name in manifest.json
+
 ## [1.1.15] - 2018-07-10
 ### Added
 - optIn procedure, localized in all the three languages

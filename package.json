@@ -1,6 +1,6 @@
 {
   "name": "tracking-exposed-extension",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "tracking.exposed is browser extension to investigate personalization algorithms, for you and for scientific research (only if you give the proper opt-in, of course)",
   "homepage": "https://github.com/tracking-exposed/web-extension/",
   "bugs": "https://github.com/tracking-exposed/web-extension/issues",
