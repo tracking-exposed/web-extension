@@ -20,7 +20,9 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const PRODUCTION = NODE_ENV === 'production';
 const DEVELOPMENT = NODE_ENV === 'development';
 console.log('NODE_ENV [' + process.env.NODE_ENV + '] Prod:', PRODUCTION, 'Devel: ', DEVELOPMENT);
-const BUILD = require('child_process').execSync('git rev-parse HEAD').toString().trim();
+/* this git command might now work if a person, like a mozilla reviewer, is downloading 
+ * the .zip from github. the .zip do not replicate the repository and the features there */
+// const BUILD = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
 const PATHS = {
     APPS: {
@@ -34,7 +36,7 @@ const PATHS = {
 };
 
 /** EXTERNAL DEFINITIONS INJECTED INTO APP **/
-var ENV_DEP_SERVER = DEVELOPMENT ? 'http://localhost:8000' : 'https://collector.facebook.tracking.exposed';
+var ENV_DEP_SERVER = DEVELOPMENT ? 'http://localhost:8100' : 'https://collector.facebook.tracking.exposed';
 var ENV_DEP_WEB = DEVELOPMENT ? 'http://localhost:8000' : 'https://facebook.tracking.exposed';
 
 // var local = 'http://192.168.223.133:8000/';
@@ -45,7 +47,7 @@ const DEFINITIONS = {
         API_ROOT: JSON.stringify(ENV_DEP_SERVER + '/api/v' + LAST_VERSION + '/'),
         WEB_ROOT: JSON.stringify(ENV_DEP_WEB),
         VERSION: JSON.stringify(packageJSON.version + (DEVELOPMENT ? '-dev' : '')),
-        BUILD: JSON.stringify(BUILD),
+        // BUILD: JSON.stringify(BUILD),
         FLUSH_INTERVAL: JSON.stringify(DEVELOPMENT ? 10000 : 20000)
     }
 };
