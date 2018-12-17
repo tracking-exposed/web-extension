@@ -1,5 +1,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
+## [1.1.17] - 2018-12-17
+### Fixed
+- Bump version because of disalignment between chrome/firefox stores
 
 ## [1.1.16] - 2018-07-18
 ### Fixed
