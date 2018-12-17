@@ -51,7 +51,7 @@
     },
 
     "popupHello": {
-        "message": "Estimado amigo,\ngracias por apoyar la iniciativa de [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
+        "message": "Estimado amigo, gracias por apoyar la iniciativa de [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
     },
 
     "popupIntro": {
@@ -71,7 +71,7 @@
     },
 
     "popupReality": {
-        "message": "**[Acceso a tus datos]($realitylink$)**. Está disponible para descargar o consular en linea (todavía es un trabajo en proceso). Contiene todo lo que Facebook está mostrandote. Estamos trabajando en maneras de mejorar la visualización y formas de estudiar tus datos.",
+        "message": "**★[Acceso a tus datos]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
@@ -104,7 +104,7 @@
     },
 
     "infoDietDesc": {
-        "message": "Para permitir a FbTREX de funcionar, tienes que hacer opt-in de las formas de datos que nos quieres dejar utilizar. Una explicación mas extensiva se encuentra en la pagina "
+        "message": "Para permitir a fbTREX de funcionar, tienes que hacer opt-in de las formas de datos que nos quieres dejar utilizar. Una explicación mas extensiva se encuentra en la pagina "
     },
 
     "InfoDietButton": {
@@ -116,7 +116,11 @@
     },
 
     "dataReuseButton": {
-        "message": "Júntense a la análisis colectiva de los fenómenos de la redes sociales. Por favor, tengas en mente: la personas están protegidas. Tu, yo todos los demás"
+        "message": "Júntense a la análisis colectiva de los fenómenos de la redes sociales."
+    },
+
+    "dataReuseButton2": {
+        "message": "Por favor, tengas en mente: la personas están protegidas. Tu, yo todos los demás"
     },
 
     "closeAndContinue": {

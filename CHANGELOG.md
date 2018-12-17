@@ -4,6 +4,10 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.16] - 2018-07-18
 ### Fixed
 - lack of short\_name in manifest.json
+- optin more clear, with only one checkbox
+- removed `git` requirement in building process
+## Added
+- experimental feature to do interaction with tracking.exposed domain
 
 ## [1.1.15] - 2018-07-10
 ### Added

@@ -1,14 +1,14 @@
-# Install web-extion in your browser
+# TL;DR how replicate the build?
 
-Stable version: **1.1.12**, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi). You should read our [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) or look the [latest explanatory video](https://media.ccc.de/v/SHA2017-127-the_quest_for_algorithm_diversity)
-
-[![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
+`$ npm i ; npm run build:dist ; ls -l dist/extension.zip`
 
 # Intro
 This is the source code for the **tracking-exposed** extension.
 We use ECMAScript 2015, aka ES6, aka ECMAScript Harmony. The aim is to keep the
 code modular, easy to test, and beautiful.
 
+
+# Install web-extion in your browser
 
 ## Getting Started
 Setting up the dev environment is super easy.
@@ -72,6 +72,12 @@ see some logging messages.
 ```
 tidy -i -m -w 0 -utf8 file.html
 ```
+
+# Current releases
+[Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi). You should read our [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) or look the [latest explanatory video](https://media.ccc.de/v/SHA2017-127-the_quest_for_algorithm_diversity)
+
+[![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
+
 
 # Thanks
 [@sohkai](https://github.com/sohkai) for the amazing [js-reactor

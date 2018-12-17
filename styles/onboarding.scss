@@ -8,7 +8,7 @@
 
 .fbtrex--onboarding-box,
 .fbtrex--onboarding-collapsed {
-    width: 700px;
+    width: 80%;
     margin: 0 auto;
     padding: 12px;
 
@@ -28,51 +28,49 @@
     h1 {
         font-size: 24px;
         color: green;
-    }
-
-    h2 {
-        font-size: 20px;
-        font-weight: 600;
-        color: lightgrey;
-        border: 0;
-        cursor: not-allowed;
-
-        .fbtrex--info {
-            font-size: 16px;
-            color: grey;
-        }
-    }
-
-    .fbtrex--next {
         text-align: center;
     }
 }
 
-.welcome-opt-in {
-    border: green 4px solid !important;
-}
-
-.default-opt-out {
-    border: red 2px solid;
-    border-radius: 6px;
-    text-align: center;
-    padding: 4px;
-}
 
 .fbtrex--opt-in a {
     font-weight: 600;
     text-decoration: underline;
 }
 
-#cc {
-    text-decoration: underline;
+.asterisk-default {
+    color: red;
+    font-weight: 600;
+}
+.asterisk-selected {
+    color: white;
 }
 
+.pretendCheckbox {
+    padding-left: 20px;
+    font-size: 1.3em;
+}
+
+.clickable {
+    font-size: 1.3em;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 5px;
+}
+
+#closeContinue {
+    text-align: center;
+    margin: 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.continue-default {
+    color: lightgrey;
+    cursor: not-allowed;
+}
 .enabled {
-    color: green !important;
-    cursor: pointer !important;
-}
-
-.warning {
-    border: yellow 5px solid !important;
+    color: green;
+    cursor: pointer;
 }

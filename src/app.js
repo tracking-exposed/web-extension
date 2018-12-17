@@ -52,7 +52,7 @@ const bo = chrome || browser;
 // Boot the user script. This is the first function called.
 // Everything starts from here.
 function boot () {
-    console.log(`fbtrex version ${config.VERSION} build ${config.BUILD} loading.`);
+    console.log(`fbtrex version ${config.VERSION} loading.`);
     console.log('Config:', config);
 
     // Register all the event handlers.
@@ -60,13 +60,32 @@ function boot () {
     // You can learn more in the [`./handlers`](./handlers/index.html) directory.
     registerHandlers(hub);
 
+    // check if the content script is on tracking.exposed page and if the page is
+    // communicating something (researcher opt-in or special settings update
+    if(!_.endsWith(window.location.origin, 'facebook.com')) {
+        console.log("Considering TREX channel on: ", window.location.origin);
+        if(_.isUndefined($("#fbtrex-parseable-channel")))
+            return null;
+
+        $(".extension-missing").hide();
+        $(".extension-present").show();
+
+        let channeled = $("#fbtrex-parseable-channel").text();
+        console.log(`Channeled content: ${channeled}`);
+
+        /* TODO -- inject a clickable function inside the button "accept"
+         * and when the user press it, save in the DB the new special
+         * conditions */
+        return;
+    }
+
     // Lookup the current user and decide what to do.
     userLookup(response => {
 
         // `response` contains the user's public key and its status,
         // if the key has just been created, the status is `new`.
         console.log("userLookup responded:", response);
-        if (response.status !== 'accepted' || !response.optin || !response.optin.infoDiet) {
+        if (_.isUndefined(response.optin) || response.optin.infoDiet !== true) {
             // The optin(s) are missing then we need to onboard the user.
             onboarding(response);
             window.setInterval(() => onboarding(response), 1000);
@@ -76,7 +95,8 @@ function boot () {
         // we returns the most update CSS selector for the public posts and 
         // an authentication token, necessary to log-in into the personal page
         // selector is returned, accessToken is saved as side-effect (it could be cleaner)
-        let uniqueMsg = `¼ #${response.publicKey}# key of #${config.userId}#, uniq: ` + Math.random();
+        let uniqueMsg = `key ${response.publicKey}@${config.userId} RAND: ${Math.random()}@${new Date()}`;
+
         // this can be used to verify presente of privateKey associated to our own publicKey
         bo.runtime.sendMessage({
             type: 'userInfo',
@@ -147,9 +167,16 @@ function flush () {
     });
 }
 
+function locationConsidered(path) {
+    /* check if the path is among the one which we would read at */
+    console.log("checking path:", path);
+    return ( path !== '/' );
+}
+
 function processPost (elem) {
-    if (window.location.pathname !== '/') {
-        console.log('Skip post, not in main feed', window.location.pathname);
+
+    if (locationConsidered(window.location.pathname)) {
+        console.log('Skip post. Not in the appropriate location', window.location.pathname);
         return;
     }
 
@@ -167,13 +194,15 @@ function processPost (elem) {
         }
     } catch (e) {
         console.log("Unable to scrape post");
-        console.log($elem.html());
+        // hub.event('newPost', { element: $elem, data: data, anomaly: true });
+        // console.log($elem.html());
     }
 
 }
 
 function processTimeline () {
     selector.internalstats.newTimeline();
+    console.log("New timeline begin:", new Date());
     selector.internalstats.reset();
     hub.event('newTimeline', {
         uuid: uuid.v4(),
@@ -184,10 +213,9 @@ function processTimeline () {
 // The function `onboarding` guides the user through the 
 // opt-in process.
 //
-// TODO, it should guide also through the public key registration.
-// that part of code and description got removed at 
-// 0927f2b6040dac4c8ef0232a1de7713d601dfef9
-//
+// Memory: this code originally guide through the public key 
+// registration. That part of code and description got removed
+// at 0927f2b6040dac4c8ef0232a1de7713d601dfef9
 function onboarding (publicKey) {
 
     // Since this function can be called multiple times, we need to check
@@ -207,37 +235,41 @@ function onboarding (publicKey) {
     });
 
     $('#info-diet-button').on('click', () => {
-        $('#info-diet-button').toggleClass('welcome-opt-in');
-        $('#cc').toggleClass('enabled');
+        $('#info-diet-asterisk').addClass('asterisk-selected');
+        $('#info-diet-asterisk').removeClass('asterisk-default');
+        $('#info-diet-checkbox').text('☑');
+        $('#closeContinue').addClass('enabled');
+        $('#closeContinue').removeClass('continue-default');
     });
 
-    $('#data-reuse-button').on('click', () => {
+/*
+    $('#anomaly-button').on('click', () => {
+        $('#anomaly-checkbox').text('☑');
+    });
+
+   -- the data reuse is not personal, and the researcher agreements
+      needs a dedicated opt-in therefore this is removed             --
+    $('#data-reuse-checkbox').on('click', () => {
         $('#data-reuse-button').toggleClass('welcome-opt-in');
+        console.log("clicked 1");
     });
+ */
 
-    $('#cc').on('click', () => {
-        if($('#cc').hasClass('enabled')) {
-
-            var dataReuse = $('#data-reuse-button').hasClass('welcome-opt-in');
-            $("#cc").text("Saving...");
+    $('#closeContinue').on('click', () => {
+        if($('#closeContinue').hasClass('enabled')) {
+            $("#closeContinue").text("Saving and refreshing...");
 
             bo.runtime.sendMessage({
                 type: 'optIn',
                 payload: {
                     infoDiet: true,
-                    dataReuse: dataReuse,
+                    // dataReuse: dataReuse,
                     userId: config.userId
                 }
             }, (response => {
                 window.location.reload();
             }));
-
-        } else {
-            $('#info-diet-button').addClass('warning');
-            window.setInterval(() => {
-                $('#info-diet-button').removeClass('warning');
-            }, 500);
-        }
+        } 
     });
 
 }

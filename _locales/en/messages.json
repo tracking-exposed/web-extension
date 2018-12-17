@@ -51,7 +51,7 @@
     },
 
     "popupHello": {
-        "message": "Dear friend,\nthanks for supporting the [facebook.tracking.exposed](https://facebook.tracking.exposed/) initiative."
+        "message": "Dear friend, thanks for supporting the [facebook.tracking.exposed](https://facebook.tracking.exposed/) initiative."
     },
 
     "popupIntro": {
@@ -71,7 +71,7 @@
     },
 
     "popupReality": {
-        "message": "**Access to [your data]($realitylink$)**, available to be downloaded or consulted (is a work in progress!). It contains what Facebook is showing you. In the 2017 will be improved with new visualizations and functionalities.",
+        "message": "**★Access to [your data]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
@@ -104,7 +104,7 @@
     },
 
     "infoDietDesc": {
-        "message": "To let FbTREX work, you should opt-in in the forms of data-reuse you want us to enable. A more extensive explanation can be found at the page "
+        "message": "To let fbTREX work, you should opt-in below. A more extensive explanation can be found at the page "
     },
 
     "InfoDietButton": {
@@ -116,7 +116,11 @@
     },
 
     "dataReuseButton": {
-        "message": "Join the collective analysis of social network phenomena, please note: people are protected. you, and anyone else"
+        "message": "Join the collective analysis of social network phenomena"
+    },
+
+    "dataReuseButton2": {
+        "message": "Please note: people are protected. you, and anyone else"
     },
 
     "closeAndContinue": {

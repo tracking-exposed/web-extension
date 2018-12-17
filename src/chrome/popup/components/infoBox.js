@@ -11,9 +11,6 @@ const InfoBox = React.createClass({
 
     render () {
         const realitylink = config.WEB_ROOT + '/personal/' + token.get() + '/data';
-        console.error("-Debug: " + realitylink);
-        console.error("+Debug: " + config);
-
         return (
             <Card>
                 <CardHeader
@@ -24,13 +21,13 @@ const InfoBox = React.createClass({
 
                 <CardText>
                     <T msg="popupHello" />
-                    <T msg="popupIntro" />
+                    <T tag='h3' className='popTitle' msg="popupReality" args={realitylink} />
 
+                    <T msg="popupIntro" />
                     <ul>
                         <T tag='li' msg="popupHighlight" />
                         <T tag='li' msg="popupPrivacy" />
                         <T tag='li' msg="popupFree" />
-                        <T tag='li' msg="popupReality" args={realitylink} />
                     </ul>
                 </CardText>
             </Card>

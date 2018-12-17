@@ -51,7 +51,7 @@
     },
 
     "popupHello": {
-        "message": "Olá,\nObrigada por apoiar a iniciativa [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
+        "message": "Olá, obrigada por apoiar a iniciativa [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
     },
 
     "popupIntro": {
@@ -71,7 +71,7 @@
     },
 
     "popupReality": {
-        "message": "** [Seus dados coletados]($realitylink$)** também estão disponíveis para download ou consulta. Eles são o resultado do seu experimeto. Estamos trabalhando para melhorar a maneira como você visualiza e acessa esses dados.",
+        "message": "**★[Seus dados coletados]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
@@ -104,7 +104,7 @@
     },
 
     "infoDietDesc": {
-        "message": "Para que FbTREX funcione, você deve aceitar as formas de reuso de dados que você quer que estejam ativadas. Uma explicação mais abrangente pode ser encontrada na página "
+        "message": "Para que fbTREX funcione, você deve aceitar as formas de reuso de dados que você quer que estejam ativadas. Uma explicação mais abrangente pode ser encontrada na página "
     },
 
     "InfoDietButton": {
@@ -116,7 +116,11 @@
     },
 
     "dataReuseButton": {
-        "message": "Junte-se à análise coletiva dos fenômenos de rede social. Tenha em mente: pessoas estão protegidas. Você e todos os outros."
+        "message": "Junte-se à análise coletiva dos fenômenos de rede social."
+    },
+
+    "dataReuseButton2": {
+        "message": "Tenha em mente: pessoas estão protegidas. Você e todos os outros."
     },
     
     "closeAndContinue": {
