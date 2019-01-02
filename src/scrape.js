@@ -16,7 +16,7 @@ var publicWords = [
     'tutti',        // Italiano
     'público',      // Português
     'openbaar',     // 'Nederlands',
-    'ledereen'      // 'Nederlands (België)'
+    'iedereen'      // 'Nederlands (België)'
 ];
 
 export function scrape (elem) {
