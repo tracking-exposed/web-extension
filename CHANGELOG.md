@@ -1,5 +1,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
+
+## [1.1.18] - 2019-01-02
+### Fixed
+- België language
+
 ## [1.1.17] - 2018-12-17
 ### Fixed
 - Bump version because of disalignment between chrome/firefox stores
