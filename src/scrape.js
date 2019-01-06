@@ -16,7 +16,10 @@ var publicWords = [
     'tutti',        // Italiano
     'público',      // Português
     'openbaar',     // 'Nederlands',
-    'iedereen'      // 'Nederlands (België)'
+    'iedereen',     // 'Nederlands (België)',
+    'avalik',       // Eesti
+    'publiczne',    // Polish
+    'opið',         // Icelandic
 ];
 
 export function scrape (elem) {
@@ -36,8 +39,7 @@ export function scrape (elem) {
 
     return {
         visibility: visibility,
-        /* this can be enabled whenever we're debugging languages */
-        /* visibilityInfo: sharingLevel, */
+        visibilityInfo: sharingLevel,
         impressionTime: getTimeISO8601()
     };
 }
