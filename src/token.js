@@ -5,22 +5,27 @@ const bo = chrome || browser;
 // refreshed in some moment by the user and (should) be saved in the
 // localStorage. At the moment is downloaded every time from fbtrex,
 // imply the user can open the link only via "your data" link and then
-// save the link, until the token is not revoked by the user itself
+// save the link, until the token is not revoked by the user itself...
+// ... (which at the moment can't be done)
 
-var storedToken = "unset";
+class Token {
+    constructor () {
+        this.stored = "unset";
+    }
 
-function get() {
-    return storedToken;
-}
+    get() {
+        return this.stored;
+    }
 
-function set(input) {
-    console.log("token.set", input);
-    storedToken = input;
+    set(input) {
+        console.log("token.set", input);
+        this.stored = input;
+    }
+
 }
 
 const token = {
-    get: get,
-    set: set,
-}
+    authToken: new Token()
+};
 
 export default token;

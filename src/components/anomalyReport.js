@@ -7,7 +7,7 @@ import token from '../token';
 const AnomalyReport = React.createClass({
     render () {
         const logo = this.props.logo;
-        const actionLink = `${config.WEB_ROOT}/personal/${token.get()}/anomaly`;
+        const actionLink = `${config.WEB_ROOT}/personal/${token.authToken.get()}/anomaly`;
         const actionText = 'know more'
         const badge = '⚠';
         const message = "fbTREX is not working for you, we want to fix this.";

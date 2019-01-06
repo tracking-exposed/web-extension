@@ -115,12 +115,12 @@ function boot () {
                 /* this could raise an exception if JSON.parse fails, but
                  * there is a default hardcoded in the extension */
                 selector.set(JSON.parse(response.response).selector);
-                token.set(JSON.parse(response.response).token);
+                token.authToken.set(JSON.parse(response.response).token);
             } catch(e) {
                 console.log("selector retrieve fail:", e.description);
             } finally {
                 console.log("Begin collection and analysis [using:", selector.get(), "]");
-                console.log("Token received is [", token.get(), "]");
+                console.log("Token sets [", token.authToken.get(), "]");
                 timeline();
                 prefeed();
                 watch();
@@ -198,7 +198,7 @@ function processPost (elem) {
         delete data.visibilityInfo;
         hub.event('newPost', { element: $elem, data: data });
     } catch (e) {
-        console.log("Unable to scrape post");
+        console.log("Unable to scrape post", e);
         selector.stats.add(null);
 
         // XXX TODO make this investigation method for developers/researcher
