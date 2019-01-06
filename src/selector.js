@@ -12,12 +12,13 @@ class SelectorChecker {
 
     add ( scrapedData ) {
         this.data.total += 1;
-        this.data.infos.push(scrapedData.visibilityInfo);
 
         if(!scrapedData)  {
             this.data.notpost += 1;
             return;
         }
+        this.data.infos.push(scrapedData.visibilityInfo);
+
         if(!this.data.begin)
             this.data.begin = scrapedData.impressionTime;
 
