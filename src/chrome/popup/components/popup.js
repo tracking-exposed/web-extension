@@ -7,8 +7,8 @@ const Popup = React.createClass({
     render () {
         return (
             <div className='fbtrex--popup'>
-                <InfoBox {...this.props} />
                 <Settings {...this.props} />
+                <InfoBox {...this.props} />
             </div>
         );
     }

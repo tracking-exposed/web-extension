@@ -71,12 +71,16 @@
     },
 
     "popupReality": {
-        "message": "**★[Acceso a tus datos]($realitylink$)**",
+        "message": "**[Acceso a tus datos]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
             }
         }
+    },
+
+    "popupChat": {
+        "message": "unirse a la [conversación](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o para reunirse con nosotros (canal Inglés)."
     },
 
     "settingsTitle": {

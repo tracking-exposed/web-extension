@@ -26,6 +26,10 @@
         }
     },
 
+    "popupChat": {
+        "message": "junte-se ao [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber mais ou para nos conhecer (canal em inglês)."
+    },
+
     "onboardingNote": {
         "message": "Se algo der errado, entre em contato através da [página do Facebook](https://www.facebook.com/personalizationalgorithm) ou relate o problema no [github](https://github.com/tracking-exposed/web-extension/issues)."
     },
@@ -71,7 +75,7 @@
     },
 
     "popupReality": {
-        "message": "**★[Seus dados coletados]($realitylink$)**",
+        "message": "**[Seus dados coletados]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"

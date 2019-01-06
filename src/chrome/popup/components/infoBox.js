@@ -25,6 +25,7 @@ const InfoBox = React.createClass({
 
                     <T msg="popupIntro" />
                     <ul>
+                        <T tag='li' msg="popupChat" />
                         <T tag='li' msg="popupHighlight" />
                         <T tag='li' msg="popupPrivacy" />
                         <T tag='li' msg="popupFree" />
