@@ -13,7 +13,6 @@ function handlePost (type, e) {
     var post = Object.assign({
         impressionOrder: state.position++,
         visibility: type,
-        visibilityInfo: e.visibilityInfo, // unset from scrape.js
         type: 'impression',
         timelineId: state.timeline.id
     }, e.data);
@@ -21,8 +20,18 @@ function handlePost (type, e) {
     if (post.visibility === 'public') {
         post.html = e.element.html();
     }
-
     state.events.push(post);
+}
+
+function handleAnomaly (type, e) {
+    var report = {
+        impressionCounter: state.position,
+        timelineId: state.timeline.id,
+        type: 'anomaly',
+        current: Object.assign(e.stats),
+        previous: Object.assign(e.previous)
+    };
+    state.events.push(report);
 }
 
 function handleTimeline (type, e) {
@@ -53,6 +62,7 @@ function sync (hub) {
 }
 
 export function register (hub) {
+    hub.register('anomaly', handleAnomaly);
     hub.register('newPost', handlePost);
     hub.register('newTimeline', handleTimeline);
     hub.register('windowUnload', sync.bind(null, hub));

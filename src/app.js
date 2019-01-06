@@ -86,9 +86,11 @@ function boot () {
         // if the key has just been created, the status is `new`.
         console.log("userLookup responded:", response);
         if (_.isUndefined(response.optin) || response.optin.infoDiet !== true) {
-            // The optin(s) are missing then we need to onboard the user.
+            // The opt-in is missing then we need to ask them to the user.
             onboarding(response);
             window.setInterval(() => onboarding(response), 1000);
+            // without opt-in, there is not acquisition at all
+            return;
         } 
 
         // The user compose this unique message and is signed with their PGP key
@@ -169,41 +171,45 @@ function flush () {
 
 function locationConsidered(path) {
     /* check if the path is among the one which we would read at */
-    console.log("checking path:", path);
     return ( path !== '/' );
 }
 
 function processPost (elem) {
 
     if (locationConsidered(window.location.pathname)) {
-        console.log('Skip post. Not in the appropriate location', window.location.pathname);
+        console.log(`Skip post: ${window.location.pathname} is not an observed location`);
         return;
     }
 
     const $elem = $(elem).parent();
+
+    if (selector.stats.isWarning()) {
+        console.log(`Anomaly detected: ${selector.stats.printStatus()}`);
+        hub.event('anomaly', {
+            stats: selector.stats.data,
+            previous: selector.stats.previous,
+            element: $elem
+        });
+    }
+
     try {
         var data = scrape($elem);
-
+        selector.stats.add(data);
+        delete data.visibilityInfo;
         hub.event('newPost', { element: $elem, data: data });
-
-        selector.internalstats.add(data);
-        if (selector.internalstats.isWarning() ) {
-            // This has to be a sendMessage and not event() 
-            // hub.event('warning', { stats: selector.internalstats, element: $elem } );
-            console.log("Warning detected!", selector.internalstats.debug());
-        }
     } catch (e) {
         console.log("Unable to scrape post");
+        selector.stats.add(null);
+
+        // XXX TODO make this investigation method for developers/researcher
         // hub.event('newPost', { element: $elem, data: data, anomaly: true });
         // console.log($elem.html());
     }
-
 }
 
 function processTimeline () {
-    selector.internalstats.newTimeline();
-    console.log("New timeline begin:", new Date());
-    selector.internalstats.reset();
+    console.log("New timeline begin now:", new Date());
+    selector.stats.newTimeline();
     hub.event('newTimeline', {
         uuid: uuid.v4(),
         startTime: getTimeISO8601()
