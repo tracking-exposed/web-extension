@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import config from './config';
+
 const bo = chrome || browser;
 
 // This code could be used to stop unsupported language, after some internal stats will 
@@ -9,95 +11,90 @@ class SelectorChecker {
     }
 
     add ( scrapedData ) {
-        this.total += 1;
+        this.data.total += 1;
+        this.data.infos.push(scrapedData.visibilityInfo);
 
         if(!scrapedData)  {
-            this.notpost += 1;
+            this.data.notpost += 1;
             return;
         }
-        if(!this.begin)
-            this.begin = scrapedData.impressionTime;
+        if(!this.data.begin)
+            this.data.begin = scrapedData.impressionTime;
 
         if(scrapedData.visibility === 'public') 
-            this.visible++;
+            this.data.visible++;
         else
-            this.restricted++;
+            this.data.restricted++;
 
-        // this.debug();
+        // this.printStatus();
     }
 
     newTimeline () {
-        this.debug();
-        console.log("newTimeline");
+        if(this.data.total) {
+            this.printStatus();
 
-        if(this.previous &&
-            this.total > 5 &&
-            this.previous.total > 5 &&
-            this.previous.visible === 0 &&
-            this.visible === 0) console.error("Ops!, check teh selector?");
+            if(this.previous &&
+                this.data.total > 5 &&
+                this.previous.total > 5 &&
+                this.previous.visible === 0 &&
+                this.data.visible === 0)
+                console.log("newTimeline- strange behaviour comparing the last & previous: is the selector ok?");
 
-        this.backupPrevious();
-
-        console.log("newTimeline registered in internalstats",
-            this.previous);
-    }
-
-    backupPrevious() {
-        this.previous = {
-            total: this.total,
-            visible: this.visible,
-            restricted: this.restricted,
-            notpost: this.notpost,
-            begin: this.begin,
-            blocked: this.blocked
-        };
+            this.previous = Object.assign(this.data);
+            console.log("newTimeline start- the previous:", JSON.stringify(this.previous));
+            this.reset();
+        }
     }
 
     reset () {
-        console.log("reset");
-        this.total = 0;
-        this.visible = 0;
-        this.restricted = 0;
-        this.notpost = 0;
-        this.begin = null;
-        this.blocked = false;
+        console.log("Initialize statistics counters");
+        this.data = {
+            total: 0,
+            visible: 0,
+            restricted: 0,
+            notpost: 0,
+            begin: null,
+            blocked: false,
+            infos: [],
+        }
+        if(!this.previous)
+            this.previous = {};
     }
 
-    debug () {
-        console.log("# ", this.total,
-                    "Public ", this.visible,
-                    "Restricted ", this.restricted,
-                    "!P ", this.notpost,
-                    "B ", this.begin,
-                    "stop ", this.blocked);
+    printStatus () {
+        console.log("collection stats: total posts processed ", this.data.total,
+                    "Public ", this.data.visible,
+                    "Restricted ", this.data.restricted,
+                    "!Post ", this.data.notpost,
+                    "Since ", this.data.begin,
+                    "Anomaly? ", this.data.blocked
+        );
+        console.log(this.data.infos);
     }
 
     /* this warning trigger `true` if restricted audience appears 
      * more than 10 times and zero visible post. It normally means 
      * we are facing an unsupported language or any other condition */
     isWarning () {
+        if(this.data.blocked)
+            return true;
 
-        var retVal = false;
-
-        if(this.blocked)
-            return retVal;
-
-        if(this.visible === 0 &&
-           this.restricted > 10 && (this.total - this.restricted) < 3) {
+        if(this.data.visible === 0 &&
+           this.data.restricted > 10 && (this.data.total - this.data.restricted) < 3) {
             console.log("This language is not supported!");
-            this.blocked = true;
-            retVal = true;
-            this.debug();
+            this.data.blocked = true;
+            this.printStatus();
+            return true;
         }
 
-        if(this.total > 20 && this.restricted === 0) {
+        if(this.data.total > 20 && this.data.restricted === 0) {
             console.log("Selector changed");
-            this.blocked = true;
-            retVal = true;
-            this.debug();
+            this.data.blocked = true;
+            this.printStatus();
+            return true;
         }
 
-        return retVal;
+        return false;
     }
 }
 
@@ -116,7 +113,7 @@ function set(input) {
 const selector = {
     get: get,
     set: set,
-    internalstats: new SelectorChecker()
+    stats: new SelectorChecker()
 }
 
 export default selector;
