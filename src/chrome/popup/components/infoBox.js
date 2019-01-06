@@ -10,7 +10,14 @@ const bo = chrome || browser;
 const InfoBox = React.createClass({
 
     render () {
-        const realitylink = config.WEB_ROOT + '/personal/' + token.get() + '/data';
+        const realitylink = `${config.WEB_ROOT}/personal/${token.authToken.get()}/data`;
+        console.log("Token retrieved composed", realitylink);
+        // this is a bug, we keep retrieving "unset" because the link is composed when the 
+        // browser is started, and not when the link is effectively pressed. I don't know
+        // enough of React to make this happen in the right moment, that's why the line below
+        // (once under the "popupHello" entry, now is here commented:
+        //
+        // <T tag='h3' className='popTitle' msg="popupReality" args={realitylink} />
         return (
             <Card>
                 <CardHeader
@@ -21,7 +28,6 @@ const InfoBox = React.createClass({
 
                 <CardText>
                     <T msg="popupHello" />
-                    <T tag='h3' className='popTitle' msg="popupReality" args={realitylink} />
 
                     <T msg="popupIntro" />
                     <ul>
