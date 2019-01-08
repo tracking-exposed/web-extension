@@ -14,7 +14,7 @@
     },
 
     "onboardingIntro": {
-        "message": "Necesitamos que publiques to llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Luego de un minuto puedes eliminarlo."
+        "message": "Necesitamos que publiques tú llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Luego de un minuto puedes eliminarlo."
     },
 
     "onboardingCopyPaste": {
