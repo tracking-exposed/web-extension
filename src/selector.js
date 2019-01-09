@@ -14,6 +14,7 @@ class SelectorChecker {
         this.data.total += 1;
 
         if(!scrapedData)  {
+            // TODO test when this happens
             this.data.notpost += 1;
             return;
         }
@@ -26,8 +27,6 @@ class SelectorChecker {
             this.data.visible++;
         else
             this.data.restricted++;
-
-        // this.printStatus();
     }
 
     newTimeline () {
@@ -81,14 +80,14 @@ class SelectorChecker {
             return true;
 
         if(this.data.visible === 0 &&
-           this.data.restricted > 10 && (this.data.total - this.data.restricted) < 3) {
+           this.data.restricted > 10 && (this.data.total === this.data.restricted) ) {
             console.log("This language is not supported!");
             this.data.blocked = true;
             this.printStatus();
             return true;
         }
 
-        if(this.data.total > 20 && this.data.restricted === 0) {
+        if(this.data.total > 10 && this.data.notpost === this.data.total ) {
             console.log("Selector changed");
             this.data.blocked = true;
             this.printStatus();
