@@ -14,7 +14,7 @@
     },
 
     "onboardingIntro": {
-        "message": "Necesitamos que publiques tu llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Luego de un minuto puedes eliminarlo."
+        "message": "Necesitamos que publiques tu llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Después de un minuto podrás eliminarlo."
     },
 
     "onboardingCopyPaste": {
@@ -27,7 +27,7 @@
     },
 
     "onboardingNote": {
-        "message": "Necesitamos publicar esta llave pública para asociarla con tus contribuciones. Luego de publicarla esta noticia desaparecerá.\nSi algo no funciona, contáctanos a traves de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o dinos tu problema en [github](https://github.com/tracking-exposed/web-extension/issues)."
+        "message": "Necesitamos publicar esta llave pública para asociarla a tus contribuciones. Después de ser publicada esta noticia desaparecerá.\nSi algo no funciona, contáctanos a través de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o dinos tu problema en [github](https://github.com/tracking-exposed/web-extension/issues)."
     },
 
     "onboardingReduceBox": {
@@ -59,7 +59,7 @@
     },
 
     "popupHighlight": {
-        "message": "Esta extensión solo puede ver y recolectar tus **publicaciones públicas**. Somo sumamente explícitos y te mostramos cuales noticias son capturadas con una clara notificación en tu línea de noticias."
+        "message": "Esta extensión solo puede ver y recolectar tus **publicaciones públicas**. Somos sumamente explícitos y te mostramos cuales noticias son capturadas con una clara notificación en tu línea de noticias."
     },
 
     "popupPrivacy": {
