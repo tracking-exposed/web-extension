@@ -14,11 +14,11 @@
     },
 
     "onboardingIntro": {
-        "message": "Necesitamos que se publique tu llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Después de un minuto podrás eliminarlo."
+        "message": "Necesitamos que se publique tu llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Después de un minuto podrás eliminarlo con toda seguridad."
     },
 
     "onboardingCopyPaste": {
-        "message": "Los algoritmos de personalización son un problema social, y solo pueden ser confrontados de manera colectiva. Desde hoy me he aliado a https://facebook.tracking.exposed y este mensaje con mi clave pública es necesario para vincular mi cuenta al proyecto: $publickey$",
+        "message": "Los algoritmos de personalización son un asunto social, y solo pueden ser abordados de manera colectiva. Desde hoy me he aliado a https://facebook.tracking.exposed y este mensaje con mi clave pública es necesario para vincular mi cuenta al proyecto: $publickey$",
         "placeholders": {
             "publickey": {
                 "content": "$1"
@@ -27,7 +27,7 @@
     },
 
     "onboardingNote": {
-        "message": "Necesitamos que se publique esta llave pública para asociarla a tus contribuciones. Después de ser publicada esta noticia desaparecerá.\nSi algo no funciona, contáctanos a través de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o explicanos tus problemas en [github](https://github.com/tracking-exposed/web-extension/issues)."
+        "message": "Necesitamos que se publique esta llave pública para asociarla a tus contribuciones. Después de ser publicada esta noticia desaparecerá.\nSi algo no funciona como debería, contáctanos a través de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o explicanos tus problemas en [github](https://github.com/tracking-exposed/web-extension/issues)."
     },
 
     "onboardingReduceBox": {
@@ -67,7 +67,7 @@
     },
 
     "popupFree": {
-        "message": "Solo empleamos y publicamos [software libre y de código abierto](https://www.github.com/tracking-exposed/) lo cual puede ser auditado por todo el mundo en cualquier momento."
+        "message": "Este es un [software libre y de código abierto](https://www.github.com/tracking-exposed/) lo cual puede ser editado por todo el mundo en cualquier momento."
     },
 
     "popupReality": {
@@ -80,7 +80,7 @@
     },
 
     "popupChat": {
-        "message": "unirse a la [conversación](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o para compartir (canal Inglés)."
+        "message": "únete a la [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o simplemente para compartir y conocernos(canal Inglés)."
     },
 
     "settingsTitle": {
@@ -108,15 +108,15 @@
     },
 
     "infoDietDesc": {
-        "message": "Para permitir a fbTREX de funcionar, tienes que introducir opt-in de las formas de datos que nos quieres dejar utilizar. Una explicación más amplia se encuentra en la pagina "
+        "message": "Para permitir a fbTREX de funcionar, tienes que confirmar abajo los datos que quieres dejar que utilizemos. Una explicación más amplia está disponible en la pagina "
     },
 
     "InfoDietButton": {
-        "message": "Danos los derechos de procesar una copia de tu timeline Facebook (solamente datos públicos)."
+        "message": "Danos los derechos de procesar una copia de tu timeline de Facebook (utilizeremos solamente datos públicos)."
     },
 
     "dataReuseDesc": {
-        "message": "Los datos que cedes pueden ser reutilizados, anónimamente y sin conexión con tus actividades, para comprender de manera colectiva a la sociedad conectada a Facebook y en qué medida sea esta influenciada por el algoritmo. Todos los tests son "
+        "message": "Los datos que cedes pueden ser reutilizados, anónimamente y sin conexión con tus actividades, para comprender de manera colectiva a la sociedad conectada a Facebook y en qué medida sea esta influenciada por el algoritmo. Todos los test son "
     },
 
     "dataReuseButton": {
@@ -132,6 +132,6 @@
     },
 
     "optInAtLeast": {
-        "message": "(Tienes que introducir opt-in por lo menos al primer botón para borrar este mensaje)"
+        "message": "(Tienes que dar tu confirmación por lo menos al primer botón para borrar este mensaje)"
     }
 }
