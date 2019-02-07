@@ -1,9 +1,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.19] - 2019-01-09
+## [1.1.19] - 2019-02-07
 ## Fixed
 - A bug was reporting malfunction when in fact was functioning
+## Addedd
+- Incremental copy of built extension in https://github.com/tracking-exposed/binaries repository
 
 ## [1.1.18] - 2019-01-02
 ### Fixed

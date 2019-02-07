@@ -13,3 +13,5 @@ cp -r _locales ./dist
 cd ./dist
 zip extension.zip * _locales/*/*.json
 
+cd ..
+./update-binaries.sh
