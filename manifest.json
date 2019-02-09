@@ -44,5 +44,13 @@
 
   "web_accessible_resources": [
       "*.png"
-  ]
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tracking.exposed.extension@gmail.com",
+      "strict_min_version": "48.0"
+    }
+  }
+
 }
