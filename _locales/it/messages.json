@@ -5,12 +5,12 @@
     },
 
     "extensionDescription": {
-        "message": "Strumento collaborativo di supporto all'analisi degli algoritmi di personalizzazione.",
+        "message": "Strumento collaborativo di analisi degli algoritmi di personalizzazione.",
         "description": "Extension description"
     },
 
     "onboardingTitle": {
-        "message": "Benvenuto a Facebook.tracking.exposed!"
+        "message": "Benvenuto in facebook.tracking.exposed!"
     },
 
     "onboardingIntro": {
@@ -43,35 +43,35 @@
     },
 
     "popupTitle": {
-        "message": "Ti diamo il benvenuto a Tracking Exposed"
+        "message": "Benvenuto in fbTREX"
     },
 
     "popupSubTitle": {
-        "message": "Annuncio al servizio della comunità"
+        "message": "Annuncio di servizio"
     },
 
     "popupHello": {
-        "message": "Caro utente, ti ringraziamo per il tuo supporto all'iniziativa di [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
+        "message": "Carissima, grazie per il tuo supporto a [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
     },
 
     "popupIntro": {
-        "message": "Per noi la tua privacy è molto importante, la nostra è una politica di piena trasparenza, per ciò:"
+        "message": "Hai dei diritti verso i dati che ci consegni, li gestiamo in trasparenza e ti segnaliamo:"
     },
 
     "popupHighlight": {
-        "message": "L'estensione archivia e prende visione dei **post pubblici**. Quando un post sarà registato verrai avvisato tramite una notifica nella sezione newsfeed."
+        "message": "L'estensione archivia e prende visione dei **post pubblici**. Quando un post sarà registato, apparirà un avviso al di sopra di ogni post, specificando se è stato collezionato o no. Solo i post nel newsfeed vengono considerati."
     },
 
     "popupPrivacy": {
-        "message": "Al link [Politica della privacy](https://facebook.tracking.exposed/privacy-statement) troverai la descrizine dettagliata di quali dati sono stati conservati nel nostro archivio, e perchè."
+        "message": "In inglese, viene descritta la nostra [politica di collezione dati](https://facebook.tracking.exposed/privacy-statement). Spiega cosa collezioniamo e a quale scopo."
     },
 
     "popupFree": {
-        "message": "Il nostro è un [free, open source code](https://www.github.com/tracking-exposed/) editabile da chiunque."
+        "message": "Questa estensione ed il servizio che tratta i tuoi dati sono del software libero, [guadalo su github](https://www.github.com/tracking-exposed/)."
     },
 
     "popupReality": {
-        "message": "**Accedi a [I tuoi dati]($realitylink$)**",
+        "message": "**Accedi ai [tuoi dati]($realitylink$)**",
         "placeholders": {
             "realitylink": {
                 "content": "$1"
@@ -80,7 +80,7 @@
     },
 
     "popupChat": {
-        "message": "Unisciti alla [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) per saperne di più o semplicemente per conoscerci."
+        "message": "Entra nella nostra [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) per saperne di più o semplicemente per conoscerci."
     },
 
     "settingsTitle": {
@@ -88,11 +88,11 @@
     },
 
     "settingsStudyGroup": {
-        "message": "Faccio parte di un gruppo di studio"
+        "message": "Configura un gruppo di studio"
     },
 
     "settingsTagId": {
-        "message": "Tag ID"
+        "message": "(nome del gruppo)"
     },
 
     "settingsHideBanner": {
@@ -100,7 +100,7 @@
     },
 
     "settingsSaveAndReload": {
-        "message": "Salva e ricarica"
+        "message": "Salva la configurazione"
     },
 
     "settingsCancel": {
@@ -108,11 +108,11 @@
     },
 
     "infoDietDesc": {
-        "message": "Per permettere a fbTREX di funzionare, devi dare la tua conferma qui in basso. Una spiegazione più dettagliata può essere trovata all'interno della pagina "
+        "message": "Per permettere a fbTREX di funzionare, devi confermare che ci abiliti a trattare i tuoi dati "
     },
 
     "InfoDietButton": {
-        "message": "Permettici di creare una copia della tua timeline di Facebook (utilizzeremo soltanto i dati pubblici)." 
+        "message": "Permettici di creare una copia della tua timeline di Facebook (ricorda copiamo solo i post condivisi con il mondo, quelli per gli amici non vengono toccati, e ti sarà confermato ad ogni post)." 
     },
 
     "dataReuseDesc": {
@@ -132,6 +132,6 @@
     },
 
     "optInAtLeast": {
-        "message": "(You should dare conferma almeno al primo tasto per disfarti di questa finestra)"
+        "message": "(Devi dare conferma del primp punto per proseguire, o disinstalla l'estensione)"
     }
 }
