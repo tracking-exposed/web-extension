@@ -14,11 +14,11 @@
     },
 
     "onboardingIntro": {
-        "message": "Necesitamos que publiques to llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Luego de un minuto puedes eliminarlo."
+        "message": "Necesitamos que se publique tu llave pública, copia y pega el siguiente mensaje como una **publicación pública**. Después de un minuto podrás eliminarlo con toda seguridad."
     },
 
     "onboardingCopyPaste": {
-        "message": "Los algoritmos de personalización son un problema social, y solo pueden ser confrontados de manera colectiva. Desde hoy me he aliado a https://facebook.tracking.exposed y este mensaje con mi clave pública es necesario para vincular mi cuenta con el proyecto: $publickey$",
+        "message": "Los algoritmos de personalización son un asunto social, y solo pueden ser abordados de manera colectiva. Desde hoy me he aliado a https://facebook.tracking.exposed y este mensaje con mi clave pública es necesario para vincular mi cuenta al proyecto: $publickey$",
         "placeholders": {
             "publickey": {
                 "content": "$1"
@@ -27,7 +27,7 @@
     },
 
     "onboardingNote": {
-        "message": "Necesitamos publicar esta llave pública para asociarla con tus contribuciones. Luego de publicarla esta noticia desaparecerá.\nSi algo no funciona, contáctanos a traves de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o dinos tu problema en [github](https://github.com/tracking-exposed/web-extension/issues)."
+        "message": "Necesitamos que se publique esta llave pública para asociarla a tus contribuciones. Después de ser publicada esta noticia desaparecerá.\nSi algo no funciona como debería, contáctanos a través de nuestra [página de Facebook](https://www.facebook.com/personalizationalgorithm) o explicanos tus problemas en [github](https://github.com/tracking-exposed/web-extension/issues)."
     },
 
     "onboardingReduceBox": {
@@ -39,7 +39,7 @@
     },
 
     "onboardingReopen": {
-        "message": "Reabrir el recuadro"
+        "message": "Volver a abrir el recuadro"
     },
 
     "popupTitle": {
@@ -55,19 +55,19 @@
     },
 
     "popupIntro": {
-        "message": "Respetamos y cuidamos mucho tu privacidad y deseamos ser tan transparentes como sea posible, por eso:"
+        "message": "Cuidamos y respetamos mucho tu privacidad y deseamos ser tan transparentes como sea posible, por esto:"
     },
 
     "popupHighlight": {
-        "message": "Esta extensión solo puede ver y recolectar tus **publicaciones públicas**. Somo sumamente explícitos y te mostramos cuales noticias son capturadas con una clara notificación en tu línea de noticias."
+        "message": "Esta extensión solo puede ver y recolectar tus **publicaciones públicas**. Somos sumamente explícitos y te mostramos las noticias atrapadas por nosotros con una clara notificación en tu línea de noticias."
     },
 
     "popupPrivacy": {
-        "message": "Tenemos una [política de privaciada](https://facebook.tracking.exposed/privacy-statement) donde describimos cuales son los datos recogemos y por qué."
+        "message": "Esta es nuestra [política de privaciada](https://facebook.tracking.exposed/privacy-statement) donde se describen los datos que hemos recogido y por qué."
     },
 
     "popupFree": {
-        "message": "Solo usamos y publicamos [software libre y de código abierto](https://www.github.com/tracking-exposed/) el cual puede ser auditado por cualquiera a todo momento."
+        "message": "Este es un [software libre y de código abierto](https://www.github.com/tracking-exposed/) lo cual puede ser editado por todo el mundo en cualquier momento."
     },
 
     "popupReality": {
@@ -80,7 +80,7 @@
     },
 
     "popupChat": {
-        "message": "unirse a la [conversación](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o para reunirse con nosotros (canal Inglés)."
+        "message": "únete a la [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o simplemente para compartir y conocernos(canal Inglés)."
     },
 
     "settingsTitle": {
@@ -88,7 +88,7 @@
     },
 
     "settingsStudyGroup": {
-        "message": "Soy parte de un grupo de estudio"
+        "message": "Soy miembro de un grupo de estudio"
     },
 
     "settingsTagId": {
@@ -100,7 +100,7 @@
     },
 
     "settingsSaveAndReload": {
-        "message": "Guardar y recargar"
+        "message": "Guardar y Recargar"
     },
 
     "settingsCancel": {
@@ -108,23 +108,23 @@
     },
 
     "infoDietDesc": {
-        "message": "Para permitir a fbTREX de funcionar, tienes que hacer opt-in de las formas de datos que nos quieres dejar utilizar. Una explicación mas extensiva se encuentra en la pagina "
+        "message": "Para permitir a fbTREX de funcionar, tienes que confirmar abajo los datos que quieres dejar que utilizemos. Una explicación más amplia está disponible en la pagina "
     },
 
     "InfoDietButton": {
-        "message": "Den nos los derechos de procesar una copia de tu timeline Facebook (solamente datos públicos)."
+        "message": "Danos los derechos de procesar una copia de tu timeline de Facebook (utilizeremos solamente datos públicos)."
     },
 
     "dataReuseDesc": {
-        "message": "Los datos que nos das pueden ser reutilizados, anónimamente y si conexión con tus actividades, para comprender de manera colectiva la sociedad conectada a Facebook y como el algoritmo la influencia. Todos los tests son "
+        "message": "Los datos que cedes pueden ser reutilizados, anónimamente y sin conexión con tus actividades, para comprender de manera colectiva a la sociedad conectada a Facebook y en qué medida sea esta influenciada por el algoritmo. Todos los test son "
     },
 
     "dataReuseButton": {
-        "message": "Júntense a la análisis colectiva de los fenómenos de la redes sociales."
+        "message": "Júntense a la análisis colectiva de los fenómenos de las redes sociales."
     },
 
     "dataReuseButton2": {
-        "message": "Por favor, tengas en mente: la personas están protegidas. Tu, yo todos los demás"
+        "message": "Por favor, tengas en mente: la personas están protegidas. Tu, yo y todos los demás"
     },
 
     "closeAndContinue": {
@@ -132,6 +132,6 @@
     },
 
     "optInAtLeast": {
-        "message": "(Tienes que hacer opt-in por lo menos al primer botón para borrar este mensaje)"
+        "message": "(Tienes que dar tu confirmación por lo menos al primer botón para borrar este mensaje)"
     }
 }

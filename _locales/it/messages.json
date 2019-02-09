@@ -1,0 +1,137 @@
+{
+    "extensionName": {
+        "message": "tracking.exposed: investigating algorithms",
+        "description": "Extension name"
+    },
+
+    "extensionDescription": {
+        "message": "Strumento collaborativo di supporto all'analisi degli algoritmi di personalizzazione.",
+        "description": "Extension description"
+    },
+
+    "onboardingTitle": {
+        "message": "Benvenuto a Facebook.tracking.exposed!"
+    },
+
+    "onboardingIntro": {
+        "message": "Abbiamo bisogno che tu posti la tua public key, copia e incolla il seguente messaggio come un nuovo **public post**. Dopo un minuto potrai cancellarlo in completa sicurezza."
+    },
+
+    "onboardingCopyPaste": {
+        "message": "Gli algoritmi di personalizzazione sono una questione colletiva, ed è solo collettivamente che possono essere affrontati; oggi mi unisco a https://facebook.tracking.exposed e questo messaggio tecnico è necessario per associare il mio account alla seguente chiave: $publickey$",
+        "placeholders": {
+            "publickey": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "onboardingNote": {
+        "message": "Abbiamo bisogno che tu posti questa chiave per associarla a tutti i contributi che ci hai fornito. Dopo averla pubblicata, questo post scomparirà.\nse si verifica qualche problema, non esitare a contattarci tramite la nostra [pagina facebook](https://www.facebook.com/personalizationalgorithm) o apri un [issue su github](https://github.com/tracking-exposed/web-extension/issues)."
+    },
+
+    "onboardingReduceBox": {
+        "message": "Riduci"
+    },
+
+    "onboardingReduced": {
+        "message": "facebook.tracking.exposed onboarding non è ancora completo."
+    },
+
+    "onboardingReopen": {
+        "message": "Ingrandisci"
+    },
+
+    "popupTitle": {
+        "message": "Ti diamo il benvenuto a Tracking Exposed"
+    },
+
+    "popupSubTitle": {
+        "message": "Annuncio al servizio della comunità"
+    },
+
+    "popupHello": {
+        "message": "Caro utente, ti ringraziamo per il tuo supporto all'iniziativa di [facebook.tracking.exposed](https://facebook.tracking.exposed/)."
+    },
+
+    "popupIntro": {
+        "message": "Per noi la tua privacy è molto importante, la nostra è una politica di piena trasparenza, per ciò:"
+    },
+
+    "popupHighlight": {
+        "message": "L'estensione archivia e prende visione dei **post pubblici**. Quando un post sarà registato verrai avvisato tramite una notifica nella sezione newsfeed."
+    },
+
+    "popupPrivacy": {
+        "message": "Al link [Politica della privacy](https://facebook.tracking.exposed/privacy-statement) troverai la descrizine dettagliata di quali dati sono stati conservati nel nostro archivio, e perchè."
+    },
+
+    "popupFree": {
+        "message": "Il nostro è un [free, open source code](https://www.github.com/tracking-exposed/) editabile da chiunque."
+    },
+
+    "popupReality": {
+        "message": "**Accedi a [I tuoi dati]($realitylink$)**",
+        "placeholders": {
+            "realitylink": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "popupChat": {
+        "message": "Unisciti alla [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) per saperne di più o semplicemente per conoscerci."
+    },
+
+    "settingsTitle": {
+        "message": "Impostazioni"
+    },
+
+    "settingsStudyGroup": {
+        "message": "Faccio parte di un gruppo di studio"
+    },
+
+    "settingsTagId": {
+        "message": "Tag ID"
+    },
+
+    "settingsHideBanner": {
+        "message": "Nascondi il banner sui post"
+    },
+
+    "settingsSaveAndReload": {
+        "message": "Salva e ricarica"
+    },
+
+    "settingsCancel": {
+        "message": "Annulla"
+    },
+
+    "infoDietDesc": {
+        "message": "Per permettere a fbTREX di funzionare, devi dare la tua conferma qui in basso. Una spiegazione più dettagliata può essere trovata all'interno della pagina "
+    },
+
+    "InfoDietButton": {
+        "message": "Permettici di creare una copia della tua timeline di Facebook (utilizzeremo soltanto i dati pubblici)." 
+    },
+
+    "dataReuseDesc": {
+        "message": "I dati che ci fornisci, possono essere riutilizzati, in forma anonima e senza che questi siano collegati alla tua attività, per una comprensione ed uno studio collettivo della società connessa a Facebook e sulle influenze dell'algoritmo su quest'ultima. Tutti i test sono "
+    },
+
+    "dataReuseButton": {
+        "message": "Unisciti all'analisi colletiva dei fenomeni del social network"
+    },
+
+    "dataReuseButton2": {
+        "message": "Nota bene: chiunque è protetto. sia tu che gli altri"
+    },
+
+    "closeAndContinue": {
+        "message": "Chiudi e Continua"
+    },
+
+    "optInAtLeast": {
+        "message": "(You should dare conferma almeno al primo tasto per disfarti di questa finestra)"
+    }
+}
