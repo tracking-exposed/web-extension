@@ -63,7 +63,7 @@
     },
 
     "popupPrivacy": {
-        "message": "Esta es nuestra [política de privaciada](https://facebook.tracking.exposed/privacy-statement) donde se describen los datos que hemos recogido y por qué."
+        "message": "Esta es nuestra [política de privacidad](https://facebook.tracking.exposed/privacy-statement) donde se describen los datos que hemos recogido y por qué."
     },
 
     "popupFree": {
@@ -80,7 +80,7 @@
     },
 
     "popupChat": {
-        "message": "únete a la [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o simplemente para compartir y conocernos(canal Inglés)."
+        "message": "únete al [chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed) para saber más o simplemente para compartir y conocernos (canal en Inglés)."
     },
 
     "settingsTitle": {
@@ -108,7 +108,7 @@
     },
 
     "infoDietDesc": {
-        "message": "Para permitir a fbTREX de funcionar, tienes que confirmar abajo los datos que quieres dejar que utilizemos. Una explicación más amplia está disponible en la pagina "
+        "message": "Para permitir a fbTREX funcionar, tienes que confirmar abajo los datos que quieres dejar que utilizemos. Una explicación más amplia está disponible en la pagina "
     },
 
     "InfoDietButton": {
@@ -120,7 +120,7 @@
     },
 
     "dataReuseButton": {
-        "message": "Júntense a la análisis colectiva de los fenómenos de las redes sociales."
+        "message": "Júntense al análisis colectivo de los fenómenos de las redes sociales."
     },
 
     "dataReuseButton2": {
