@@ -1,3 +1,4 @@
+__old
 .DS_Store
 *.seed
 *.log
@@ -7,7 +8,6 @@
 *.gz
 .idea
 *.sublime-project
-*.sublime-workspace
 *.sublime-workspace
 
 extension.zip
@@ -19,4 +19,3 @@ dist/*
 docs/*
 
 node_modules/*
-package-lock.json

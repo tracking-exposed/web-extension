@@ -1,1 +1,2 @@
-export default process.env;
+const CONFIG = __CONFIG__;
+export default CONFIG;
