@@ -41,7 +41,10 @@
     {
       "matches": ["https://*.facebook.com/*"],
       "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js"],
-      "css": ["content_scripts/facebook.com/bundle.css"]
+      "css": [
+        "styles/theme/main.css",
+        "content_scripts/facebook.com/bundle.css"
+      ]
     }
   ],
 

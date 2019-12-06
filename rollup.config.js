@@ -58,6 +58,17 @@ export default [
           {
             src: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
             dest: "build/"
+          },
+          {
+            src: [
+              "theme-trex/assets/main.css",
+              "theme-trex/assets/main.css.map"
+            ],
+            dest: "build/styles/theme"
+          },
+          {
+            src: "theme-trex/static/fonts",
+            dest: "build/"
           }
         ]
       }),
