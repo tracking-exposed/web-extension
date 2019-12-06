@@ -8,6 +8,9 @@ import commonjs from "rollup-plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
+import fs from "fs";
+import sass from "node-sass";
+
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
 const config = {
@@ -26,6 +29,16 @@ function setConfig() {
     __CONFIG__: JSON.stringify(config)
   });
 }
+
+function compileSCSS() {
+  const result = sass.renderSync({
+    file: "src/styles/main.scss"
+  });
+  fs.mkdirSync("build/styles/theme", { recursive: true });
+  fs.writeFileSync("build/styles/theme/main.css", result.css);
+}
+
+compileSCSS();
 
 export default [
   // Background is just javascript, without a UI.
@@ -58,13 +71,6 @@ export default [
           {
             src: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
             dest: "build/"
-          },
-          {
-            src: [
-              "theme-trex/assets/main.css",
-              "theme-trex/assets/main.css.map"
-            ],
-            dest: "build/styles/theme"
           },
           {
             src: "theme-trex/static/fonts",
