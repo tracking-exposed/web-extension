@@ -41,7 +41,6 @@ function compileSCSS() {
 compileSCSS();
 
 export default [
-  // Background is just javascript, without a UI.
   {
     input: "src/background/",
     output: {

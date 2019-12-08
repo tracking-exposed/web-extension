@@ -2,7 +2,6 @@ import handlers from "./handlers";
 import observers from "./observers";
 import { Hub, logger, dom } from "../";
 import Onboarding from "./components/Onboarding.svelte";
-import config from "../../config";
 
 const log = logger("boot");
 
@@ -15,9 +14,17 @@ function boot() {
   log("Welcome to Facebook Tracking Exposed.");
 
   const hub = new Hub();
+
   handlers(hub);
   observers(hub);
-  mount();
+  //mount();
+
+  async function mmm() {
+    const response = await browser.runtime.sendMessage({ greeting: "hello" });
+    log(response);
+  }
+
+  mmm();
 }
 
 function mount() {
