@@ -1,4 +1,9 @@
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import sass from "node-sass";
+
+import alias from "@rollup/plugin-alias";
 import copy from "rollup-plugin-copy";
 import json from "rollup-plugin-json";
 import svelte from "rollup-plugin-svelte";
@@ -7,9 +12,6 @@ import replace from "@rollup/plugin-replace";
 import commonjs from "rollup-plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
-
-import fs from "fs";
-import sass from "node-sass";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
@@ -27,6 +29,18 @@ const config = {
 function setConfig() {
   return replace({
     __CONFIG__: JSON.stringify(config)
+  });
+}
+
+function setAlias() {
+  const projectRootDir = path.resolve(__dirname);
+  return alias({
+    entries: [
+      {
+        find: "src",
+        replacement: path.resolve(projectRootDir, "src")
+      }
+    ]
   });
 }
 
@@ -77,6 +91,9 @@ export default [
           }
         ]
       }),
+
+      setAlias(),
+
       // If you have external dependencies installed from
       // npm, you'll most likely need these plugins. In
       // some cases you'll need additional configuration —
@@ -132,6 +149,7 @@ export default [
         }
       }),
 
+      setAlias(),
       // If you have external dependencies installed from
       // npm, you'll most likely need these plugins. In
       // some cases you'll need additional configuration —
@@ -160,7 +178,7 @@ export default [
     }
   },
   {
-    input: "src/content_scripts/facebook.com/",
+    input: "src/domains/facebook.com/content_scripts/",
     output: {
       sourcemap: true,
       format: "iife",
@@ -178,6 +196,8 @@ export default [
           css.write("build/content_scripts/facebook.com/bundle.css");
         }
       }),
+
+      setAlias(),
 
       // If you have external dependencies installed from
       // npm, you'll most likely need these plugins. In

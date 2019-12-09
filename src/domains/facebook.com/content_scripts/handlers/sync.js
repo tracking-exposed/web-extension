@@ -66,9 +66,9 @@ function sync(hub) {
 }
 
 export default function register(hub) {
-  hub.register("anomaly", handleAnomaly);
-  hub.register("newPost", handlePost);
-  hub.register("newTimeline", handleTimeline);
-  hub.register("windowUnload", sync.bind(null, hub));
+  hub.on("anomaly", handleAnomaly);
+  hub.on("newPost", handlePost);
+  hub.on("newTimeline", handleTimeline);
+  hub.on("windowUnload", sync.bind(null, hub));
   window.setInterval(sync.bind(null, hub), INTERVAL);
 }

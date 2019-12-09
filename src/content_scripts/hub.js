@@ -3,7 +3,7 @@ class Hub {
     this.handlers = {};
   }
 
-  register(type, handler) {
+  on(type, handler) {
     if (!this.handlers[type]) {
       this.handlers[type] = [];
     }

@@ -1,1 +1,1 @@
-import "./facebook.com";
+import "src/domains/facebook.com/background/";

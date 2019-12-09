@@ -1,4 +1,4 @@
-import { logger } from "..";
+import { logger } from "src/content_scripts";
 import { getTimeISO8601 } from "./utils";
 
 const log = logger("scraper");

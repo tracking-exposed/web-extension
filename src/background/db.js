@@ -1,12 +1,26 @@
 const local = browser.storage.local;
 
-export async function get(key, fallback) {
+function join(key) {
+  return key instanceof Array ? key.join(":") : key;
+}
+
+async function get(key, fallback) {
+  key = join(key);
   const value = await local.get(key);
-
+  return value === undefined || value === null ? fallback : value[key];
 }
 
-export async function set(key, valueOrFunc) {
+async function set(key, value) {
+  key = join(key);
+  console.log("set key", key, value);
+  return local.set({ key: value });
 }
 
-export async function remove(key) {
-}
+async function remove(key) {}
+
+export default {
+  join,
+  get,
+  set,
+  remove
+};
