@@ -51,4 +51,4 @@
 </ul>
 
 <h2>Settings</h2>
-<Settings {currentUser} />
+<Settings bind:currentUser />
