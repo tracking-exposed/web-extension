@@ -44,6 +44,23 @@ export async function setOptIn(value) {
   await db.update([user.id, "profile"], { optIn: value });
 }
 
+// ## setHideBanner
+//
+// Hide the banner from each post.
+export async function setHideBanner(value) {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new Error("User is not logged in");
+  }
+
+  if (typeof value !== "boolean") {
+    throw new Error("Value type must be boolean");
+  }
+
+  await db.update([user.id, "profile"], { hideBanner: value });
+}
+
 // ## setPause
 //
 // Pause is used to notify the web extension to not scrape the feed anymore.

@@ -11,13 +11,11 @@ async function get(key, fallback) {
 }
 
 async function set(key, value) {
-  console.log("set", key, value);
   key = join(key);
   return local.set({ [key]: value });
 }
 
 async function update(key, value) {
-  console.log("update", key, value);
   if (!(value instanceof Object)) {
     throw new Error("value must be an object");
   }

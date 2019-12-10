@@ -20,16 +20,28 @@
   main {
     min-width: 500px;
   }
+
+  nav {
+    background-color: #1b1b1b;
+    border-bottom: 8px solid #53c1b6;
+    margin-bottom: 20px;
+  }
 </style>
 
 <main class="webtrex">
-  <Navbar color="light" light expand="md">
-    <NavbarBrand href="/">sveltestrap</NavbarBrand>
-  </Navbar>
+  <nav>
+    <Navbar expand="md">
+      <NavbarBrand href="">
+        <img
+          src="../images/header-logo-default.svg"
+          alt="Tracking Exposed Logo" />
+      </NavbarBrand>
+    </Navbar>
+  </nav>
 
-  <Container>
-    <Row>
+  <article>
+    <Container>
       <PopupFacebook />
-    </Row>
-  </Container>
+    </Container>
+  </article>
 </main>
