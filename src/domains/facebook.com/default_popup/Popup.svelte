@@ -2,11 +2,11 @@
   import { onMount } from "svelte";
   import Settings from "./Settings.svelte";
 
-  let currentUser = {};
+  let profile = {};
 
   onMount(async () => {
-    currentUser = await browser.runtime.sendMessage({
-      method: "getCurrentUser"
+    profile = await browser.runtime.sendMessage({
+      method: "getProfile"
     });
   });
 </script>
@@ -51,4 +51,4 @@
 </ul>
 
 <h2>Settings</h2>
-<Settings bind:currentUser />
+<Settings bind:profile />

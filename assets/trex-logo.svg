@@ -13,9 +13,9 @@
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    version="1.1"
    data-name="Layer 1"
-   viewBox="0 -26 345.44639 345.44638"
-   width="345.44638"
-   height="345.44638">
+   viewBox="0 -26 300.00001 300"
+   width="300"
+   height="300">
   <metadata
      id="metadata4732">
     <rdf:RDF>
@@ -42,8 +42,8 @@
      id="namedview4730"
      showgrid="false"
      inkscape:zoom="2.8455937"
-     inkscape:cx="157.38568"
-     inkscape:cy="168.39532"
+     inkscape:cx="29.791"
+     inkscape:cy="145.67214"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -200,21 +200,15 @@
      inkscape:label="default"
      id="g19161"
      inkscape:groupmode="layer"
-     transform="translate(-112.83027,46.93273)">
+     transform="translate(-135.1745,24.209545)">
     <g
        style="display:inline"
        inkscape:label="default-black"
        id="layer2-6"
        transform="translate(178.78106,-97.036902)">
-      <circle
-         style="fill:#ececec;stroke-width:1.94754946;stroke-miterlimit:4;stroke-dasharray:none"
-         id="path77"
-         cx="106.7724"
-         cy="196.82736"
-         r="172.72319" />
       <g
          id="g85"
-         transform="translate(-45.939864,45.452386)">
+         transform="matrix(0.99747999,0,0,1,-45.933984,45.452386)">
         <path
            inkscape:export-ydpi="40.959999"
            inkscape:export-xdpi="40.959999"
@@ -272,7 +266,7 @@
      inkscape:label="default-black"
      style="display:none"
      sodipodi:insensitive="true"
-     transform="translate(-112.83027,46.93273)">
+     transform="translate(-135.1745,24.209545)">
     <path
        d="m 398.76122,59.554971 v 79.379999 h -19.32 V 59.554971 h -27.3 v -18.62 h 73.92 v 18.62 z"
        id="path19953"

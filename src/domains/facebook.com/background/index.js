@@ -1,7 +1,7 @@
-import * as account from "./account";
+import * as profile from "./profile";
 
 const mapping = {
-  ...account
+  ...profile
 };
 
 // ## Dispatch requests
@@ -32,12 +32,12 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
 
   params = params === undefined ? [] : params;
 
-  console.log(
-    `Dispatch ${method}(${params.join(", ")}) from ${JSON.stringify(sender)}`
-  );
+  console.log(`Dispatch ${method}(${params.join(", ")}) from ${sender.url}`);
 
   if (!func) {
-    return Promise.reject(new Error(`Method "${method}" not supported.`));
+    const message = `Method "${method}" not supported.`;
+    console.error(message);
+    return Promise.reject(new Error(message));
   }
 
   return func(...params);

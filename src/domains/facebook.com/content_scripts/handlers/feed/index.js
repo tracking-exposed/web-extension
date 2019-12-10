@@ -7,11 +7,14 @@ import Component from "./Component.svelte";
 
 const log = logger("feed");
 
-function eventHandler(type, payload) {
+function eventHandler(type, payload, hub) {
   new Component({
     target: payload.element,
     anchor: payload.element.querySelector("div"),
-    props: payload.data
+    props: {
+      hub,
+      ...payload.data
+    }
   });
 }
 

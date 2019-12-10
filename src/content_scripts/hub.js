@@ -1,6 +1,11 @@
 class Hub {
-  constructor() {
+  constructor(config = {}) {
     this.handlers = {};
+    this.config = config;
+    this.on("updateConfig", (_, config) => {
+      this.config = { ...this.config, ...config };
+      this.send("newConfig", this.config);
+    });
   }
 
   on(type, handler) {
@@ -14,11 +19,11 @@ class Hub {
     const funcs = this.handlers[type];
     const funcsStar = this.handlers["*"];
     if (funcs) {
-      funcs.forEach(func => func(type, payload));
+      funcs.forEach(func => func(type, payload, this));
     }
 
     if (funcsStar) {
-      funcsStar.forEach(func => func(type, payload));
+      funcsStar.forEach(func => func(type, payload, this));
     }
   }
 }

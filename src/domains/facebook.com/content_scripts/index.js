@@ -13,23 +13,31 @@ async function boot() {
 
   log("Welcome to Facebook Tracking Exposed.");
 
+  const profile = await browser.runtime.sendMessage({
+    method: "getProfile"
+  });
+
+  log("Profile", profile);
+
   const hub = new Hub();
   handlers(hub);
   observers(hub);
 
-  const currentUser = await browser.runtime.sendMessage({
-    method: "getCurrentUser"
-  });
+  hub.send("updateConfig", profile);
 
-  log("current user", currentUser);
-
-  if (currentUser) {
-    if (currentUser.optIn && !currentUser.pause) {
+  if (profile) {
+    if (profile.optIn && !profile.pause) {
       hub.send("startScraping");
     } else {
       new Onboarding({ target: document.body, props: { hub } });
     }
   }
+
+  // TODO: handling here is specific to the header. Need to be refactored soon to support new stuff
+  browser.runtime.onMessage.addListener(({ method, params }, sender) => {
+    log("update config", method, params);
+    hub.send("updateConfig", params[0]);
+  });
 }
 
 boot();

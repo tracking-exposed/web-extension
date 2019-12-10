@@ -3,13 +3,25 @@
 
   import { Form, FormGroup, Input, Label } from "sveltestrap";
 
-  export let currentUser;
+  export let profile;
 
-  function handleHideBanner() {
+  async function handleShowHeader() {
     browser.runtime.sendMessage({
-      method: "setHideBanner",
-      params: [currentUser.hideBanner]
+      method: "setShowHeader",
+      params: [profile.showHeader]
     });
+
+    const tabs = await browser.tabs.query({
+      currentWindow: true,
+      active: true
+    });
+
+    tabs.forEach(tab =>
+      browser.tabs.sendMessage(tab.id, {
+        method: "updateConfig",
+        params: [profile]
+      })
+    );
   }
 </script>
 
@@ -25,10 +37,10 @@
     <FormGroup check>
       <Label check>
         <Input
-          bind:checked={currentUser.hideBanner}
-          on:change={handleHideBanner}
+          bind:checked={profile.showHeader}
+          on:change={handleShowHeader}
           type="checkbox" />
-        <p>Hide banner at the top of the posts.</p>
+        <p>Show informational header on the posts in your feed.</p>
       </Label>
     </FormGroup>
   </Form>
