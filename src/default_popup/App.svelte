@@ -1,12 +1,35 @@
 <script>
-	export let name;
+  import {
+    Navbar,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Col,
+    Container,
+    Row
+  } from "sveltestrap";
+  import PopupFacebook from "src/domains/facebook.com/default_popup/Popup.svelte";
 </script>
 
 <style>
-	h1 {
-		color: purple;
-	}
+  :global(body) {
+    margin: 0;
+  }
+
+  main {
+    min-width: 500px;
+  }
 </style>
 
-<h1>Hello {name}!</h1>
-<input bind:value={name} />
+<main class="webtrex">
+  <Navbar color="light" light expand="md">
+    <NavbarBrand href="/">sveltestrap</NavbarBrand>
+  </Navbar>
+
+  <Container>
+    <Row>
+      <PopupFacebook />
+    </Row>
+  </Container>
+</main>

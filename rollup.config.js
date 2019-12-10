@@ -35,6 +35,7 @@ function setConfig() {
 function setAlias() {
   const projectRootDir = path.resolve(__dirname);
   return alias({
+    resolve: [".svelte", ".js"],
     entries: [
       {
         find: "src",
@@ -76,8 +77,8 @@ export default [
             dest: "build/"
           },
           {
-            src: "src/images",
-            dest: "build/"
+            src: ["theme-trex/static/images/*", "assets/*"],
+            dest: "build/images"
           },
           // Google doesn't give a (fire)fox about the `browser` namespace, so it's polyfill time!
           // More info: https://github.com/mozilla/webextension-polyfill
