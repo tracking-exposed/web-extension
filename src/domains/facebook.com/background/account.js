@@ -17,10 +17,11 @@ export async function getCurrentUser() {
     return;
   } else {
     const id = cUserCookie.value;
+    const key = [id, "profile"].join(":");
+    const profile = await db.get(key);
     return {
       id,
-      pause: await db.get([id, "pause"]),
-      optIn: await db.get([id, "optIn"])
+      ...profile
     };
   }
 }
@@ -40,7 +41,7 @@ export async function setOptIn(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.set([user.id, "optIn"], value);
+  await db.update([user.id, "profile"], { optIn: value });
 }
 
 // ## setPause
@@ -58,5 +59,5 @@ export async function setPause(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.set([user.id, "optIn"], value);
+  await db.update([user.id, "profile"], { pause: value });
 }

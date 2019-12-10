@@ -11,9 +11,19 @@ async function get(key, fallback) {
 }
 
 async function set(key, value) {
+  console.log("set", key, value);
   key = join(key);
-  console.log("set key", key, value);
-  return local.set({ key: value });
+  return local.set({ [key]: value });
+}
+
+async function update(key, value) {
+  console.log("update", key, value);
+  if (!(value instanceof Object)) {
+    throw new Error("value must be an object");
+  }
+  key = join(key);
+  const prev = await get(key, {});
+  return local.set({ [key]: { ...prev, ...value } });
 }
 
 async function remove(key) {}
@@ -22,5 +32,6 @@ export default {
   join,
   get,
   set,
+  update,
   remove
 };
