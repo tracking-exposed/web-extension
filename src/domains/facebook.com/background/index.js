@@ -1,4 +1,5 @@
 import * as profile from "./profile";
+import "./sync";
 
 const mapping = {
   ...profile

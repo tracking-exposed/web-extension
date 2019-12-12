@@ -17,6 +17,8 @@
     "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
@@ -34,8 +36,10 @@
     "start:chromium": "web-ext run --source-dir ./build/ --target=chromium --chromium-binary=$(which chromium-browser) --start-url=www.facebook.com"
   },
   "dependencies": {
+    "bs58": "^4.0.1",
     "svelte": "^3.0.0",
     "sveltestrap": "^3.2.8",
+    "tweetnacl": "^1.0.1",
     "uuid": "^3.3.3",
     "webextension-polyfill": "^0.5.0"
   }

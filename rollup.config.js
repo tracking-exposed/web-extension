@@ -6,6 +6,8 @@ import sass from "node-sass";
 import alias from "@rollup/plugin-alias";
 import copy from "rollup-plugin-copy";
 import json from "rollup-plugin-json";
+import globals from "rollup-plugin-node-globals";
+import builtins from "rollup-plugin-node-builtins";
 import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
@@ -94,6 +96,8 @@ export default [
       }),
 
       setAlias(),
+      globals(),
+      builtins(),
 
       // If you have external dependencies installed from
       // npm, you'll most likely need these plugins. In

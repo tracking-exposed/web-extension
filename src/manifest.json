@@ -16,7 +16,9 @@
   },
 
   "permissions": [
+    "alarms",
     "storage",
+    "unlimitedStorage",
     "cookies",
     "http://localhost:8100/",
     "https://*.facebook.com/",

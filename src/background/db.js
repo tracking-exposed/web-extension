@@ -6,22 +6,31 @@ function join(key) {
 
 async function get(key, fallback) {
   key = join(key);
-  const value = await local.get(key);
-  return value === undefined || value === null ? fallback : value[key];
+  const value = (await local.get(key))[key];
+  return value === undefined ? fallback : value;
 }
 
-async function set(key, value) {
+async function set(key, valueOrFunc, fallback) {
   key = join(key);
-  return local.set({ [key]: value });
+  let newValue;
+  if (valueOrFunc instanceof Function) {
+    const previousValue = await get(key, fallback);
+    newValue = valueOrFunc(previousValue);
+  } else {
+    newValue = valueOrFunc;
+  }
+
+  return local.set({ [key]: newValue });
 }
 
 async function update(key, value) {
   if (!(value instanceof Object)) {
-    throw new Error("value must be an object");
+    throw new Error("Value must be an object.");
   }
   key = join(key);
-  const prev = await get(key, {});
-  return local.set({ [key]: { ...prev, ...value } });
+  const previousValue = await get(key, {});
+  const newValue = { ...previousValue, ...value };
+  return local.set({ [key]: newValue });
 }
 
 async function remove(key) {}

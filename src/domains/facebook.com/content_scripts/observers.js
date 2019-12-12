@@ -1,5 +1,4 @@
 import { logger, dom } from "src/content_scripts";
-import { getTimeISO8601, uuid } from "./utils";
 import config from "src/background/config";
 import scraper from "./scraper";
 
@@ -14,8 +13,7 @@ function observeTimeline(hub) {
     }
     watcher = dom.on("#newsFeedHeading", _ =>
       hub.send("newTimeline", {
-        uuid: uuid(),
-        startTime: getTimeISO8601()
+        location: window.location.href
       })
     );
   });

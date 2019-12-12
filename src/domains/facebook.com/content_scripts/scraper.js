@@ -1,5 +1,4 @@
 import { logger } from "src/content_scripts";
-import { getTimeISO8601 } from "./utils";
 
 const log = logger("scraper");
 
@@ -43,7 +42,6 @@ export default function scrape(element) {
 
   return {
     visibility: visibility,
-    visibilityInfo: sharingLevel,
-    impressionTime: getTimeISO8601()
+    visibilityInfo: sharingLevel
   };
 }
