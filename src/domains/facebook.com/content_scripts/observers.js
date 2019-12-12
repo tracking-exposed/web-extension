@@ -57,7 +57,11 @@ function observeLoginForm(hub) {
   });
 }
 
-function observeCookie(hub) {}
+function observeWindowUnload(hub) {
+  window.addEventListener("beforeunload", e => {
+    hub.event("windowUnload");
+  });
+}
 
 export default function start(hub) {
   log("Start DOM observers");

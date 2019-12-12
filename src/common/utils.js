@@ -48,3 +48,18 @@ export function isEmpty(object) {
 export function isFunction(value) {
   return value instanceof Function;
 }
+
+export function decodeString(s) {
+  // Credits: https://github.com/dchest/tweetnacl-util-js
+  var d = unescape(encodeURIComponent(s));
+  var b = new Uint8Array(d.length);
+
+  for (var i = 0; i < d.length; i++) {
+    b[i] = d.charCodeAt(i);
+  }
+  return b;
+}
+
+export function decodeKey(key) {
+  return new Uint8Array(bs58.decode(key));
+}

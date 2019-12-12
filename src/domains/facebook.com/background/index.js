@@ -1,8 +1,9 @@
 import * as profile from "./profile";
-import "./sync";
+import * as sync from "./sync";
 
 const mapping = {
-  ...profile
+  ...profile,
+  ...sync
 };
 
 // ## Dispatch requests
@@ -33,7 +34,7 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
 
   params = params === undefined ? [] : params;
 
-  console.log(`Dispatch ${method}(${params.join(", ")}) from ${sender.url}`);
+  //console.log(`Dispatch ${method}(${params.join(", ")}) from ${sender.url}`);
 
   if (!func) {
     const message = `Method "${method}" not supported.`;

@@ -10,7 +10,7 @@ const PROFILE = {
   showHeader: true,
   address: null,
   publicKey: null,
-  privateKey: null
+  secretKey: null
 };
 
 // # Account

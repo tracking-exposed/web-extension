@@ -1,36 +1,59 @@
-function handlePost(port, type, e) {
-  port.postMessage({
+import { uuid, getTimeISO8601 } from "src/common/utils";
+
+const INTERVAL = 1000;
+const MAX_BUFFER_SIZE = 1024 * 1024;
+
+var state = {
+  timeline: null,
+  position: 1,
+  size: 0,
+  events: []
+};
+
+function handlePost(type, e) {
+  const impression = {
     type: "impression",
-    //impressionOrder: state.position++,
-    //timelineId: state.timeline.id
-    ...e.data,
-    ...(e.data.visibility === "public" ? { html: e.element.outerHTML } : {})
-  });
+    visibility: e.data.visibility,
+    visibilityInfo: e.data.visibilityInfo,
+    startTime: getTimeISO8601(),
+    impressionOrder: state.position++,
+    timelineId: state.timelineId
+  };
+
+  if (impression.visibility === "public") {
+    impression.html = e.element.outerHTML;
+  }
+
+  state.size += impression.html ? impression.html.length : 0;
+  state.events.push(impression);
+  if (state.size > MAX_BUFFER_SIZE) {
+    sync();
+  }
 }
 
-function handleTimeline(port, type, e) {
-  port.postMessage({
+function handleTimeline(type, e) {
+  const id = uuid();
+  state.position = 1;
+  state.timelineId = id;
+  state.events.push({
+    id,
     type: "timeline",
-    //id: e.uuid,
-    //startTime: e.startTime,
+    startTime: getTimeISO8601(),
     location: window.location.href
   });
 }
 
-function handleAnomaly(port, type, e) {
-  var report = {
-    impressionCounter: state.position,
-    timelineId: state.timeline.id,
-    type: "anomaly",
-    current: Object.assign(e.stats),
-    previous: Object.assign(e.previous)
-  };
-  state.events.push(report);
+function sync() {
+  if (state.events.length) {
+    browser.runtime.sendMessage({
+      method: "syncEvents",
+      params: [state.events]
+    });
+    state.events = [];
+  }
 }
-
 export default function register(hub) {
-  const port = browser.runtime.connect();
-  hub.on("anomaly", handleAnomaly.bind(null, port));
-  hub.on("newPost", handlePost.bind(null, port));
-  hub.on("newTimeline", handleTimeline.bind(null, port));
+  hub.on("newPost", handlePost);
+  hub.on("newTimeline", handleTimeline);
+  window.setInterval(sync.bind(null, hub), INTERVAL);
 }
