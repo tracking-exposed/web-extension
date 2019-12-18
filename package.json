@@ -1,5 +1,5 @@
 {
-  "name": "svelte-web-extension-template",
+  "name": "webtrex",
   "version": "0.0.1",
   "devDependencies": {
     "@babel/core": "^7.7.5",

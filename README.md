@@ -9,7 +9,9 @@
 Install dependencies:
 
 ```bash
+git submodule update --init theme-trex
 npm install
+npm install --only=dev
 ```
 
 ### Configure
