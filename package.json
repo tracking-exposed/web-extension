@@ -27,13 +27,16 @@
   "scripts": {
     "start": "run-s build dev",
     "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "dist": "run-s build lint pack",
+    "lint": "web-ext lint",
+    "pack": "web-ext build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "autobuild": "rollup -c -w",
-    "dev": "run-p start:chromium autobuild",
-    "dev:firefox": "run-p start:firefox autobuild",
-    "start:firefox": "web-ext run --source-dir ./build/ --target=firefox-desktop --firefox-binary=$(which firefox) --start-url=www.facebook.com",
-    "start:chromium": "web-ext run --source-dir ./build/ --target=chromium --chromium-binary=$(which chromium-browser) --start-url=www.facebook.com"
+    "dev": "run-p start:chromium build:watch",
+    "dev:firefox": "run-p start:firefox build:watch",
+    "start:firefox": "web-ext run --target=firefox-desktop --firefox-binary=$(which firefox) --start-url=www.facebook.com",
+    "start:chromium": "web-ext run --target=chromium --chromium-binary=$(which chromium-browser) --start-url=www.facebook.com"
   },
   "dependencies": {
     "bs58": "^4.0.1",
@@ -42,5 +45,12 @@
     "tweetnacl": "^1.0.1",
     "uuid": "^3.3.3",
     "webextension-polyfill": "^0.5.0"
+  },
+  "webExt": {
+    "sourceDir": "build",
+    "artifactsDir": "dist",
+    "build": {
+      "overwriteDest": true
+    }
   }
 }
