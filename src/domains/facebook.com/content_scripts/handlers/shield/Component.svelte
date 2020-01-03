@@ -1,7 +1,3 @@
-<script>
-  export let visibility;
-</script>
-
 <style>
   div {
     position: absolute;

@@ -42,7 +42,7 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
     return Promise.reject(new Error(message));
   }
 
-  return func(...params);
+  return func(params);
 });
 
 //

@@ -41,7 +41,7 @@ export default function scrape(element) {
   const visibility = publicWords.includes(sharingLevel) ? "public" : "private";
 
   return {
-    visibility: visibility,
+    visibility,
     visibilityInfo: sharingLevel
   };
 }

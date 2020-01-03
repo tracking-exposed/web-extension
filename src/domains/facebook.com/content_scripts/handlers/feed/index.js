@@ -13,7 +13,7 @@ function eventHandler(type, payload, hub) {
     anchor: payload.element.querySelector("div"),
     props: {
       hub,
-      ...payload.data
+      visibility: payload.data.visibility
     }
   });
 }

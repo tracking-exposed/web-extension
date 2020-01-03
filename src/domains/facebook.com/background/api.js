@@ -5,14 +5,12 @@ import { Buffer } from "buffer";
 import { decodeString, decodeKey } from "src/common/utils";
 
 async function post(apiUrl, data, profile) {
-  console.log(profile);
   const body = JSON.stringify(data);
   const url = "http://localhost:8100/api/v1/" + apiUrl;
   const signature = nacl.sign.detached(
     decodeString(body),
     new Uint8Array(profile.secretKey)
   );
-  console.log(signature);
 
   const response = await fetch(url, {
     method: "POST",
