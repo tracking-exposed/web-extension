@@ -32,7 +32,7 @@ function observePosts(hub) {
     if (watcher) {
       return;
     }
-    watcher = dom.on(".userContentWrapper", element =>
+    watcher = dom.on(hub.config.selector, element =>
       hub.send("newPost", {
         data: scraper(element),
         element

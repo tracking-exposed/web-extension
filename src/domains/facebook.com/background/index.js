@@ -1,5 +1,6 @@
 import * as profile from "./profile";
 import * as sync from "./sync";
+import { refreshUserInfo } from "./userInfo";
 
 const mapping = {
   ...profile,
@@ -42,10 +43,24 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
     return Promise.reject(new Error(message));
   }
 
-  return func(params);
+  return func(...params);
 });
 
+// ## Alarms
 //
+// Alarms are a neat way to schedule code to run at a specific time.
+// Here we set a listener to refresh some user info every hour.
+browser.alarms.onAlarm.addListener(refreshUserInfo);
+browser.alarms.create("refreshUserInfo", {
+  periodInMinutes: 60
+});
+
+// ## Extra stuff
+//
+// We also want to refresh the user info when the extension boots.
+refreshUserInfo();
+
 // [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
 // [2]: https://github.com/mozilla/webextension-polyfill/issues/16#issuecomment-296693219
 // [3]: https://github.com/mozilla/webextension-polyfill
+// [4]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/alarms

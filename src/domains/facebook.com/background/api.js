@@ -31,7 +31,7 @@ async function post(apiUrl, data, profile) {
 const api = {
   sync: post.bind(null, "events"),
   validate: post.bind(null, "validate"),
-  selector: post.bind(null, "userInfo")
+  userInfo: post.bind(null, "userInfo")
 };
 
 export default api;
