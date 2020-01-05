@@ -1,4 +1,5 @@
-import { logger, dom } from "src/content_scripts";
+import logger from "src/common/logger";
+import { dom } from "src/content_scripts";
 import config from "src/background/config";
 import scraper from "./scraper";
 
@@ -16,11 +17,13 @@ function observeTimeline(hub) {
         location: window.location.href
       })
     );
+    log("Start #newsFeedHeading");
   });
 
   hub.on("stopScraping", () => {
     if (watcher) {
       watcher.disconnect();
+      log("Stop #newsFeedHeading");
     }
   });
 }
@@ -38,11 +41,13 @@ function observePosts(hub) {
         element
       })
     );
+    log("Start", hub.config.selector);
   });
 
   hub.on("stopScraping", () => {
     if (watcher) {
       watcher.disconnect();
+      log("Stop", hub.config.selector);
     }
   });
 }
@@ -64,8 +69,6 @@ function observeWindowUnload(hub) {
 }
 
 export default function start(hub) {
-  log("Start DOM observers");
-
   observeTimeline(hub);
   observePosts(hub);
 

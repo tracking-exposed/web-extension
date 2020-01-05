@@ -1,4 +1,4 @@
-import { logger } from "src/content_scripts";
+import logger from "src/common/logger";
 
 const log = logger("scraper");
 
@@ -39,6 +39,11 @@ export default function scrape(element) {
   }
 
   const visibility = publicWords.includes(sharingLevel) ? "public" : "private";
+
+  log.debug(
+    `Post with sharing set to "${sharingLevel}" ` +
+      `categorized as "${visibility}"`
+  );
 
   return {
     visibility,

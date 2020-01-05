@@ -1,9 +1,9 @@
-import { logger } from "src/content_scripts";
+import logger from "src/common/logger";
 
 const log = logger("spy");
 
 function eventHandler(type, e) {
-  log(type, e);
+  log.debug("New event", type, e);
 }
 
 export default function register(hub) {
