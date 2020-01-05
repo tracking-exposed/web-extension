@@ -2,11 +2,12 @@ import nacl from "tweetnacl";
 import bs58 from "bs58";
 import { Buffer } from "buffer";
 
+import CONFIG from "src/background/config";
 import { decodeString, decodeKey } from "src/common/utils";
 
 async function post(apiUrl, data, profile) {
   const body = JSON.stringify(data);
-  const url = "http://localhost:8100/api/v1/" + apiUrl;
+  const url = CONFIG.apiEndpoint + apiUrl;
   const signature = nacl.sign.detached(
     decodeString(body),
     new Uint8Array(profile.secretKey)

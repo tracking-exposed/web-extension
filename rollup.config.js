@@ -20,11 +20,14 @@ const production = !process.env.ROLLUP_WATCH;
 const config = {
   production,
   ...(production
-    ? {}
+    ? {
+        apiEndpoint: "https://collector.facebook.tracking.exposed/api/v1/"
+      }
     : {
         autologin: true,
         autologinEmail: process.env.AUTOLOGIN_EMAIL,
-        autologinPassword: process.env.AUTOLOGIN_PASSWORD
+        autologinPassword: process.env.AUTOLOGIN_PASSWORD,
+        apiEndpoint: "http://localhost:8100/api/v1/"
       })
 };
 

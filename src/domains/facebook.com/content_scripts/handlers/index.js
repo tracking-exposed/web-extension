@@ -7,5 +7,5 @@ export default function registerHandlers(hub) {
   spy(hub);
   sync(hub);
   feed(hub);
-  shield(hub);
+  // shield(hub);
 }
