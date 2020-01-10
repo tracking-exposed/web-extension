@@ -33,7 +33,9 @@ async function update(key, value) {
   return local.set({ [key]: newValue });
 }
 
-async function remove(key) {}
+async function remove(key) {
+  return local.remove(key);
+}
 
 export default {
   join,

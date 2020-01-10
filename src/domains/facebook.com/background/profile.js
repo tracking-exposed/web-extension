@@ -1,8 +1,12 @@
 import nacl from "tweetnacl";
 import bs58 from "bs58";
 import { Buffer } from "buffer";
+import * as v1 from "./v1";
 
+import logger from "src/common/logger";
 import db from "src/background/db";
+
+const log = logger("profile");
 
 const PROFILE = {
   id: null,
@@ -46,16 +50,26 @@ export async function getProfile() {
   let profile = await db.get(key);
 
   if (!profile) {
-    // Create keypair
-    const keypair = nacl.sign.keyPair();
-    profile = {
-      ...PROFILE,
-      address: bs58.encode(Buffer.from(keypair.publicKey)),
-      publicKey: Array.from(keypair.publicKey),
-      // Todo: check if it's safe to share the private key with the
-      // content script.
-      secretKey: Array.from(keypair.secretKey)
-    };
+    // Check if we need to migrate the profile from v1 to v2
+    const v1Profile = await v1.getProfile(id);
+    if (v1Profile) {
+      log.info("Import profile from v1.0", v1Profile);
+      profile = {
+        ...PROFILE,
+        ...v1Profile
+      };
+    } else {
+      // Create keypair
+      const keypair = nacl.sign.keyPair();
+      profile = {
+        ...PROFILE,
+        address: bs58.encode(Buffer.from(keypair.publicKey)),
+        publicKey: Array.from(keypair.publicKey),
+        // Todo: check if it's safe to share the private key with the
+        // content script.
+        secretKey: Array.from(keypair.secretKey)
+      };
+    }
     await db.set(key, profile);
   }
 
