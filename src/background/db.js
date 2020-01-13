@@ -16,10 +16,8 @@ async function set(key, valueOrFunc, fallback) {
   if (valueOrFunc instanceof Function) {
     const previousValue = await get(key, fallback);
     newValue = valueOrFunc(previousValue);
-  } else if (valueOrFunc instanceof Object) {
-    newValue = valueOrFunc;
   } else {
-    throw new Error("Value must be an object.");
+    newValue = valueOrFunc;
   }
 
   return local.set({ [key]: newValue });
