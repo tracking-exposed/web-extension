@@ -30,25 +30,6 @@ export function getTimeISO8601(date) {
   ].join("");
 }
 
-export function normalizeUrl(url) {
-  if (!url) {
-    url = null;
-  } else if (url[0] === "/") {
-    url = "https://www.facebook.com" + url;
-  }
-  return url;
-}
-
-export function isEmpty(object) {
-  return (
-    object === null || object === undefined || Object.keys(object).length === 0
-  );
-}
-
-export function isFunction(value) {
-  return value instanceof Function;
-}
-
 export function decodeString(s) {
   // Credits: https://github.com/dchest/tweetnacl-util-js
   var d = unescape(encodeURIComponent(s));
