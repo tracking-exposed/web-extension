@@ -59,7 +59,7 @@
           <p class="lead">
             We need your explicit consent to allow fbTREX to work.
           </p>
-          <hr class="my-2" />
+          <hr />
           <p>
             By opting in, you give us the right to process a copy of your
             Facebook timeline. We take your privacy very seriously, for more
