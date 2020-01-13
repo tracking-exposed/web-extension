@@ -1,6 +1,9 @@
 import api from "./api";
 import { getProfile } from "./profile";
 import db from "src/background/db";
+import logger from "src/common/logger";
+
+const log = logger("userInfo");
 
 export async function getUserInfo(profile) {
   const uniqueMsg = `key ${profile.publicKey}@${
@@ -19,6 +22,11 @@ export async function getUserInfo(profile) {
 
 export async function refreshUserInfo(alarmInfo) {
   let profile = await getProfile();
+  if (!profile) {
+    log.info("User is not logged in, skip");
+    return;
+  }
+  log.info("Refresh");
   const userInfo = await getUserInfo(profile);
   await db.update([profile.id, "profile"], {
     selector: userInfo.selector,

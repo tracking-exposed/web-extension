@@ -53,15 +53,15 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
 //
 // Alarms are a neat way to schedule code to run at a specific time.
 // Here we set a listener to refresh some user info every hour.
-browser.alarms.onAlarm.addListener(refreshUserInfo);
-browser.alarms.create("refreshUserInfo", {
-  periodInMinutes: 60
-});
+// browser.alarms.onAlarm.addListener(refreshUserInfo);
+// browser.alarms.create("refreshUserInfo", {
+//   periodInMinutes: 60
+// });
 
 // ## Extra stuff
 //
 // We also want to refresh the user info when the extension boots.
-refreshUserInfo();
+// refreshUserInfo();
 
 // [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
 // [2]: https://github.com/mozilla/webextension-polyfill/issues/16#issuecomment-296693219

@@ -13,8 +13,12 @@
   let agree = false;
   let display = true;
 
-  function handleOptIn() {
-    browser.runtime.sendMessage({ method: "setOptIn", params: [true] });
+  async function handleOptIn() {
+    await browser.runtime.sendMessage({ method: "setOptIn", params: [true] });
+    const profile = await browser.runtime.sendMessage({
+      method: "loadProfile"
+    });
+    hub.send("updateConfig", profile);
     hub.send("startScraping");
     display = false;
   }

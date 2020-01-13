@@ -13,7 +13,7 @@ async function boot() {
   );
 
   const profile = await browser.runtime.sendMessage({
-    method: "getProfile"
+    method: "loadProfile"
   });
 
   log.info("Profile loaded", profile);
