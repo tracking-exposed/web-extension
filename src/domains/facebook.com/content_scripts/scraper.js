@@ -1,7 +1,3 @@
-import logger from "src/common/logger";
-
-const log = logger("scraper");
-
 // TODO: in order to extract the visibility of a post,
 // we analyze the last word in the "aria-label" of the post itself.
 // This part should be improved because there might be some really
@@ -40,7 +36,7 @@ export default function scrape(element) {
 
   const visibility = publicWords.includes(sharingLevel) ? "public" : "private";
 
-  log.debug(
+  console.debug(
     `Post with sharing set to "${sharingLevel}" ` +
       `categorized as "${visibility}"`
   );

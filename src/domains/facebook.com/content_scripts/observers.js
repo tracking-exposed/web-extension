@@ -1,9 +1,6 @@
-import logger from "src/common/logger";
 import { dom } from "src/content_scripts";
 import config from "src/background/config";
 import scraper from "./scraper";
-
-const log = logger("observers");
 
 function observeTimeline(hub) {
   let watcher;
@@ -17,13 +14,13 @@ function observeTimeline(hub) {
         location: window.location.href
       })
     );
-    log("Start #newsFeedHeading");
+    console.log("Start #newsFeedHeading");
   });
 
   hub.on("stopScraping", () => {
     if (watcher) {
       watcher.disconnect();
-      log("Stop #newsFeedHeading");
+      console.log("Stop #newsFeedHeading");
     }
   });
 }
@@ -41,13 +38,13 @@ function observePosts(hub) {
         element
       })
     );
-    log("Start", hub.config.selector);
+    console.log("Start", hub.config.selector);
   });
 
   hub.on("stopScraping", () => {
     if (watcher) {
       watcher.disconnect();
-      log("Stop", hub.config.selector);
+      console.log("Stop", hub.config.selector);
     }
   });
 }

@@ -1,10 +1,7 @@
 import handlers from "./handlers";
 import observers from "./observers";
-import logger from "src/common/logger";
 import { Hub, dom } from "src/content_scripts/";
 import Onboarding from "./components/Onboarding.svelte";
-
-const log = logger("boot");
 
 async function boot() {
   console.log(
@@ -16,7 +13,7 @@ async function boot() {
     method: "loadProfile"
   });
 
-  log.info("Profile loaded", profile);
+  console.info("Profile loaded", profile);
 
   const hub = new Hub();
   handlers(hub);
@@ -34,7 +31,7 @@ async function boot() {
 
   // TODO: handling here is specific to the header. Need to be refactored soon to support new stuff
   browser.runtime.onMessage.addListener(({ method, params }, sender) => {
-    log.debug("Configuration updated", method, params);
+    console.debug("Configuration updated", method, params);
     hub.send("updateConfig", params[0]);
   });
 }

@@ -5,9 +5,6 @@ import * as v1 from "./v1";
 import { getUserInfo } from "./userInfo";
 
 import db from "src/background/db";
-import logger from "src/common/logger";
-
-const log = logger("profile");
 
 const PROFILE = {
   id: null,
@@ -32,7 +29,7 @@ export async function newProfile(id) {
   // Check if we need to migrate the profile from v1 to v2
   const v1Profile = await v1.getProfile(id);
   if (v1Profile) {
-    log.info("Import profile from v1.0", v1Profile);
+    console.info("Import profile from v1.0", v1Profile);
     profile = {
       ...PROFILE,
       ...v1Profile

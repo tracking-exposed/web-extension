@@ -1,7 +1,4 @@
 import { uuid, getTimeISO8601 } from "src/common/utils";
-import logger from "src/common/logger";
-
-const log = logger("sync");
 
 const INTERVAL = 1000;
 const MAX_BUFFER_SIZE = 1024 * 1024;
@@ -30,7 +27,7 @@ function handlePost(type, e) {
   state.size += impression.html ? impression.html.length : 0;
   state.events.push(impression);
   if (state.size > MAX_BUFFER_SIZE) {
-    log.debug(`Collected about ${state.size} bytes of data, forcing sync`);
+    console.debug(`Collected about ${state.size} bytes of data, forcing sync`);
     sync();
   }
 }
@@ -49,7 +46,7 @@ function handleTimeline(type, e) {
 
 function sync() {
   if (state.events.length) {
-    log(`Sending ${state.events.length} events`);
+    console.log(`Sending ${state.events.length} events`);
     browser.runtime.sendMessage({
       method: "syncEvents",
       params: [state.events]

@@ -1,9 +1,6 @@
 import * as profile from "./profile";
 import * as sync from "./sync";
 import { refreshUserInfo } from "./userInfo";
-import logger from "src/common/logger";
-
-const log = logger("root");
 
 const mapping = {
   ...profile,
@@ -38,11 +35,11 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
 
   params = params === undefined ? [] : params;
 
-  log.debug(`Dispatch "${method}" from ${sender.url}`);
+  console.debug(`Dispatch "${method}" from ${sender.url}`);
 
   if (!func) {
     const message = `Method "${method}" not supported.`;
-    log.error(message);
+    console.error(message);
     return Promise.reject(new Error(message));
   }
 
