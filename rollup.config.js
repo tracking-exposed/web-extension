@@ -12,6 +12,7 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import commonjs from "rollup-plugin-commonjs";
+import strip from "@rollup/plugin-strip";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
@@ -114,6 +115,10 @@ export default [
       }),
       commonjs(),
 
+      production &&
+        strip({
+          functions: ["console.debug"]
+        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       //! production && livereload("build"),
@@ -170,6 +175,10 @@ export default [
       }),
       commonjs(),
 
+      production &&
+        strip({
+          functions: ["console.debug"]
+        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       //! production && livereload("build"),
@@ -219,6 +228,10 @@ export default [
       }),
       commonjs(),
 
+      production &&
+        strip({
+          functions: ["console.debug"]
+        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       // !production && livereload("build"),
