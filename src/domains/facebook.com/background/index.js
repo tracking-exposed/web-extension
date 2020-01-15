@@ -18,7 +18,21 @@ const mapping = {
 //
 // Here we connect the "backend functions" (where *backend* here is intended as
 // the **background page**) to a dispatcher.
+
+// ### Log errors
 //
+// To understand better what happens when calling a "backend function", here we
+// wrap its call and log errors for better debugging.
+async function wrapAndLog(func, params) {
+  try {
+    return await func(...params);
+  } catch (e) {
+    console.error(`Error dispatching "${func.name}"`, e);
+    throw e;
+  }
+}
+
+// ### Global listener
 // It's **not** a good practice to plug an async fuction as a listener.
 // The Mozilla documentation [says][1]:
 //
@@ -35,15 +49,15 @@ browser.runtime.onMessage.addListener(({ method, params }, sender) => {
 
   params = params === undefined ? [] : params;
 
-  console.debug(`Dispatch "${method}" from ${sender.url}`);
-
   if (!func) {
     const message = `Method "${method}" not supported.`;
     console.error(message);
     return Promise.reject(new Error(message));
   }
 
-  return func(...params);
+  console.log(`Dispatch "${method}" from ${sender.url}`);
+
+  return wrapAndLog(func, params);
 });
 
 // ## Alarms
