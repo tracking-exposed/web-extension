@@ -14,6 +14,7 @@
 
 <style>
   :global(body) {
+    width: 600px;
     margin: 0;
   }
 
