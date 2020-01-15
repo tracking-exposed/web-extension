@@ -1,84 +1,69 @@
-# TL;DR how replicate the build?
+# webtrex
 
-`$ npm i ; npm run build:dist ; ls -l dist/extension.zip`
+**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects.
 
-# Intro
-This is the source code for the **tracking-exposed** extension.
-We use ECMAScript 2015, aka ES6, aka ECMAScript Harmony. The aim is to keep the
-code modular, easy to test, and beautiful.
+## Develop the extension
 
+### Prepare
 
-# Install web-extion in your browser
+Install dependencies:
 
-## Getting Started
-Setting up the dev environment is super easy.
-
-
-### Dependencies
-This project requires Node 5+. Install [nvm](https://github.com/creationix/nvm) for easy version maintaining. Alternatively install Nodejs from a package, but make sure it's the right version and install npm as well for package management.  
-
-
-### Set up your build system
-The build system uses a simple `package.json` file to describe the tasks, you can check it out to find out the packages that we rely on to make this extension available or for troubleshooting.
-
-To get started run:
-```
+```bash
+git submodule update --init theme-trex
 npm install
-npm test
-npm start
+npm install --only=dev
 ```
 
-The second line (`npm test`) is optional, but testing is cool and you should do
-it anyway. It's also a nice way to check if the installation succeeded.
-If npm test fails, don't worry and try npm start nonetheless, it might be due to facebook frequent html structure changes or nodejs extensions incompatibility, please report it back to us if this is the case.  
-
-`npm start` will build the application using `webpack` and watch for changes.
-
-Keep `npm start` running in the background to take advantage of the autoreload.
+### Configure
 
 
-### Set up your browser (for Chromium / Google Chrome)
-To install the extension go to **settings**, select **extensions**, and enable
-**Developer mode**. Click on **Load unpacked extension** and select the
-`extension/build` directory contained in this repo.
 
-### Set up your browser (for Firefox)
-As standard practice, firefox doesn't allow unpacked extension to be loaded. However, it does allow developers to test unpacked extensions **temporarily**. To accomplish this just visit [about:debugging], click **Load Temporary Add-on** and select `extension/build` directory contained in this repo.
+### Build
+Start the build process:
 
-#### Note on autoreloading the extension
-By running `npm start`, the extension will work in `DEVELOPMENT` mode. This
-means that every time you reload `facebook.com`, the extension will automatically
-reload itself using the `chrome.runtime.reload()` method.
-
-Note that before we were using [Extension
-Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid)
-to autoreload your extension every time a build succeeds.
-This dependency is no longer needed.
-
-
-### Ready to go!
-Visit [Facebook](https://www.facebook.com/) and open the dev tools. You should
-see some logging messages.
-
-
-### Extend fixtures
-
- * You've to install the package `tidy` the last version in ubuntu is not
-   working (we'll update the comment when fixed), use
-   http://binaries.html-tidy.org/
- * Copy the userContentWrapper Element
- * save in file.html
-
-```
-tidy -i -m -w 0 -utf8 file.html
+```bash
+npm run build:watch
 ```
 
-# Current releases
-[Firefox](https://addons.mozilla.org/en-US/firefox/addon/facebook-tracking-exposed/?src=userprofile) & [Chrome](https://chrome.google.com/webstore/detail/facebooktrackingexposed/fnknflppefckhjhecbfigfhlcbmcnmmi). You should read our [Privacy Statement](https://facebook.tracking.exposed/privacy-statement) or look the [latest explanatory video](https://media.ccc.de/v/SHA2017-127-the_quest_for_algorithm_diversity)
+### Run
 
-[![Build Status](https://travis-ci.org/tracking-exposed/web-extension.svg?branch=master)](https://travis-ci.org/tracking-exposed/web-extension)
+Launch a new instance of Firefox or Chromium (you need to run this from another terminal, since the previous command needs to keep running). For Firefox, run:
+
+```bash
+npm run start:firefox
+```
+
+For chromium, run:
+
+```bash
+npm run start:chromium
+```
+
+**Important**: keep in mind that those browser instances are temporary. If you close the browser or kill the process that launched the browser, all data will be lost. This is a feature, not a bug, since it allows you to always test the extension on a fresh install. Check the FAQ for more info.
 
 
-# Thanks
-[@sohkai](https://github.com/sohkai) for the amazing [js-reactor
-boilerplate](https://github.com/bigchaindb/js-reactor).
+## Distribute the extension
+
+Make sure you have all dependencies installed, then run:
+
+```bash
+npm run dist
+```
+
+The command will build the extension, run the linter, and pack it in a zip file.
+
+## FAQ
+
+### I'm annoyed because I have to log in to the social network I'm testing all the time
+
+Everytime you launch the browser you start with new cookies, new local storage, new everything. This means that if you open facebook.com you have to enter email and password on a fresh browser start.
+
+We have a dev feature called **autologin**. If you've followed the previous steps correctly, you should have a file called `.env` (that is a copy of `.env_template`). To enable **autologin** put your email in `AUTOLOGIN_EMAIL` and your password in `AUTOLOGIN_PASSWORD`. Reload the page and... voilà you are logged in. (OK to be honest sometimes facebook complains, just give it another try, it works!)
+
+### I need to test the extension in my browser and I want to load it manually
+
+After the first successful execution of `build:watch`, you should find under the `build` directory the compiled extension. You can manually load the *unpacked extension* in your browser. If you need help, check how to do it on [Firefox](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#Installing) and [Chrom(e|ium](https://developer.chrome.com/extensions/getstarted).
+
+## Adding new domains
+
+Don't forget is to use the [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) when working on new things.

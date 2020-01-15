@@ -1,0 +1,75 @@
+import { dom } from "src/content_scripts";
+import config from "src/background/config";
+import scraper from "./scraper";
+
+function observeTimeline(hub) {
+  let watcher;
+
+  hub.on("startScraping", () => {
+    if (watcher) {
+      return;
+    }
+    watcher = dom.on("#newsFeedHeading", _ =>
+      hub.send("newTimeline", {
+        location: window.location.href
+      })
+    );
+    console.log("Start #newsFeedHeading");
+  });
+
+  hub.on("stopScraping", () => {
+    if (watcher) {
+      watcher.disconnect();
+      console.log("Stop #newsFeedHeading");
+    }
+  });
+}
+
+function observePosts(hub) {
+  let watcher;
+
+  hub.on("startScraping", () => {
+    if (watcher) {
+      return;
+    }
+    watcher = dom.on(hub.config.selector, element =>
+      hub.send("newPost", {
+        data: scraper(element),
+        element
+      })
+    );
+    console.log("Start", hub.config.selector);
+  });
+
+  hub.on("stopScraping", () => {
+    if (watcher) {
+      watcher.disconnect();
+      console.log("Stop", hub.config.selector);
+    }
+  });
+}
+
+function observeLoginForm(hub) {
+  const watcher = dom.one("form[action*=login]", form => {
+    const email = form.querySelectorAll("input[name=email]")[0];
+    const password = form.querySelectorAll("input[type=password]")[0];
+    email.value = config.autologinEmail;
+    password.value = config.autologinPassword;
+    setTimeout(() => form.submit(), 1000);
+  });
+}
+
+function observeWindowUnload(hub) {
+  window.addEventListener("beforeunload", e => {
+    hub.event("windowUnload");
+  });
+}
+
+export default function start(hub) {
+  observeTimeline(hub);
+  observePosts(hub);
+
+  if (config.autologinEmail && config.autologinPassword) {
+    observeLoginForm(hub);
+  }
+}

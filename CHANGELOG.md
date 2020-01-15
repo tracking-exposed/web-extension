@@ -2,9 +2,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.19] - 2019-02-07
-## Fixed
+### Fixed
 - A bug was reporting malfunction when in fact was functioning
-## Addedd
+### Addedd
 - Incremental copy of built extension in https://github.com/tracking-exposed/binaries repository
 - Italian localization support
 
@@ -24,14 +24,14 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - lack of short\_name in manifest.json
 - optin more clear, with only one checkbox
 - removed `git` requirement in building process
-## Added
+### Added
 - experimental feature to do interaction with tracking.exposed domain
 
 ## [1.1.15] - 2018-07-10
 ### Added
 - optIn procedure, localized in all the three languages
 
-## [1.1.14] - 2018-06-01 -- not released yet 
+## [1.1.14] - 2018-06-01 -- not released yet
 ### Fixed
 - link generated is not anymore to `realitycheck` which get discontinued, but to `personal`
 - renamed again, now is **tracking.exposed: distributed algorithm analysis**
