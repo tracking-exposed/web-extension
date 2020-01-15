@@ -115,13 +115,15 @@ export default [
       }),
       commonjs(),
 
-      production &&
-        strip({
-          functions: ["console.debug"]
-        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       //! production && livereload("build"),
+
+      production &&
+        strip({
+          functions: ["console.debug"],
+          sourceMap: false
+        }),
 
       // If we're building for production (npm run build
       // instead of npm run dev), minify
@@ -175,13 +177,15 @@ export default [
       }),
       commonjs(),
 
-      production &&
-        strip({
-          functions: ["console.debug"]
-        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       //! production && livereload("build"),
+
+      production &&
+        strip({
+          functions: ["console.debug"],
+          sourceMap: false
+        }),
 
       // If we're building for production (npm run build
       // instead of npm run dev), minify
@@ -228,13 +232,15 @@ export default [
       }),
       commonjs(),
 
-      production &&
-        strip({
-          functions: ["console.debug"]
-        }),
       // Watch the `build` directory and refresh the
       // browser on changes when not in production
       // !production && livereload("build"),
+
+      production &&
+        strip({
+          functions: ["console.debug"],
+          sourceMap: false
+        }),
 
       // If we're building for production (npm run build
       // instead of npm run dev), minify
