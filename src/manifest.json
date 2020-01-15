@@ -26,8 +26,7 @@
   ],
 
   "background": {
-    "scripts": ["browser-polyfill.js", "background/bundle.js"],
-    "persistent": false
+    "scripts": ["browser-polyfill.js", "background/bundle.js"]
   },
 
   "browser_action": {
