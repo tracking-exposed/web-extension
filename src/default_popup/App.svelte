@@ -14,12 +14,9 @@
 
 <style>
   :global(body) {
-    width: 600px;
+    min-width: 600px;
     margin: 0;
-  }
-
-  main {
-    min-width: 500px;
+    overflow-x: hidden;
   }
 
   nav {

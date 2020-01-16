@@ -10,6 +10,7 @@ const PROFILE = {
   id: null,
   optIn: false,
   showHeader: true,
+  pauseScraping: false,
   address: null,
   publicKey: null,
   secretKey: null,
@@ -126,7 +127,7 @@ export async function setOptIn(value) {
   });
 }
 
-// ## setHideBanner
+// ## setShowHeader
 //
 // Hide the banner from each post.
 export async function setShowHeader(value) {
@@ -143,11 +144,11 @@ export async function setShowHeader(value) {
   await db.update([profile.id, "profile"], { showHeader: value });
 }
 
-// ## setPause
+// ## setPauseScraping
 //
 // Pause is used to notify the web extension to not scrape the feed anymore.
 // It can be true or false.
-export async function setPause(value) {
+export async function setPauseScraping(value) {
   const profile = await getProfile();
 
   if (!profile) {
@@ -158,5 +159,5 @@ export async function setPause(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.update([profile.id, "profile"], { pause: value });
+  await db.update([profile.id, "profile"], { pauseScraping: value });
 }
