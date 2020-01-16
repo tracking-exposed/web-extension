@@ -3,7 +3,7 @@
   export let hub;
   let hide = !hub.config.showHeader;
 
-  hub.on("newConfig", (_, { showHeader }) => {
+  hub.on("setConfig", (_, { showHeader }) => {
     hide = !showHeader;
   });
 </script>

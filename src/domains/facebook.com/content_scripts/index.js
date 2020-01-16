@@ -21,12 +21,8 @@ async function boot() {
 
   hub.send("updateConfig", profile);
 
-  if (profile) {
-    if (profile.optIn && !profile.pause) {
-      hub.send("startScraping");
-    } else {
-      new Onboarding({ target: document.body, props: { hub } });
-    }
+  if (profile && !profile.optIn) {
+    new Onboarding({ target: document.body, props: { hub } });
   }
 
   // TODO: handling here is specific to the header. Need to be refactored soon to support new stuff

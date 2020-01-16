@@ -1,5 +1,5 @@
 function eventHandler(type, e) {
-  console.debug("New event", type, e);
+  console.debug("[log event]", type, e);
 }
 
 export default function register(hub) {

@@ -5,22 +5,24 @@ import scraper from "./scraper";
 function observeTimeline(hub) {
   let watcher;
 
-  hub.on("startScraping", () => {
+  hub.on("startScraping", (_, selectors) => {
     if (watcher) {
       return;
     }
-    watcher = dom.on("#newsFeedHeading", _ =>
+    watcher = dom.on(selectors.timeline, element =>
       hub.send("newTimeline", {
-        location: window.location.href
+        location: window.location.href,
+        element
       })
     );
-    console.log("Start #newsFeedHeading");
+    console.log("Start", selectors.timeline);
   });
 
-  hub.on("stopScraping", () => {
+  hub.on("stopScraping", (_, selectors) => {
     if (watcher) {
       watcher.disconnect();
-      console.log("Stop #newsFeedHeading");
+      watcher = null;
+      console.log("Stop", selectors.timeline);
     }
   });
 }
@@ -28,23 +30,24 @@ function observeTimeline(hub) {
 function observePosts(hub) {
   let watcher;
 
-  hub.on("startScraping", () => {
+  hub.on("startScraping", (_, selectors) => {
     if (watcher) {
       return;
     }
-    watcher = dom.on(hub.config.selector, element =>
+    watcher = dom.on(selectors.post, element =>
       hub.send("newPost", {
         data: scraper(element),
         element
       })
     );
-    console.log("Start", hub.config.selector);
+    console.log("Start", selectors.post);
   });
 
-  hub.on("stopScraping", () => {
+  hub.on("stopScraping", (_, selectors) => {
     if (watcher) {
       watcher.disconnect();
-      console.log("Stop", hub.config.selector);
+      watcher = null;
+      console.log("Stop", selectors.post);
     }
   });
 }

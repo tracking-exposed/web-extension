@@ -23,6 +23,25 @@
       })
     );
   }
+
+  async function handlePauseScraping() {
+    browser.runtime.sendMessage({
+      method: "setPauseScraping",
+      params: [profile.pauseScraping]
+    });
+
+    const tabs = await browser.tabs.query({
+      currentWindow: true,
+      active: true
+    });
+
+    tabs.forEach(tab =>
+      browser.tabs.sendMessage(tab.id, {
+        method: "updateConfig",
+        params: [profile]
+      })
+    );
+  }
 </script>
 
 <style>
@@ -41,6 +60,15 @@
           on:change={handleShowHeader}
           type="checkbox" />
         <p>Show informational header on the posts in your feed.</p>
+      </Label>
+    </FormGroup>
+    <FormGroup check>
+      <Label check>
+        <Input
+          bind:checked={profile.pauseScraping}
+          on:change={handlePauseScraping}
+          type="checkbox" />
+        <p>Pause extension from analyzing your feed.</p>
       </Label>
     </FormGroup>
   </Form>
