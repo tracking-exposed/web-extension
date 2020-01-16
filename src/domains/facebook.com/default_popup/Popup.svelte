@@ -1,19 +1,26 @@
 <script>
   import { onMount } from "svelte";
+  import { Alert } from "sveltestrap";
+
   import Settings from "./Settings.svelte";
 
-  let profile = {};
-
-  onMount(async () => {
-    profile = await browser.runtime.sendMessage({
-      method: "getProfile"
-    });
+  let profile = browser.runtime.sendMessage({
+    method: "getProfile"
   });
 </script>
 
+{#await profile then value}
+{#if !value}
+  <Alert color={"warning"}>
+    <h4 class="alert-heading">You are not logged in Facebook.com</h4>
+    In order to make the extension work, please log in to facebook.com.
+  </Alert>
+{/if}
+{/await}
+
 <h1>Facebook Tracking Exposed</h1>
 <p>
-  Dear friend, thanks for supporting the facebook.tracking.exposed initiative.
+  Dear friend, thanks for supporting this initiative.
 </p>
 <p>
   We care a lot about your privacy and we want to be as transparent as possible,
@@ -50,5 +57,9 @@
   </li>
 </ul>
 
-<h2>Settings</h2>
-<Settings bind:profile />
+{#await profile then value}
+  {#if value}
+  <h2>Settings</h2>
+  <Settings bind:profile />
+  {/if}
+{/await}
