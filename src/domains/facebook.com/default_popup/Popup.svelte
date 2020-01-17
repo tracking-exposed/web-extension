@@ -24,7 +24,8 @@
   <li>
     Join the
     <a
-      href="https://chat.securitywithoutborders.org/community/channels/trackingexposed">
+      href="https://chat.securitywithoutborders.org/community/channels/trackingexposed"
+      target="_blank">
       chat
     </a>
     to know more or to meet us.
@@ -39,13 +40,13 @@
 
   <li>
     We have a
-    <a href="https://facebook.tracking.exposed/privacy">Privacy Statement</a>
+    <a href="https://facebook.tracking.exposed/privacy" target="_blank">Privacy Statement</a>
     that describes what data we collect, and why.
   </li>
 
   <li>
     We release only
-    <a href="https://github.com/tracking-exposed/">free, open source code</a>
+    <a href="https://github.com/tracking-exposed/" target="_blank">free, open source code</a>
     everyone can audit.
   </li>
 </ul>
