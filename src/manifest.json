@@ -52,7 +52,14 @@
     }
   ],
 
-  "web_accessible_resources": ["*.png", "*.svg"],
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg",
+    "*.eot",
+    "*.woff",
+    "*.svg",
+    "*.ttf"
+  ],
 
   "browser_specific_settings": {
     "gecko": {
