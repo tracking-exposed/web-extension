@@ -21,8 +21,12 @@
 
   nav {
     background-color: #1b1b1b;
-    border-bottom: 8px solid #53c1b6;
-    margin-bottom: 20px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
+    /* border-bottom: 8px solid #53c1b6; */
+  }
+
+  img {
+    width: 250px;
   }
 </style>
 
@@ -38,8 +42,6 @@
   </nav>
 
   <article>
-    <Container>
-      <PopupFacebook />
-    </Container>
+    <PopupFacebook />
   </article>
 </main>
