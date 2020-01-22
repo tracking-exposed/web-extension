@@ -42,8 +42,10 @@
     "start:chromium": "web-ext run --target=chromium --chromium-binary=$(which chromium-browser) --start-url=www.facebook.com"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "bs58": "^4.0.1",
     "svelte": "^3.0.0",
+    "svelte-spa-router": "^2.0.0",
     "sveltestrap": "^3.2.8",
     "tweetnacl": "^1.0.1",
     "uuid": "^3.3.3"
