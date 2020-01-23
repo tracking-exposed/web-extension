@@ -11,6 +11,7 @@ const PROFILE = {
   optIn: false,
   showHeader: true,
   pauseScraping: false,
+  scrapeOutsideRoot: false,
   address: null,
   publicKey: null,
   secretKey: null,
@@ -180,4 +181,22 @@ export async function setPauseScraping(value) {
   }
 
   await db.update([profile.id, "profile"], { pauseScraping: value });
+}
+
+// ## setScrapeOutsideRoot
+//
+// Pause is used to notify the web extension to not scrape the feed anymore.
+// It can be true or false.
+export async function setScrapeOutsideRoot(value) {
+  const profile = await getProfile();
+
+  if (!profile) {
+    throw new Error("User is not logged in");
+  }
+
+  if (typeof value !== "boolean") {
+    throw new Error("Value type must be boolean");
+  }
+
+  await db.update([profile.id, "profile"], { scrapeOutsideRoot: value });
 }
