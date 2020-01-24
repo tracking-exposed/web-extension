@@ -15,6 +15,7 @@
 <style>
   :global(body) {
     min-width: 600px;
+    min-height: 400px;
     margin: 0;
     overflow-x: hidden;
   }

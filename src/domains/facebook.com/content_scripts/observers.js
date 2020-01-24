@@ -9,12 +9,18 @@ function observeTimeline(hub) {
     if (watcher) {
       return;
     }
-    watcher = dom.on(selectors.timeline, element =>
+    watcher = dom.on(selectors.timeline, element => {
+      const location = window.location.href;
+      const pathname = window.location.pathname;
+      if (!pathname.match(selectors.pathname)) {
+        return;
+      }
+
       hub.send("newTimeline", {
-        location: window.location.href,
+        location,
         element
-      })
-    );
+      });
+    });
     console.log("Start", selectors.timeline);
   });
 
@@ -34,12 +40,18 @@ function observePosts(hub) {
     if (watcher) {
       return;
     }
-    watcher = dom.on(selectors.post, element =>
+    watcher = dom.on(selectors.post, element => {
+      const pathname = window.location.pathname;
+
+      if (!pathname.match(selectors.pathname)) {
+        return;
+      }
+
       hub.send("newPost", {
         data: scraper(element),
         element
-      })
-    );
+      });
+    });
     console.log("Start", selectors.post);
   });
 
