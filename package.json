@@ -14,9 +14,9 @@
     "jest-webextension-mock": "^3.5.0",
     "node-sass": "^4.13.1",
     "npm-run-all": "^4.1.5",
-    "rollup": "^1.29.0",
+    "rollup": "^1.29.1",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-copy": "^3.1.0",
+    "rollup-plugin-copy": "^3.2.1",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-node-builtins": "^2.1.2",
@@ -44,11 +44,11 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "bs58": "^4.0.1",
-    "svelte": "^3.0.0",
+    "svelte": "^3.17.2",
     "svelte-spa-router": "^2.0.0",
     "sveltestrap": "^3.2.8",
-    "tweetnacl": "^1.0.1",
-    "uuid": "^3.3.3"
+    "tweetnacl": "^1.0.2",
+    "uuid": "^3.4.0"
   },
   "webExt": {
     "sourceDir": "build",

@@ -1,3 +1,3 @@
-<div class="webtrex">
+<div class="webtrex--root">
   <slot />
 </div>

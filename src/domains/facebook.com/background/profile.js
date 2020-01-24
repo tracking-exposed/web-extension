@@ -47,6 +47,7 @@ export async function newProfile(id) {
       secretKey: Array.from(keypair.secretKey)
     };
   }
+  await db.set("profiles", profiles => [...profiles, id], []);
   return profile;
 }
 
@@ -61,11 +62,18 @@ export async function getId() {
   return cUserCookie ? cUserCookie.value : null;
 }
 
+// ## getIds
+//
+// Return the list of user ids stored in the extension.
+export async function getIds() {
+  return await db.get("profiles");
+}
+
 // ## getProfile
 //
 // Return information about the profile of the user
-export async function getProfile() {
-  const id = await getId();
+export async function getProfile(id) {
+  id = id || (await getId());
 
   // User is not logged in Facebook, so there is no profile to retrieve.
   if (!id) {
@@ -83,6 +91,18 @@ export async function getProfile() {
     ...profile,
     id
   };
+}
+
+// ## getProfiles
+//
+// Return the list of all profiles managed by the extension
+export async function getProfiles() {
+  const ids = await getIds();
+  const profiles = [];
+  for (let id of ids) {
+    profiles.push(await getProfile(id));
+  }
+  return profiles;
 }
 
 // ## loadProfile
