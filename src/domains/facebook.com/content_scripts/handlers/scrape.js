@@ -10,7 +10,6 @@ function shouldRestart(newValues) {
     }
     lastValues[value] = newValues[value];
   }
-  console.log("shouldRestart", newValues, lastValues, different);
   return different;
 }
 

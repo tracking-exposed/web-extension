@@ -23,7 +23,7 @@
           </Col>
           <Col sm="9">
             <p>You are logged in with this profile.</p>
-            <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" class="btn btn-primary active" role="button" aria-pressed="true">Reality Check</a>
+            <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" target="_blank" class="btn btn-primary active" role="button" aria-pressed="true">Reality Check</a>
             <a href="#/settings" class="btn btn-secondary active" role="button" aria-pressed="true">Settings</a>
           </Col>
         </Row>
