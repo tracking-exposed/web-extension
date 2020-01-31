@@ -67,7 +67,7 @@ export async function getId() {
 //
 // Return the list of user ids stored in the extension.
 export async function getIds() {
-  return await db.get("profiles");
+  return await db.get("profiles", []);
 }
 
 // ## getProfile
