@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import sass from "node-sass";
+import { execSync } from "child_process";
 
 import alias from "@rollup/plugin-alias";
 import copy from "rollup-plugin-copy";
@@ -16,15 +17,23 @@ import strip from "@rollup/plugin-strip";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
+import manifest from "./src/manifest.json";
+
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
+const build = execSync("git rev-parse --short HEAD")
+  .toString()
+  .trim();
 const config = {
   production,
+  build,
   ...(production
     ? {
+        version: manifest.version,
         apiEndpoint: "https://collector.facebook.tracking.exposed/api/v1/"
       }
     : {
+        version: "dev",
         autologin: true,
         autologinEmail: process.env.AUTOLOGIN_EMAIL,
         autologinPassword: process.env.AUTOLOGIN_PASSWORD,

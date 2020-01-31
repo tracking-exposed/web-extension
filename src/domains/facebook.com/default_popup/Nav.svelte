@@ -28,13 +28,15 @@
 
 <nav>
   <Navbar dark expand="xs">
-    <NavbarBrand href="#">Facebook</NavbarBrand>
+    <NavbarBrand href="#">fbTREX</NavbarBrand>
     <NavbarToggler on:click={() => (isOpen = !isOpen)} />
     <Collapse {isOpen} navbar expand="xs" on:update={handleUpdate}>
       <Nav class="mr-auto" navbar>
+      <!--
         <NavItem>
           <NavLink href="#/">Home</NavLink>
         </NavItem>
+      -->
         <NavItem>
           <NavLink href="#/settings">Settings</NavLink>
         </NavItem>

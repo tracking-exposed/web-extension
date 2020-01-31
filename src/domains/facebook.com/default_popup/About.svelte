@@ -10,19 +10,26 @@
 <ul>
   <li>
     Join the
+
+    <a
+      href="https://www.facebook.com/personalizationalgorithm/"
+      target="_blank">
+      Facebook community page
+    </a>
+    to get all the updates, or 
     <a
       href="https://chat.securitywithoutborders.org/community/channels/trackingexposed"
       target="_blank">
       chat
-    </a>
-    to know more or to meet us.
+    </a> on Mattermost if you want to get engaged.
   </li>
 
   <li>
     The extension only see and collects the
     <strong>public posts</strong>
     . You will know that public posts are being recorded by a notification
-    highlighting them in your newsfeed.
+    highlighting them in your newsfeed. 
+    These our <a target="_blank" href="https://facebook.tracking.exposed/impact">statistics</a>.
   </li>
 
   <li>
