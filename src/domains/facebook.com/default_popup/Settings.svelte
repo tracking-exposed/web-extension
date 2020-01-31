@@ -69,14 +69,14 @@
 {:else}
   <Alert color="warning" fade={false}>
     <h4 class="alert-heading">You are not logged in</h4>
-    Please log in to Facebook.com to see something here.
+    Please log in to facebook.com to see something here.
   </Alert>
 {/if}
 
 {#if showAdvanced || mustShowAdvanced}
-  <h3 class="mt-2">Dangerous Features</h3>
+  <h3 class="mt-2">Experiment Features for researchers</h3>
   <Alert color="danger" fade={false}>
-    Those options can violate our privacy statement, use them at your own risk!
+    Those options can violate individual privacy, it won't work if you are not experiment with dummy profile
   </Alert>
 
   <div class="form-check">
@@ -85,7 +85,7 @@
           bind:checked={profile.scrapeOutsideRoot}
           on:change={() => handleOption("setScrapeOutsideRoot", profile.scrapeOutsideRoot)}
           type="checkbox" />
-      Analyze posts outside your personal feed.
+      Consider dynamic window.location.href match.
     </label>
   </div>
 {/if}
