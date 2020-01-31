@@ -18,8 +18,8 @@ async function post(apiUrl, data, profile) {
     credentials: "same-origin", // include, *same-origin, omit
     headers: {
       "Content-Type": "application/json",
-      "X-Fbtrex-Version": "2.0",
-      "X-Fbtrex-Build": "dev",
+      "X-Fbtrex-Version": CONFIG.version,
+      "X-Fbtrex-Build": CONFIG.build,
       "X-Fbtrex-UserId": profile.id,
       "X-Fbtrex-PublicKey": profile.address,
       "X-Fbtrex-Signature": bs58.encode(Buffer.from(signature))
