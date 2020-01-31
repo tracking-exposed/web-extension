@@ -63,7 +63,7 @@
           disabled={mustShowAdvanced}
           bind:checked={showAdvanced}
           type="checkbox" />
-      Show dangerous features.
+      Show features for researchers.
     </label>
   </div>
 {:else}
@@ -74,9 +74,9 @@
 {/if}
 
 {#if showAdvanced || mustShowAdvanced}
-  <h3 class="mt-2">Experiment Features for researchers</h3>
+  <h3 class="mt-2">Experimental features for researchers</h3>
   <Alert color="danger" fade={false}>
-    Those options can violate individual privacy, it won't work if you are not experiment with dummy profile
+    Those options can violate individual privacy, and they won't work if you are not part of a research experiment.
   </Alert>
 
   <div class="form-check">
