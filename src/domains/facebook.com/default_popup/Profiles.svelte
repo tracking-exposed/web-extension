@@ -9,10 +9,12 @@
 
   onMount(async () => {
     profileInUse = await browser.runtime.sendMessage({
-      method: "getProfile"
+      method: "getProfile",
+      params: [undefined, true]
     });
     profiles = await browser.runtime.sendMessage({
-      method: "getProfiles"
+      method: "getProfiles",
+      params: [true]
     });
     if (profileInUse) {
       profiles = profiles.filter(p => p.id != profileInUse.id);
