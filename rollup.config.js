@@ -74,7 +74,7 @@ export default [
   {
     input: "src/background/",
     output: {
-      sourcemap: true,
+      sourcemap: !production,
       format: "iife",
       name: "background",
       file: "build/background/bundle.js"
@@ -92,17 +92,14 @@ export default [
             dest: "build/"
           },
           {
-            src: ["theme-trex/static/images/*", "assets/*"],
-            dest: "build/images"
-          },
-          // Google doesn't give a (fire)fox about the `browser` namespace, so it's polyfill time!
-          // More info: https://github.com/mozilla/webextension-polyfill
-          {
-            src: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
+            src: ["assets/images", "assets/fonts"],
             dest: "build/"
           },
+          // Google doesn't give a (fire)fox about the `browser` namespace, so
+          // it's polyfill time! More info:
+          // https://github.com/mozilla/webextension-polyfill
           {
-            src: "theme-trex/static/fonts",
+            src: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
             dest: "build/"
           }
         ]
@@ -148,7 +145,7 @@ export default [
   {
     input: "src/default_popup/",
     output: {
-      sourcemap: true,
+      sourcemap: !production,
       format: "iife",
       name: "default_popup",
       file: "build/default_popup/bundle.js"
@@ -210,7 +207,7 @@ export default [
   {
     input: "src/domains/facebook.com/content_scripts/",
     output: {
-      sourcemap: true,
+      sourcemap: !production,
       format: "iife",
       name: "content_scripts",
       file: "build/content_scripts/facebook.com/bundle.js"
