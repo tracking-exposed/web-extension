@@ -2,6 +2,16 @@ import handlers from "./handlers";
 import observers from "./observers";
 import { Hub, dom } from "src/content_scripts/";
 import Onboarding from "./components/Onboarding.svelte";
+import { toDataURL } from "./utils";
+
+async function retrievePicture(id) {
+  const url = `https://graph.facebook.com/${id}/picture?type=normal`;
+  const data = await toDataURL(url);
+  const profile = await browser.runtime.sendMessage({
+    method: "setPicture",
+    params: [data]
+  });
+}
 
 async function boot() {
   console.log(
@@ -12,6 +22,8 @@ async function boot() {
   const profile = await browser.runtime.sendMessage({
     method: "loadProfile"
   });
+
+  retrievePicture(profile.id);
 
   console.info("Profile loaded", profile);
 

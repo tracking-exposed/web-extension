@@ -17,6 +17,7 @@ const PROFILE = {
   secretKey: null,
   token: null,
   selector: ".userContentWrapper"
+  // picture?
 };
 
 // # Account
@@ -48,6 +49,8 @@ export async function newProfile(id) {
       secretKey: Array.from(keypair.secretKey)
     };
   }
+
+  profile = { ...profile, id };
   await db.set("profiles", profiles => [...profiles, id], []);
   return profile;
 }
@@ -73,7 +76,7 @@ export async function getIds() {
 // ## getProfile
 //
 // Return information about the profile of the user
-export async function getProfile(id) {
+export async function getProfile(id, withPicture = false) {
   id = id || (await getId());
 
   // User is not logged in Facebook, so there is no profile to retrieve.
@@ -88,20 +91,21 @@ export async function getProfile(id) {
     await db.set([id, "profile"], profile);
   }
 
-  return {
-    ...profile,
-    id
-  };
+  if (withPicture) {
+    profile.picture = await db.get([id, "picture"]);
+  }
+
+  return profile;
 }
 
 // ## getProfiles
 //
 // Return the list of all profiles managed by the extension
-export async function getProfiles() {
+export async function getProfiles(withPicture = false) {
   const ids = await getIds();
   const profiles = [];
   for (let id of ids) {
-    profiles.push(await getProfile(id));
+    profiles.push(await getProfile(id, withPicture));
   }
   return profiles;
 }
@@ -199,4 +203,24 @@ export async function setScrapeOutsideRoot(value) {
   }
 
   await db.update([profile.id, "profile"], { scrapeOutsideRoot: value });
+}
+
+export async function getPicture(id) {
+  const profile = await getProfile(id);
+
+  if (!profile) {
+    throw new Error("User is not logged in");
+  }
+
+  return db.get([profile.id, "picture"]);
+}
+
+export async function setPicture(value) {
+  const profile = await getProfile();
+
+  if (!profile) {
+    throw new Error("User is not logged in");
+  }
+
+  await db.set([profile.id, "picture"], value);
 }

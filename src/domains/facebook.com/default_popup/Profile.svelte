@@ -19,7 +19,7 @@
       <Container>
         <Row>
           <Col sm="3">
-            <img src="https://graph.facebook.com/{profile.id}/picture?type=normal" alt="Avatar for user {profile.id}" />
+            <img src="{profile.picture}" alt="Avatar for user {profile.id}" />
           </Col>
           <Col sm="9">
             <p>You are logged in with this profile.</p>
