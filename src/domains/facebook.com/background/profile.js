@@ -48,6 +48,8 @@ export async function newProfile(id) {
       secretKey: Array.from(keypair.secretKey)
     };
   }
+
+  profile = { ...profile, id };
   await db.set("profiles", profiles => [...profiles, id], []);
   return profile;
 }
@@ -88,10 +90,7 @@ export async function getProfile(id) {
     await db.set([id, "profile"], profile);
   }
 
-  return {
-    ...profile,
-    id
-  };
+  return profile;
 }
 
 // ## getProfiles
