@@ -1,10 +1,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0-rc.1] - 2020-01-31
+### Fixed
+- Update Architecture and dependencies #95
+- Consolidate styling for Onboarding and Popup to match trex visual identity #96
+- Handle missing cookie #101
+- Restore the popup link, store in localstorage the auth token #100
+- Support multiple Facebook users using the same browser #98
+
+### Added
+- Suspend extension activity #97
+- Advanced settings editing mode from the popup #102
+
 ## [1.1.19] - 2019-02-07
 ### Fixed
 - A bug was reporting malfunction when in fact was functioning
-### Addedd
+### Added
 - Incremental copy of built extension in https://github.com/tracking-exposed/binaries repository
 - Italian localization support
 
