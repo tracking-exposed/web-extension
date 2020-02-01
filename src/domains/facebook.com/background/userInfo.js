@@ -25,7 +25,7 @@ export async function refreshUserInfo(alarmInfo) {
   }
   console.info("Refresh user info");
   const userInfo = await getUserInfo(profile);
-  await db.update([profile.id, "profile"], {
+  await db.update([NAMESPACE, profile.id, "profile"], {
     selector: userInfo.selector,
     token: userInfo.token
   });

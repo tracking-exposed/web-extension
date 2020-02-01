@@ -4,6 +4,8 @@ import { Buffer } from "buffer";
 import * as v1 from "./v1";
 import { getUserInfo } from "./userInfo";
 
+import { NAMESPACE } from "../";
+
 import db from "src/background/db";
 
 const PROFILE = {
@@ -51,7 +53,7 @@ export async function newProfile(id) {
   }
 
   profile = { ...profile, id };
-  await db.set("profiles", profiles => [...profiles, id], []);
+  await db.set([NAMESPACE, "profiles"], profiles => [...profiles, id], []);
   return profile;
 }
 
@@ -70,7 +72,7 @@ export async function getId() {
 //
 // Return the list of user ids stored in the extension.
 export async function getIds() {
-  return await db.get("profiles", []);
+  return await db.get([NAMESPACE, "profiles"], []);
 }
 
 // ## getProfile
@@ -84,15 +86,15 @@ export async function getProfile(id, withPicture = false) {
     return;
   }
 
-  let profile = await db.get([id, "profile"]);
+  let profile = await db.get([NAMESPACE, id, "profile"]);
 
   if (!profile) {
     profile = await newProfile(id);
-    await db.set([id, "profile"], profile);
+    await db.set([NAMESPACE, id, "profile"], profile);
   }
 
   if (withPicture) {
-    profile.picture = await db.get([id, "picture"]);
+    profile.picture = await db.get([NAMESPACE, id, "picture"]);
   }
 
   return profile;
@@ -123,12 +125,12 @@ export async function loadProfile() {
 
   const userInfo = await getUserInfo(profile);
 
-  await db.update([profile.id, "profile"], {
+  await db.update([NAMESPACE, profile.id, "profile"], {
     selector: userInfo.selector,
     token: userInfo.token
   });
 
-  return await db.get([profile.id, "profile"]);
+  return await db.get([NAMESPACE, profile.id, "profile"]);
 }
 
 // ## setOptIn
@@ -147,7 +149,7 @@ export async function setOptIn(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.update([profile.id, "profile"], {
+  await db.update([NAMESPACE, profile.id, "profile"], {
     optIn: value
   });
 }
@@ -166,7 +168,7 @@ export async function setShowHeader(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.update([profile.id, "profile"], { showHeader: value });
+  await db.update([NAMESPACE, profile.id, "profile"], { showHeader: value });
 }
 
 // ## setPauseScraping
@@ -184,7 +186,7 @@ export async function setPauseScraping(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.update([profile.id, "profile"], { pauseScraping: value });
+  await db.update([NAMESPACE, profile.id, "profile"], { pauseScraping: value });
 }
 
 // ## setScrapeOutsideRoot
@@ -202,7 +204,7 @@ export async function setScrapeOutsideRoot(value) {
     throw new Error("Value type must be boolean");
   }
 
-  await db.update([profile.id, "profile"], { scrapeOutsideRoot: value });
+  await db.update([NAMESPACE, profile.id, "profile"], { scrapeOutsideRoot: value });
 }
 
 export async function getPicture(id) {
@@ -212,7 +214,7 @@ export async function getPicture(id) {
     throw new Error("User is not logged in");
   }
 
-  return db.get([profile.id, "picture"]);
+  return db.get([NAMESPACE, profile.id, "picture"]);
 }
 
 export async function setPicture(value) {
@@ -222,5 +224,5 @@ export async function setPicture(value) {
     throw new Error("User is not logged in");
   }
 
-  await db.set([profile.id, "picture"], value);
+  await db.set([NAMESPACE, profile.id, "picture"], value);
 }

@@ -1,4 +1,3 @@
-import db from "src/background/db";
 import api from "./api";
 import { getProfile } from "./profile";
 
