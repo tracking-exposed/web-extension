@@ -23,8 +23,6 @@ async function boot() {
     method: "loadProfile"
   });
 
-  retrievePicture(profile.id);
-
   console.info("Profile loaded", profile);
 
   const hub = new Hub();
@@ -34,6 +32,7 @@ async function boot() {
   hub.send("updateConfig", profile);
 
   if (profile && !profile.optIn) {
+    retrievePicture(profile.id);
     new Onboarding({ target: document.body, props: { hub } });
   }
 
