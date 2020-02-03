@@ -23,6 +23,7 @@
     "cookies",
     "http://localhost:8100/",
     "https://*.facebook.com/",
+    "https://*.fbcdn.net/",
     "https://*.tracking.exposed/"
   ],
 
