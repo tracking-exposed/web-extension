@@ -17,7 +17,7 @@ import strip from "@rollup/plugin-strip";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
-import manifest from "./src/manifest.json";
+import packageJson from "./package.json";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
@@ -29,7 +29,7 @@ const config = {
   build,
   ...(production
     ? {
-        version: manifest.version,
+        version: packageJson.version,
         apiEndpoint: "https://collector.facebook.tracking.exposed/api/v1/"
       }
     : {
@@ -68,7 +68,21 @@ function compileSCSS() {
   fs.writeFileSync("build/styles/theme/main.css", result.css);
 }
 
+function compileManifest() {
+  fs.mkdirSync("build/", { recursive: true });
+  const manifest = JSON.parse(fs.readFileSync("src/manifest.json"));
+  manifest.version = packageJson.version.split("-")[0];
+  manifest.version_name = packageJson.version;
+  if (production) {
+    manifest.permissions = manifest.permissions.filter(
+      p => !p.includes("localhost")
+    );
+  }
+  fs.writeFileSync("build/manifest.json", JSON.stringify(manifest, null, 2));
+}
+
 compileSCSS();
+compileManifest();
 
 export default [
   {
@@ -83,10 +97,6 @@ export default [
       setConfig(),
       copy({
         targets: [
-          {
-            src: "src/manifest.json",
-            dest: "build/"
-          },
           {
             src: "src/_locales",
             dest: "build/"
