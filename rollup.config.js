@@ -18,15 +18,14 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
 import packageJson from "./package.json";
+import { debug } from "svelte/internal";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
-const build = execSync("git rev-parse --short HEAD")
-  .toString()
-  .trim();
+const build = retrieveGitHead();
 const config = {
   production,
-  build,
+  build: (production ? "tagged" : build),
   ...(production
     ? {
         version: packageJson.version,
@@ -270,3 +269,14 @@ export default [
     }
   }
 ];
+
+function retrieveGitHead() {
+  try {
+    return execSync("git rev-parse --short HEAD")
+      .toString()
+      .trim();
+  } catch(e) {
+    console.log("Please note: The build string would not be consistent: %s", e.message);
+    return 'git-error';
+  }
+} 
