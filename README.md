@@ -1,6 +1,6 @@
 # webtrex
 
-**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects; In February 2019, at the moment supports only [fbtrex](https://facebook.tracking.exposed).
+**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects; In February 2020, at the moment supports only [fbtrex](https://facebook.tracking.exposed).
 
 ### Prepare
 
