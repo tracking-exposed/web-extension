@@ -8,8 +8,8 @@ Install dependencies:
 
 ```bash
 npm install
-git submodule update --init theme-trex
 ```
+
 ## Compile and distribute the extension
 
 Make sure you have all dependencies installed, then run:
