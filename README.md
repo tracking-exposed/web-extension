@@ -1,8 +1,6 @@
 # webtrex
 
-**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects.
-
-## Develop the extension
+**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects; In February 2019, at the moment supports only [fbtrex](https://facebook.tracking.exposed).
 
 ### Prepare
 
@@ -10,10 +8,22 @@ Install dependencies:
 
 ```bash
 npm install
+git submodule update --init theme-trex
+```
+## Compile and distribute the extension
+
+Make sure you have all dependencies installed, then run:
+
+```bash
+npm run dist
 ```
 
-### Configure
+This command shall produce a compressed file in dist/
+This file is the one submitted to Firefox and Google store.
 
+## Develop the extension
+
+### Configure
 
 
 ### Build
@@ -39,14 +49,6 @@ npm run start:chromium
 
 **Important**: keep in mind that those browser instances are temporary. If you close the browser or kill the process that launched the browser, all data will be lost. This is a feature, not a bug, since it allows you to always test the extension on a fresh install. Check the FAQ for more info.
 
-
-## Distribute the extension
-
-Make sure you have all dependencies installed, then run:
-
-```bash
-npm run dist
-```
 
 The command will build the extension, run the linter, and pack it in a zip file.
 
