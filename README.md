@@ -2,7 +2,19 @@
 
 **webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects; In February 2020, at the moment supports only [fbtrex](https://facebook.tracking.exposed).
 
-### Prepare
+### web extension reviewer 
+
+Dear reviewer, to rebuild the browser extension you've to run these commands:
+
+```bash
+npm install
+npm run dist
+```
+
+This command shall produce a compressed file in dist/
+This file is the one submitted to Firefox and Google store.
+
+### Developer? Prepare
 
 Install dependencies:
 
@@ -10,23 +22,6 @@ Install dependencies:
 npm install
 ```
 
-## Compile and distribute the extension
-
-Make sure you have all dependencies installed, then run:
-
-```bash
-npm run dist
-```
-
-This command shall produce a compressed file in dist/
-This file is the one submitted to Firefox and Google store.
-
-## Develop the extension
-
-### Configure
-
-
-### Build
 Start the build process:
 
 ```bash
