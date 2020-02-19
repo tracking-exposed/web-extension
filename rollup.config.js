@@ -175,7 +175,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/default_popup/bundle.css");
+          css.write("build/default_popup/bundle.css", !production);
         }
       }),
 
@@ -229,7 +229,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/content_scripts/facebook.com/bundle.css");
+          css.write("build/content_scripts/facebook.com/bundle.css", !production);
         }
       }),
 
