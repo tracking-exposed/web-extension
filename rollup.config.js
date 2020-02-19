@@ -22,7 +22,7 @@ import { debug } from "svelte/internal";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
-const build = retrieveGitHead();
+const build = retrieveGitHead() || "unknow";
 const config = {
   production,
   build: (production ? "tagged" : build),
@@ -276,7 +276,7 @@ function retrieveGitHead() {
       .toString()
       .trim();
   } catch(e) {
-    console.log("Please note: The build string would not be consistent: %s", e.message);
-    return 'git-error';
+    console.log("This package is not under .git, the build string would not be consistent: %s", e.message);
+    return null;
   }
 } 
