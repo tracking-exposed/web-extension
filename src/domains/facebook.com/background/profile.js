@@ -59,13 +59,25 @@ export async function newProfile(id) {
 
 // ## getId
 //
-// Return the user id stored in the session cookie
+// Return the user id stored in the first session cookie
 export async function getId() {
-  const cUserCookie = await browser.cookies.get({
+  let cUserCookie = await browser.cookies.get({
     url: "https://www.facebook.com/",
-    name: "c_user"
+    name: "c_user",
   });
-  return cUserCookie ? cUserCookie.value : null;
+  if(cUserCookie)
+    return cUserCookie.value;
+  /* else, let's try to see if container storage contains a Facebook cookie */
+  const stores = await browser.cookies.getAllCookieStores();
+  for (let container of stores) {
+    const attempt = await browser.cookies.get({
+      url: "https://www.facebook.com/",
+      name: "c_user",
+      storeId: container.id,
+    });
+    cUserCookie = attempt ? attempt.value : null;
+  }
+  return cUserCookie;
 }
 
 // ## getIds
