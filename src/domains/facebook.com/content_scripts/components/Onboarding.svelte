@@ -55,21 +55,18 @@
     <div class="outer">
       <div class="inner">
         <Jumbotron class="foobar">
-          <h1>Thank you for installing Facebook Tracking Exposed!</h1>
+          <h1>Thank you for joining Trex!</h1>
           <p class="lead">
-            We need your explicit consent to allow fbTREX to work.
+            We want to make sure you know <a
+              target="_blank"
+              href="https://facebook.tracking.exposed/what-we-collect/">
+              what we collect</a>,
+              and you consent to the processing of personal data that are strictly necessary for the research.
           </p>
           <hr />
           <p>
-            By opting in, you give us the right to process a copy of your
-            Facebook timeline. We take your privacy very seriously, for more
-            information check our
-            <a
-              target="_blank"
-              href="https://facebook.tracking.exposed/what-we-collect/">
-              Privacy Statement
-            </a>
-            .
+            By opting in, you give us the right to process a copy of your Facebook timeline.
+            Our interest is research and analysis on personalization algorithms, not personal data exploitation, businesses, or any other exchange.
           </p>
 
           <div>
@@ -77,7 +74,12 @@
               <FormGroup check>
                 <Label check>
                   <Input bind:checked={agree} type="checkbox" />
-                  <p>I agree to the Privacy Statement.</p>
+                  <p>I have read the <a
+                    target="_blank"
+                    href="https://facebook.tracking.exposed/what-we-collect/">
+                    information notice 
+                    </a>, and I consent to processing operations strictly necessary for participating to the research.
+                  </p>
                 </Label>
               </FormGroup>
             </Form>
