@@ -1,6 +1,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.1 - 2020-02-20
+- Fixed reproducible building
+
 ## [2.0.0-rc.1] - 2020-01-31
 ### Fixed
 - Update Architecture and dependencies #95
