@@ -11,6 +11,13 @@ var state = {
 };
 
 function handlePost(type, e) {
+  if(!e.data) {
+    console.log(e, "has not visibility: skipping entry (type", type, ")");
+    return;
+  } else {
+    console.debug("handlePost", e);
+  }
+
   const impression = {
     type: "impression",
     visibility: e.data.visibility,

@@ -11,14 +11,14 @@ import db from "src/background/db";
 const PROFILE = {
   id: null,
   optIn: false,
-  showHeader: true,
+  showHeader: false,
   pauseScraping: false,
-  scrapeOutsideRoot: false,
+  scrapeOutsideRoot: true,
   address: null,
   publicKey: null,
   secretKey: null,
   token: null,
-  selector: ".userContentWrapper"
+  selector: ".userContentWrapper" // now this is useless 
   // picture?
 };
 
@@ -59,8 +59,19 @@ export async function newProfile(id) {
 
 // ## getId
 //
-// Return the user id stored in the first session cookie
+// Return the user id stored in the first session cookie, this now
+// wrap the actual function because the popup and the logic should work
+// even if the user isn't logged.
 export async function getId() {
+  try {
+    return wrappedGetId();
+  } catch(error) {
+    console.error("Error", error, "Ignored");
+    return "dummyCookieValue";
+  }
+}
+
+async function wrappedGetId() {
   let cUserCookie = await browser.cookies.get({
     url: "https://www.facebook.com/",
     name: "c_user",

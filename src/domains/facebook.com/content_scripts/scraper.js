@@ -39,7 +39,6 @@ function recursiveParent(node, MAX) {
   console.log("trying", node.tagName, "size", node.outerHTML.length);
 
   if(node.parentNode.outerHTML.length > MAX) {
-
     return node;
   }
   return recursiveParent(node.parentNode, MAX);
