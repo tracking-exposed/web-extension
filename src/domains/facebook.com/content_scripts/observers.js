@@ -73,6 +73,7 @@ function observePosts(hub) {
       if (!pathname.match(/\/events/))
         return;
 
+      debugger;
       hub.send("newEventPage", {
         data: scrapeGrab(element),
         element

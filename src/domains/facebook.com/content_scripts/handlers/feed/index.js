@@ -5,6 +5,10 @@
 import Component from "./Component.svelte";
 
 function eventHandler(type, payload, hub) {
+  if(!payload.data) {
+    console.debug("data is null, returning", payload);
+    return;
+  }
   new Component({
     target: payload.element,
     anchor: payload.element.querySelector("div"),
