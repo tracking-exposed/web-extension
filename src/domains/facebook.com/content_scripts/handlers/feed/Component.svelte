@@ -39,11 +39,12 @@
   }
 </style>
 
+<!-- this is disabled at the moment
 <div class={visibility} class:hide>
-  <img src={browser.runtime.getURL('images/trex-logo.svg')} alt="Tracking Exposed Logo" />
   <strong>{visibility}</strong>
   &nbsp;post.
   {#if visibility === 'public'}
     Content has been collected.
   {:else}No content has been collected.{/if}
 </div>
+-->
