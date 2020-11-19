@@ -113,7 +113,7 @@ function scrapePost(element) {
     return label.trim().split(" ").pop().toLowerCase();
   });
   const visibility = lastVisibleWord.some(function(fword) {
-    if(publicWords.includes(fword)) console.log("Seems we have a winner", fword, lastVisibleWord, publicWords);
+    // if(publicWords.includes(fword)) console.log("Seems we have a winner", fword, lastVisibleWord, publicWords);
     return publicWords.includes(fword);
   }) ? "public" : "private";
 
