@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "__MSG_extensionName__",
-  "short_name": "FbTREX",
+  "short_name": "PAADC",
   "description": "__MSG_extensionDescription__",
   "version": "<managed by rollup>",
   "version_name": "<managed by rollup>",
@@ -68,7 +68,8 @@
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "{a6e6d9fd-020e-47a3-94e2-77e38a37b603}",
+      "id": "{a6e6d9fd-020e-47a3-94e2-77e38a37b604}",
+      "note": "changed the last from 3 to 4 from trex extension",
       "strict_min_version": "57.0"
     }
   }
