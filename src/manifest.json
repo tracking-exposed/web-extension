@@ -45,8 +45,11 @@
 
   "content_scripts": [
     {
-      "matches": ["https://*.facebook.com/*"],
-      "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js"],
+      "matches": [
+	 "https://*.facebook.com/*",
+	 "http://localhost/*"
+      ],
+      "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js", "content_scripts/localhost/bundle.js"],
       "css": [
         "styles/theme/main.css",
         "content_scripts/facebook.com/bundle.css"

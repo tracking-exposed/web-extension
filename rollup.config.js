@@ -212,6 +212,15 @@ export default [
     }
   },
   {
+    input: "src/domains/localhost/content_scripts/index.js",
+    output: {
+      sourcemap: !production,
+      format: "iife",
+      name: "content_scripts",
+      file: "build/content_scripts/localhost/bundle.js"
+    },
+  },
+  {
     input: "src/domains/facebook.com/content_scripts/",
     output: {
       sourcemap: !production,
