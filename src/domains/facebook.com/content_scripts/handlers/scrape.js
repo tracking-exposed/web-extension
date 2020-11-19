@@ -53,7 +53,8 @@ function handleSetConfig(_, e, hub) {
 }
 
 function handleElement(_, e) {
-  console.log("Adding marker class in element", _, "size:", e.element.outerHTML.length);
+  console.log("Adding class (marker and highlighter) from a [", _, "],",
+    e.element.outerHTML.substr(0, 20), ", in bytes:", e.element.outerHTML.length);
   e.element.classList.add("webtrex--scraped");
 }
 
