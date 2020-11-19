@@ -11,7 +11,6 @@ var state = {
 };
 
 function handlePost(type, e) {
-  console.log("Last sanity check: type + e = ", type, e);
   if(!e.data) {
     console.log(e, "has not visibility: skipping entry (type", type, ")");
     return;
