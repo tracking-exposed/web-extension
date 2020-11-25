@@ -1,6 +1,4 @@
-# webtrex
-
-**webtrex** is the web extension for all [tracking.exposed](https://tracking.exposed) projects; In February 2020, at the moment supports only [fbtrex](https://facebook.tracking.exposed).
+# PAADC is the rebranded version of 'facebook.tracking.exposed' for a joint project lead by University of Amsterdam
 
 ### web extension reviewer 
 
