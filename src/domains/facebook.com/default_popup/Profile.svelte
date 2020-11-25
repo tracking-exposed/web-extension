@@ -1,5 +1,5 @@
 <script>
-  import { Button, Card, CardBody, Container, Col, Row } from "sveltestrap";
+  import { Button, Card, CardFooter, CardBody, CardHeader, Container, Col, Row } from "sveltestrap";
   import { onMount } from "svelte";
 
   export let inUse;
@@ -7,34 +7,29 @@
 </script>
 
 <style>
-  img {
-    display: block;
-    margin: auto;
+  .textual {
+    padding: 10px;
+  }
+
+  .borderless {
+    border: 0px;
   }
 </style>
 
 {#if inUse}
-  <Card>
-    <CardBody>
-      <Container>
-        <Row>
-          <Col sm="3">
-            <img src="{profile.picture}" alt="Avatar for user {profile.id}" />
-          </Col>
-          <Col sm="9">
-            <p>You are logged in with this profile.</p>
-            <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" target="_blank" class="btn btn-primary active" role="button" aria-pressed="true">Reality Check</a>
-            <a href="#/settings" class="btn btn-secondary active" role="button" aria-pressed="true">Settings</a>
-          </Col>
-        </Row>
-      </Container>
+  <Card class="borderless">
+    <CardBody class="borderless">
+      <img src="../images/trex-logo-256.png" alt="University of Amsterdam Logo" />
+      <p class="textual">Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt ten alle tijden participatie in het onderzoek stopzetten, zie ook ons <a target=_blank href="https://algorithms.exposed/paadc-privacy-statement/">privacy statement</a>.</p>
     </CardBody>
+    <!--
+    <CardFooter class="no-border">
+    </CardFooter> -->
   </Card>
 {:else}
   <Card>
     <CardBody>
-      <img src="https://graph.facebook.com/{profile.id}/picture?type=normal" alt="Avatar for user {profile.id}" />
+      Anything here? https://algorithms.exposed/paadc-privacy-statement/
     </CardBody>
-    <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" class="btn btn-primary btn-sm btn-block active" role="button" aria-pressed="true">Reality Check</a>
   </Card>
 {/if}

@@ -26,13 +26,13 @@
 {#if ready}
   {#if profileInUse}
     <section class="mb-4">
-      <h2>Profile in use</h2>
+      <!-- <h2>Profile in use</h2> -->
       <Profile inUse profile={profileInUse} />
     </section>
   {:else}
     <Alert color="warning" fade={false}>
       <h4 class="alert-heading">You are not logged in</h4>
-      Please log in to Facebook.com to see something here.
+      Please log in to facebook.com to see something here.
     </Alert>
   {/if}
 

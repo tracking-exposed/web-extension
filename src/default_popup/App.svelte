@@ -14,8 +14,8 @@
 
 <style>
   :global(body) {
-    min-width: 600px;
-    min-height: 400px;
+    min-width: 280px;
+    min-height: 430px;
     margin: 0;
     overflow-x: hidden;
   }
@@ -25,23 +25,15 @@
     box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
     /* border-bottom: 8px solid #53c1b6; */
   }
-
-  img {
-    width: 250px;
-  }
 </style>
 
 <main class="webtrex">
   <nav>
     <Navbar expand="md">
       <NavbarBrand href="">
-        <img
-          src="../images/header-logo-default.svg"
-          alt="Tracking Exposed Logo" />
       </NavbarBrand>
     </Navbar>
   </nav>
-
   <article>
     <PopupFacebook />
   </article>

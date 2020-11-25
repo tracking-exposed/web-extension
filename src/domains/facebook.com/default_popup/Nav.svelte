@@ -28,7 +28,7 @@
 
 <nav>
   <Navbar dark expand="xs">
-    <NavbarBrand href="#">fbTREX</NavbarBrand>
+    <NavbarBrand href="#">PAADC</NavbarBrand>
     <NavbarToggler on:click={() => (isOpen = !isOpen)} />
     <Collapse {isOpen} navbar expand="xs" on:update={handleUpdate}>
       <Nav class="mr-auto" navbar>
@@ -36,10 +36,10 @@
         <NavItem>
           <NavLink href="#/">Home</NavLink>
         </NavItem>
-      -->
         <NavItem>
           <NavLink href="#/settings">Settings</NavLink>
         </NavItem>
+      -->
         <NavItem>
           <NavLink href="#/about">About</NavLink>
         </NavItem>

@@ -55,21 +55,21 @@
     <div class="outer">
       <div class="inner">
         <Jumbotron class="foobar">
-          <h1>Thank you for joining Trex!</h1>
-          <p class="lead">
+        <h1>Het activeren van de plug-in is gelukt!</h1>
+          <!-- <p class="lead">
             We want to make sure you know <a
               target="_blank"
               href="https://facebook.tracking.exposed/what-we-collect/">
               what we collect</a>,
               and you consent to the processing of personal data that are strictly necessary for the research.
-          </p>
-          <hr />
+          </p> -->
           <p>
-            By opting in, you give us the right to process a copy of your Facebook timeline.
-            Our interest is research and analysis on personalization algorithms, not personal data exploitation, businesses, or any other exchange.
+            Politieke Advertentie Analyse van Digitale Campagnes
+          <br>
+	          Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt ten alle tijden participatie in het onderzoek stopzetten, zie ook ons privacy statement.
           </p>
 
-          <div>
+          <div> <!--
             <Form>
               <FormGroup check>
                 <Label check>
@@ -83,6 +83,7 @@
                 </Label>
               </FormGroup>
             </Form>
+          -->
           </div>
 
           <p class="lead">
