@@ -212,13 +212,35 @@ export default [
     }
   },
   {
-    input: "src/domains/localhost/content_scripts/index.js",
+    input: "src/domains/iodc.nl/content_scripts/index.js",
     output: {
       sourcemap: !production,
       format: "iife",
       name: "content_scripts",
-      file: "build/content_scripts/localhost/bundle.js"
+      file: "build/content_scripts/iodc.nl/bundle.js"
     },
+    plugins: [
+      setConfig(),
+      setAlias(),
+      resolve({
+        browser: true,
+        dedupe: importee =>
+          importee === "svelte" || importee.startsWith("svelte/")
+      }),
+      commonjs(),
+      production &&
+        strip({
+          functions: ["console.debug"],
+          sourceMap: false
+        }),
+      production && terser()
+    ],
+    watch: {
+      clearScreen: true,
+      chokidar: {
+        usePolling: true
+      }
+    }
   },
   {
     input: "src/domains/facebook.com/content_scripts/",

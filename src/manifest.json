@@ -17,14 +17,14 @@
   },
 
   "permissions": [
-    "alarms",
     "storage",
     "unlimitedStorage",
     "cookies",
     "http://localhost:8100/",
     "https://*.facebook.com/",
     "https://*.fbcdn.net/",
-    "https://*.tracking.exposed/"
+    "https://*.tracking.exposed/",
+    "https://www.iodc.nl/"
   ],
 
   "background": {
@@ -46,10 +46,11 @@
   "content_scripts": [
     {
       "matches": [
-	 "https://*.facebook.com/*",
-	 "http://localhost/*"
+        "https://*.facebook.com/*",
+        "http://localhost/*",
+        "https://www.iodc.nl/*"
       ],
-      "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js", "content_scripts/localhost/bundle.js"],
+      "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js", "content_scripts/iodc.nl/bundle.js"],
       "css": [
         "styles/theme/main.css",
         "content_scripts/facebook.com/bundle.css"

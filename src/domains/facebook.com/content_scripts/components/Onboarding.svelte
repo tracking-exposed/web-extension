@@ -55,7 +55,7 @@
     <div class="outer">
       <div class="inner">
         <Jumbotron class="foobar">
-        <h1>Het activeren van de plug-in is gelukt!</h1>
+        <h1>Politieke Advertentie Analyse van Digitale Campagnes</h1>
           <!-- <p class="lead">
             We want to make sure you know <a
               target="_blank"
@@ -63,11 +63,10 @@
               what we collect</a>,
               and you consent to the processing of personal data that are strictly necessary for the research.
           </p> -->
-          <p>
-            Politieke Advertentie Analyse van Digitale Campagnes
+          <h6>
           <br>
 	          Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt ten alle tijden participatie in het onderzoek stopzetten, zie ook ons privacy statement.
-          </p>
+          </h6>
 
           <div> <!--
             <Form>
@@ -90,12 +89,8 @@
             <Button
               on:click={handleOptIn}
               color="primary"
-              size="lg"
-              disabled={!agree}>
-              Close and continue
-            </Button>
-            <Button on:click={handlePause} color="secondary" outline size="lg">
-              Ask me later
+              size="lg">
+              Afsluiten
             </Button>
           </p>
         </Jumbotron>
