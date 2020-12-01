@@ -104,8 +104,7 @@ function scrapePost(element) {
 
   const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label]'), 'aria-label');
   if(!iconsNfo) {
-    console.debug("This post match proven to be a mistake: no attrs found! ",
-      iconsNfo.attrs ? iconsNfo: null, " will not be send:", element.textContent);
+    console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
     return null;
   }
 
