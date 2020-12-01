@@ -27,7 +27,7 @@ const config = {
   ...(production
     ? {
         version: packageJson.version,
-        apiEndpoint: "https://paadc.facebook.tracking.exposed/api/v1/"
+        apiEndpoint: "https://paadc.tracking.exposed/api/v1/"
       }
     : {
         version: "dev",
@@ -71,10 +71,9 @@ function compileManifest() {
   manifest.version = packageJson.version.split("-")[0];
   manifest.version_name = packageJson.version;
   if (production) {
-    manifest.permissions = manifest.permissions.filter(
-      p => !p.includes("localhost")
-    );
+    manifest.permissions = manifest.permissions.filter(function(d) { return !d.match(/:\/\/localhost/); });
   }
+  console.log(manifest.permissions);
   fs.writeFileSync("build/manifest.json", JSON.stringify(manifest, null, 2));
 }
 
