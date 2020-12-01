@@ -20,21 +20,21 @@ import packageJson from "./package.json";
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
 const build = retrieveGitHead() || "unknow";
-console.log("production is", production);
+console.log("PAADC production?", production);
 const config = {
   production,
   build: (production ? "tagged" : build),
   ...(production
     ? {
         version: packageJson.version,
-        apiEndpoint: "https://collector.facebook.tracking.exposed/api/v1/"
+        apiEndpoint: "https://paadc.facebook.tracking.exposed/api/v1/"
       }
     : {
         version: "dev",
         autologin: true,
         autologinEmail: process.env.AUTOLOGIN_EMAIL,
         autologinPassword: process.env.AUTOLOGIN_PASSWORD,
-        apiEndpoint: "http://localhost:8100/api/v1/"
+        apiEndpoint: "http://localhost:8105/api/v1/"
       })
 };
 
