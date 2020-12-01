@@ -104,8 +104,8 @@ function scrapePost(element) {
 
   const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label]'), 'aria-label');
   if(!iconsNfo) {
-    console.debug("This post match proven to be a mistake: no attrs found! ",
-      iconsNfo.attrs ? iconsNfo: null, " will not be send:", element.textContent);
+    console.debug("Post proven to be a mistake: no attrs found. Dropping w/text: ",
+      element.textContent);
     return null;
   }
 
@@ -132,7 +132,7 @@ function scrapePost(element) {
 function scrapeGrab(element) {
   /* this is used for events pages */
   console.log("scrapeGrab for /events -- PLS2CHK", element);
-  debugger;
+  // debugger;
   return {
     type: 'event',
     note: 'not really implemented, check near the end of scraper.js'

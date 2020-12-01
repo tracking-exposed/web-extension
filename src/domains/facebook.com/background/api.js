@@ -22,6 +22,7 @@ async function post(apiUrl, data, profile) {
       "X-Fbtrex-Build": CONFIG.build,
       "X-Fbtrex-UserId": profile.id,
       "X-Fbtrex-PublicKey": profile.address,
+      "X-IODCNL": profile.exactId,
       "X-Fbtrex-Signature": bs58.encode(Buffer.from(signature))
     },
     body

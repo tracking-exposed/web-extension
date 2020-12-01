@@ -20,7 +20,7 @@
     "storage",
     "unlimitedStorage",
     "cookies",
-    "http://localhost:8100/",
+    "http://localhost:8105/",
     "https://*.facebook.com/",
     "https://*.fbcdn.net/",
     "https://*.tracking.exposed/",

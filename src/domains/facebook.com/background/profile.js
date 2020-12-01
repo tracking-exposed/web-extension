@@ -156,6 +156,7 @@ export async function loadProfile() {
   return await db.get([NAMESPACE, profile.id, "profile"]);
 }
 
+
 // ## setOptIn
 //
 // OptIn is set when the user agrees on the privacy policy.
