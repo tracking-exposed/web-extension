@@ -19,8 +19,8 @@ import packageJson from "./package.json";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
-const build = retrieveGitHead() || "unknow";
 console.log("production is", production);
+const build = production ? retrieveGitHead() : "dist";
 const config = {
   production,
   build: (production ? "tagged" : build),
@@ -71,9 +71,9 @@ function compileManifest() {
   manifest.version = packageJson.version.split("-")[0];
   manifest.version_name = packageJson.version;
   if (production) {
-    manifest.permissions = manifest.permissions.filter(
-      p => !p.includes("localhost")
-    );
+    manifest.permissions = manifest.permissions.filter(function(d) {
+      return !d.match(/:\/\/localhost/);
+    });
   }
   fs.writeFileSync("build/manifest.json", JSON.stringify(manifest, null, 2));
 }
@@ -274,7 +274,7 @@ function retrieveGitHead() {
       .toString()
       .trim();
   } catch(e) {
-    console.log("This package is not under .git, the build string would not be consistent: %s", e.message);
+    console.log("This package is not under .git");
     return null;
   }
 } 
