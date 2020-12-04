@@ -20,7 +20,7 @@ import packageJson from "./package.json";
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
 console.log("production is", production);
-const build = production ? retrieveGitHead() : "dist";
+const build = !production ? retrieveGitHead() : "assumeNOgit";
 const config = {
   production,
   build: (production ? "tagged" : build),
