@@ -19,8 +19,9 @@ import packageJson from "./package.json";
 
 dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
-const build = retrieveGitHead() || "unknow";
-console.log("PAADC production?", production);
+const build = production ? "districondition" : retrieveGitHead();
+console.log("PAADC production:", production, "PAADC build string:", build);
+
 const config = {
   production,
   build: (production ? "tagged" : build),
@@ -304,7 +305,7 @@ function retrieveGitHead() {
       .toString()
       .trim();
   } catch(e) {
-    console.log("This package is not under .git, the build string would not be consistent: %s", e.message);
+    console.log("This package is not under .git");
     return null;
   }
 } 
