@@ -52,8 +52,7 @@
       ],
       "js": ["browser-polyfill.js", "content_scripts/facebook.com/bundle.js", "content_scripts/iodc.nl/bundle.js"],
       "css": [
-        "styles/theme/main.css",
-        "content_scripts/facebook.com/bundle.css"
+        "styles/theme/main.css"
       ]
     }
   ],
