@@ -48,7 +48,7 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "bs58": "^4.0.1",
-    "svelte": "^3.29.7",
+    "svelte": "^3.31.0",
     "svelte-spa-router": "^2.2.0",
     "sveltestrap": "^3.9.6",
     "tweetnacl": "^1.0.3",
