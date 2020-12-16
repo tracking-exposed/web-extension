@@ -121,20 +121,6 @@ function scrapePost(element) {
     `Post categorized as "${visibility}" +i ${JSON.stringify(iconsNfo)}`
   );
 
-  linksNfo.e.map(function(urlstr, i) {
-    let urlO;
-    if(!urlstr || !urlstr.length)
-      return;
-    if(urlstr[0] === '/') {
-      urlO = new URL(urlstr, window.location.href);
-      console.info("REL", i, urlstr);
-    } else {
-      urlO = new URL(urlstr);
-      console.info("ABS", i, urlstr);
-    }
-    console.info(urlO.pathname, [...urlO.searchParams.keys()] );
-  });
-
   return {
     type: 'post',
     from: 'standard',
