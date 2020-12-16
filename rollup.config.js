@@ -18,8 +18,8 @@ import { terser } from "rollup-plugin-terser";
 import packageJson from "./package.json";
 
 dotenv.config();
-const production = !process.env.ROLLUP_WATCH;
-const build = retrieveGitHead() || "unknow";
+const production = (!process.env.NODE_ENV == 'development') || !process.env.ROLLUP_WATCH;
+const build = !production ? retrieveGitHead() : "assumeNOgit";
 const config = {
   production,
   build: (production ? "tagged" : build),
@@ -70,15 +70,16 @@ function compileManifest() {
   manifest.version = packageJson.version.split("-")[0];
   manifest.version_name = packageJson.version;
   if (production) {
-    manifest.permissions = manifest.permissions.filter(
-      p => !p.includes("localhost")
-    );
+    manifest.permissions = manifest.permissions.filter(function(d) {
+      return !d.match(/:\/\/localhost/);
+    });
   }
   fs.writeFileSync("build/manifest.json", JSON.stringify(manifest, null, 2));
 }
 
 compileSCSS();
 compileManifest();
+console.log("Configuration is", config);
 
 export default [
   {
@@ -142,7 +143,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -172,7 +173,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/default_popup/bundle.css", !production);
+          css.write("bundle.css");
         }
       }),
 
@@ -204,7 +205,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -226,7 +227,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/content_scripts/facebook.com/bundle.css", !production);
+          css.write("bundle.css");
         }
       }),
 
@@ -259,7 +260,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -273,7 +274,7 @@ function retrieveGitHead() {
       .toString()
       .trim();
   } catch(e) {
-    console.log("This package is not under .git, the build string would not be consistent: %s", e.message);
+    console.log("This package is not under .git");
     return null;
   }
 } 

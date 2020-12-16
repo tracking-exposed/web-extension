@@ -13,7 +13,7 @@ function observeTimeline(hub) {
       const location = window.location.href;
       const pathname = window.location.pathname;
       if (!pathname.match(selectors.pathname)) {
-        console.debug("Location consideredn't by fbtrex", pathname);
+        console.debug("Location is consideredn't by web-trex", pathname);
         return;
       }
 
@@ -38,6 +38,7 @@ function observePosts(hub) {
   /* standard watcher looks for public posts, the 'sad' is special advertising,
    * it looks for sponsored post which are custom audience (aka dark ads) and */
   let watcherStd = null, watcherSad = null, watcherEvent = null;
+  const INTERVAL = 4100;
 
   hub.on("startScraping", (_, selectors) => {
     if (watcherStd) {
@@ -50,10 +51,11 @@ function observePosts(hub) {
         return;
       }
 
-      hub.send("newPost", {
-        data: scrapePost(element),
-        element
-      });
+      window.setTimeout(
+        hub.send("newPost", {
+          data: scrapePost(element),
+          element
+        }), INTERVAL);
     });
 
     watcherSad = dom.on(selectors.darkadv, element => {
@@ -65,7 +67,7 @@ function observePosts(hub) {
       hub.send("newDarkAdv", {
         data: scrapeAbove(element),
         element
-      });
+      })
     });
 
     watcherEvent = dom.on(selectors.eventPage, element => {
@@ -73,7 +75,7 @@ function observePosts(hub) {
       if (!pathname.match(/\/events/))
         return;
 
-      debugger;
+      // console.log("Event page to be processed");
       hub.send("newEventPage", {
         data: scrapeGrab(element),
         element

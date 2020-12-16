@@ -24,7 +24,9 @@ function handlePost(type, e) {
     visibilityInfo: e.data.visibilityInfo,
     startTime: getTimeISO8601(),
     impressionOrder: state.position++,
-    timelineId: state.timelineId
+    timelineId: state.timelineId,
+    from: e.data.from,
+    kind: e.data.type,
   };
 
   if (impression.visibility === "public") {
@@ -63,6 +65,7 @@ function sync() {
 }
 export default function register(hub) {
   hub.on("newPost", handlePost);
+  hub.on("newDarkAdv", handlePost);
   hub.on("newTimeline", handleTimeline);
   window.setInterval(sync.bind(null, hub), INTERVAL);
 }

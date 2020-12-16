@@ -26,7 +26,7 @@ function handleSetConfig(_, e, hub) {
     /* the selector was retrieved via API, it should comeback, but I couldn't fix it 
        when debugging 
     post: e.selector + NOT_SCRAPED_SELECTOR,                                 */
-    post: "div[aria-posinset]" + NOT_SCRAPED_SELECTOR,
+    post: "div[data-pagelet]" + NOT_SCRAPED_SELECTOR,
 
     /* this selector do not match the entire element, but we should look a few 
        .parentNode above; PLEASE NOTE, the NOT_SCRAPED_SELECTOR isn't here, but in
