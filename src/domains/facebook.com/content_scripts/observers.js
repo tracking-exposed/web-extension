@@ -1,6 +1,6 @@
 import { dom } from "src/content_scripts";
 import config from "src/background/config";
-import scraper from "./scraper";
+import { scrapePost, scrapeAbove, scrapeGrab } from "./scraper";
 
 function observeTimeline(hub) {
   let watcher;
@@ -13,6 +13,7 @@ function observeTimeline(hub) {
       const location = window.location.href;
       const pathname = window.location.pathname;
       if (!pathname.match(selectors.pathname)) {
+        console.debug("Location consideredn't by fbtrex", pathname);
         return;
       }
 
@@ -34,32 +35,71 @@ function observeTimeline(hub) {
 }
 
 function observePosts(hub) {
-  let watcher;
+  /* standard watcher looks for public posts, the 'sad' is special advertising,
+   * it looks for sponsored post which are custom audience (aka dark ads) and */
+  let watcherStd = null, watcherSad = null, watcherEvent = null;
 
   hub.on("startScraping", (_, selectors) => {
-    if (watcher) {
+    if (watcherStd) {
       return;
     }
-    watcher = dom.on(selectors.post, element => {
+    watcherStd = dom.on(selectors.post, element => {
+      /* we've to check path now because the watcher is even based */
       const pathname = window.location.pathname;
-
       if (!pathname.match(selectors.pathname)) {
         return;
       }
 
       hub.send("newPost", {
-        data: scraper(element),
+        data: scrapePost(element),
         element
       });
     });
-    console.log("Start", selectors.post);
+
+    watcherSad = dom.on(selectors.darkadv, element => {
+      const pathname = window.location.pathname;
+      if (!pathname.match(selectors.pathname)) {
+        return;
+      }
+
+      hub.send("newDarkAdv", {
+        data: scrapeAbove(element),
+        element
+      });
+    });
+
+    watcherEvent = dom.on(selectors.eventPage, element => {
+      const pathname = window.location.pathname;
+      if (!pathname.match(/\/events/))
+        return;
+
+      debugger;
+      hub.send("newEventPage", {
+        data: scrapeGrab(element),
+        element
+      })
+    });
+
+    console.log("Start watching on",
+      selectors.post, selectors.darkadv, selectors.eventPage);
   });
 
   hub.on("stopScraping", (_, selectors) => {
-    if (watcher) {
-      watcher.disconnect();
-      watcher = null;
+    if (watcherStd) {
+      watcherStd.disconnect();
+      watcherStd = null;
       console.log("Stop", selectors.post);
+    }
+    if (watcherSad) {
+      watcherSad.disconnect();
+      watcherSad = null;
+      console.log("Stop", selectors.darkadv);
+    }
+    if(watcherEvent) {
+      /* events might need a dedicated switch */
+      watcherEvent.disconnect();
+      watcherEvent = null;
+      console.log("Stop event full page watchers");
     }
   });
 }
@@ -74,6 +114,7 @@ function observeLoginForm(hub) {
   });
 }
 
+/* this is never used, TODO find out when it should? */
 function observeWindowUnload(hub) {
   window.addEventListener("beforeunload", e => {
     hub.event("windowUnload");
