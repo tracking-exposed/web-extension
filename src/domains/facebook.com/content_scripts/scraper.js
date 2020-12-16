@@ -5,7 +5,6 @@
 // of the `publicWords`, then we might detect a wrong visibility.
 
 const _ = require('lodash');
-const { not_equal } = require("svelte/internal");
 
 // See https://github.com/tracking-exposed/web-extension/issues/42
 // TODO change your browser language and see how 'Public' is localized.
@@ -45,13 +44,13 @@ function infoReducer(listof, attribute) {
   return retval;
 }
 
-function recursiveParent(node, MAX) {
+/* function recursiveParent(node, MAX) {
   console.log("* recursiveParent", node.tagName, "size", node.outerHTML.length);
   if(node.parentNode.outerHTML.length < MAX) {
     return recursiveParent(node.parentNode, MAX);
   }
   return node;
-}
+} */
 
 function checkIfIsAd(e) {
   const candidates = infoReducer(e.querySelectorAll('[aria-label]'), 'aria-label');
@@ -62,7 +61,7 @@ function checkIfIsAd(e) {
   });
   if(!sponseredWordFound)
     return null;
-  // console.log("Matched sponsored content!", e);
+  console.log("Matched sponsored content!", sponseredWordFound, e);
   return {
     type: 'ad',
     visibility: 'public',
@@ -74,19 +73,20 @@ function checkIfIsAd(e) {
    return element because it should overwrite the one grabbed */
 function scrapeAbove(element) {
   /* this is used for dark ad spotting */
-  const rightElement = recursiveParent(element, 100000);
+  const rightElement = element.closest('div["data-pagelet"]');
+  console.log("scrapeAbove(darkad)", rightElement.outerHTML.length);
+
+  /* double check */
+  const classList = rightElement.className.split(/\s+/);
+  if(classList.indexOf('webtrex--scraped') !== -1) {
+    console.log("Element already checked/acquired?", rightElement, "returning");
+    return null;
+  }
+  rightElement.classList.add("webtrex--scraped");
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(rightElement);
   if(isAd) return _.extend(isAd, { from: 'recursive', element: rightElement });
-
-  const check = rightElement.querySelector('div[aria-posinset]');
-  if(check)
-    check.classList.add("webtrex--scraped");
-  else {
-    console.log("Odd mistake here! double spot!", rightElement);
-    return null;
-  }
 
   return {
     type: 'darkadv',
@@ -97,12 +97,13 @@ function scrapeAbove(element) {
 }
 
 function scrapePost(element) {
+  console.log("scrapePost(darkad)", element.outerHTML.length);
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(element);
   if(isAd) return _.extend(isAd, {from: 'standard'});
 
-  const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label]'), 'aria-label');
+  const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label][role="img"]'), 'aria-label');
   if(!iconsNfo) {
     console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
     return null;

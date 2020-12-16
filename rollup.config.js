@@ -18,8 +18,7 @@ import { terser } from "rollup-plugin-terser";
 import packageJson from "./package.json";
 
 dotenv.config();
-const production = !process.env.ROLLUP_WATCH;
-console.log("production is", production);
+const production = (!process.env.NODE_ENV == 'development') || !process.env.ROLLUP_WATCH;
 const build = !production ? retrieveGitHead() : "assumeNOgit";
 const config = {
   production,
@@ -80,6 +79,7 @@ function compileManifest() {
 
 compileSCSS();
 compileManifest();
+console.log("Configuration is", config);
 
 export default [
   {
@@ -143,7 +143,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -173,7 +173,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/default_popup/bundle.css", !production);
+          css.write("bundle.css");
         }
       }),
 
@@ -205,7 +205,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -227,7 +227,7 @@ export default [
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
-          css.write("build/content_scripts/facebook.com/bundle.css", !production);
+          css.write("bundle.css");
         }
       }),
 
@@ -260,7 +260,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }

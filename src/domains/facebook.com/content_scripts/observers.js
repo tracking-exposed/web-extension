@@ -38,7 +38,7 @@ function observePosts(hub) {
   /* standard watcher looks for public posts, the 'sad' is special advertising,
    * it looks for sponsored post which are custom audience (aka dark ads) and */
   let watcherStd = null, watcherSad = null, watcherEvent = null;
-  const INTERVAL = 5000;
+  const INTERVAL = 4100;
 
   hub.on("startScraping", (_, selectors) => {
     if (watcherStd) {
@@ -51,7 +51,6 @@ function observePosts(hub) {
         return;
       }
 
-      // console.log("observer// post // timeout");
       window.setTimeout(
         hub.send("newPost", {
           data: scrapePost(element),
