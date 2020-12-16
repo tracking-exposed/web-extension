@@ -66,7 +66,7 @@ export async function getId() {
   try {
     return wrappedGetId();
   } catch(error) {
-    console.error("Error", error, "Ignored");
+    console.log("error catch from getId:", error, "returning dummy value");
     return "dummyCookieValue";
   }
 }
