@@ -1,5 +1,5 @@
 import handlers from "./handlers";
-import observers from "./observers";
+import sifter from "./sifter";
 import { Hub } from "src/content_scripts/";
 import Onboarding from "./components/Onboarding.svelte";
 import { toDataURL } from "./utils";
@@ -7,6 +7,7 @@ import { toDataURL } from "./utils";
 async function retrievePicture(id) {
   const url = `https://graph.facebook.com/${id}/picture?type=normal`;
   const data = await toDataURL(url);
+
   const profile = await browser.runtime.sendMessage({
     method: "setPicture",
     params: [data]
@@ -33,7 +34,14 @@ async function boot() {
 
   const hub = new Hub();
   handlers(hub);
+  sifter(hub);
+
+/*
+ * --- December 2020, temporarly removed the usave of observers because facebook 
+ * has deploy an unexpected countermeasure 
   observers(hub);
+
+ * */
 
   hub.send("updateConfig", profile);
 

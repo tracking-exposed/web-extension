@@ -69,12 +69,21 @@ function checkIfIsAd(e) {
   }
 }
 
-/* core entry function for client-side parsing, configured in scrape.js, this is the only function that 
-   return element because it should overwrite the one grabbed */
+function unReliableSize(elem) {
+  const s = elem.outerHTML.length;
+  const MINIMUM = 10000;
+  if(s > MINIMUM) return false;
+  console.log("size failure", s, elem.outerHTML.substr(0, 200));
+  return true;
+}
+
+/* core entry function for client-side parsing, configured in scrape.js,
+  this is the only function that return element because it should overwrite the one grabbed */
 function scrapeAbove(element) {
   /* this is used for dark ad spotting */
-  const rightElement = element.closest('div["data-pagelet"]');
+  const rightElement = element.closest("div[data-pagelet]"); // ERROR this selector is hardcoded and shouldn't
   console.log("scrapeAbove(darkad)", rightElement.outerHTML.length);
+  if(unReliableSize(rightElement)) return null;
 
   /* double check */
   const classList = rightElement.className.split(/\s+/);
@@ -82,22 +91,23 @@ function scrapeAbove(element) {
     console.log("Element already checked/acquired?", rightElement, "returning");
     return null;
   }
-  rightElement.classList.add("webtrex--scraped");
+  // rightElement.classList.add("webtrex--scraped");
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(rightElement);
   if(isAd) return _.extend(isAd, { from: 'recursive', element: rightElement });
 
+  const visibilityInfo = infoReducer(rightElement.querySelectorAll('i[aria-label]'), 'aria-label');
   return {
     type: 'darkadv',
     element: rightElement,
     from: 'recursive',
-    visibilityInfo: infoReducer(rightElement.querySelectorAll('i[aria-label]'), 'aria-label'),
+    visibilityInfo,
   }
 }
 
 function scrapePost(element) {
-  console.log("scrapePost(darkad)", element.outerHTML.length);
+  if(unReliableSize(element)) return null;
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(element);
@@ -105,7 +115,8 @@ function scrapePost(element) {
 
   const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label][role="img"]'), 'aria-label');
   if(!iconsNfo) {
-    console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
+    // this is like "people you might know"
+    // console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
     return null;
   }
 
@@ -132,7 +143,6 @@ function scrapePost(element) {
 function scrapeGrab(element) {
   /* this is used for events pages */
   console.log("scrapeGrab for /events -- PLS2CHK", element);
-  debugger;
   return {
     type: 'event',
     note: 'not really implemented, check near the end of scraper.js'

@@ -23,10 +23,7 @@ function handleSetConfig(_, e, hub) {
     pathname: e.scrapeOutsideRoot ? /.*/ : /^(\/$|\/watch|\/events)/,
     timeline: "div[role='main']" + NOT_SCRAPED_SELECTOR,
 
-    /* the selector was retrieved via API, it should comeback, but I couldn't fix it 
-       when debugging 
-    post: e.selector + NOT_SCRAPED_SELECTOR,                                 */
-    post: "div[data-pagelet]" + NOT_SCRAPED_SELECTOR,
+    post: e.selector + NOT_SCRAPED_SELECTOR,
 
     /* this selector do not match the entire element, but we should look a few 
        .parentNode above; PLEASE NOTE, the NOT_SCRAPED_SELECTOR isn't here, but in
@@ -53,8 +50,15 @@ function handleSetConfig(_, e, hub) {
 }
 
 function handleElement(_, e) {
-  console.log("Adding marker class in element", _, "size:", e.element.outerHTML.length);
+  if(!e.element || !e.element.outerHTML || !e.data) {
+    console.log("handleElement drop condition", e);
+    return;
+  }
   e.element.classList.add("webtrex--scraped");
+}
+
+function handlePage(_, e) {
+  console.log("handlePage called, no marked added at the moment. args:", _, e);
 }
 
 function doNotMark(_, e) {
@@ -66,6 +70,6 @@ export default function register(hub) {
   hub.on("newTimeline", handleElement);
   hub.on("newPost", handleElement);
   hub.on("newDarkAdv", doNotMark);
-  hub.on("newEventPage", handleElement);
+  hub.on("newEventPage", handlePage);
   hub.on("setConfig", handleSetConfig);
 }

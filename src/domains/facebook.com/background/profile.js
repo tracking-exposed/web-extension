@@ -18,7 +18,7 @@ const PROFILE = {
   publicKey: null,
   secretKey: null,
   token: null,
-  selector: ".userContentWrapper" // now this is useless 
+  selector: "div[data-pagelet^='FeedUnit']",
   // picture?
 };
 

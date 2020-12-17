@@ -27,6 +27,7 @@ function handlePost(type, e) {
     timelineId: state.timelineId,
     from: e.data.from,
     kind: e.data.type,
+    offset: e.element.offsetTop,
   };
 
   if (impression.visibility === "public") {
