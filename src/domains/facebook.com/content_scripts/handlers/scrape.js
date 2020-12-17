@@ -50,26 +50,31 @@ function handleSetConfig(_, e, hub) {
 }
 
 function handleElement(_, e) {
-  if(!e.element || !e.element.outerHTML || !e.data) {
-    console.log("handleElement drop condition", e);
+  /* this receive all the events, because all should be marked.
+     this only work to mark event. It do not mark thing incomplete */
+  if(!e.element || !e.data) {
+    console.log("handleElement can't apply here? dropping", e);
     return;
   }
-  e.element.classList.add("webtrex--scraped");
-}
-
-function handlePage(_, e) {
-  console.log("handlePage called, no marked added at the moment. args:", _, e);
+  if(!e.element.outerHTML && e.element.length) {
+    console.debug("List of elements marked / type", _, e.element.length);
+    e.element.array.forEach(element => {
+      element.classList.add("webtrex--scraped");
+    });
+  } else {
+    console.debug("single element marked / type", _);
+    e.element.classList.add("webtrex--scraped");
+  }
 }
 
 function doNotMark(_, e) {
   /* do not mark because this is marked as a POST, not as darkad */
-  console.log("this special advertising is class-marked by scraper.js and not by scrape.js");
+  console.debug("this special advertising is class-marked by scraper.js and not by scrape.js");
 }
 
 export default function register(hub) {
   hub.on("newTimeline", handleElement);
   hub.on("newPost", handleElement);
   hub.on("newDarkAdv", doNotMark);
-  hub.on("newEventPage", handlePage);
   hub.on("setConfig", handleSetConfig);
 }

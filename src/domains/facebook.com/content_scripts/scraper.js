@@ -57,11 +57,12 @@ function checkIfIsAd(e) {
   if(!candidates || !candidates.attrs.length)
     return null;
   const sponseredWordFound = _.some(candidates.attrs, function(label) {
+    if(sponsoredText.includes(label))
+      console.log("Matched sponsored content!", label, "in", e);
     return sponsoredText.includes(label);
   });
   if(!sponseredWordFound)
     return null;
-  console.log("Matched sponsored content!", sponseredWordFound, e);
   return {
     type: 'ad',
     visibility: 'public',
@@ -140,17 +141,7 @@ function scrapePost(element) {
   };
 }
 
-function scrapeGrab(element) {
-  /* this is used for events pages */
-  console.log("scrapeGrab for /events -- PLS2CHK", element);
-  return {
-    type: 'event',
-    note: 'not really implemented, check near the end of scraper.js'
-  }
-}
-
 module.exports = {
   scrapePost,
   scrapeAbove,
-  scrapeGrab,
 }

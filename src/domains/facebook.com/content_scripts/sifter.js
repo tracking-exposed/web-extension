@@ -1,5 +1,7 @@
-import { scrapePost, scrapeAbove, scrapeGrab } from "./scraper";
-const INTERVAL = 5000;
+import { scrapePost, scrapeAbove } from "./scraper";
+const TIMELINE_INTERVAL = 1000;
+const POST_INTERVAL = 3000;
+const POST_DELAY = 500;
 
 let cache = {};
 /* this function is call by a .filter */
@@ -45,7 +47,23 @@ function findTimeline(hub) {
         location,
         element: timeline
       });
-    }, INTERVAL);
+
+      /* this is not the right place to do it but until I don't
+      get the tree of dependencies ... */
+      if( window.location.pathname.match(selectors.pathname) &&
+          window.location.pathname.match(/\/events\/(\d+)/)) {
+        console.log("Event page spotted!, scrapedEvent", window.location.pathname);
+        /* todo scrape a bit */
+        hub.send("scrapedEvent", {
+          data: {
+            path: window.location.pathname,
+            type: 'evelif',
+          },
+          element: timeline[0]
+        })
+        timeline[0].classList.add("webtrex--scraped");
+      }
+    }, TIMELINE_INTERVAL);
   });
 
   hub.on("stopScraping", (_, selectors) => {
@@ -73,17 +91,17 @@ function findPosts(hub) {
         const freshest = Array.from(normalposts).filter(sessionCache);
         // console.log("matching posts", normalposts.length, "surviving cache check", freshest.length);
         freshest.forEach(function(p) {
-          // console.log("(post) Offset check", p.offsetTop);
-          hub.send("newPost", {
-            data: scrapePost(p),
-            element: p
-          });
+          window.setTimeout(() => {
+            hub.send("newPost", {
+              data: scrapePost(p),
+              element: p
+            });
+          }, POST_DELAY);
         });
       }
 
       if(potentialdadv && potentialdadv.length) {
-        console.log("potential DAV, cache nor class implemented!", potentialdadv.length);
-          // TODO cache check and filtering
+        console.log("(look) dark advertising <no cache|no class>", potentialdadv.length);
         potentialdadv.forEach(function(pdadv) {
           const data = scrapeAbove(pdadv);
           hub.send("newDarkAdv", {
@@ -92,7 +110,8 @@ function findPosts(hub) {
           });
         });
       }
-    }, INTERVAL);
+
+    }, POST_INTERVAL);
 
   });
 
@@ -115,7 +134,6 @@ function observeWindowUnload(hub) {
 }
 
 export default function start(hub) {
-
   findTimeline(hub);
   findPosts(hub);
 }

@@ -29,7 +29,7 @@ const config = {
         apiEndpoint: "https://collector.facebook.tracking.exposed/api/v1/"
       }
     : {
-        version: "dev",
+        version: packageJson.version + "-dev",
         autologin: true,
         autologinEmail: process.env.AUTOLOGIN_EMAIL,
         autologinPassword: process.env.AUTOLOGIN_PASSWORD,

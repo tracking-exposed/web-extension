@@ -1,6 +1,6 @@
 import { uuid, getTimeISO8601 } from "src/common/utils";
 
-const INTERVAL = 1000;
+const INTERVAL = 10000; // this interval should come from config
 const MAX_BUFFER_SIZE = 1024 * 1024;
 
 var state = {
@@ -12,7 +12,13 @@ var state = {
 
 function handlePost(type, e) {
   if(!e.data) {
-    console.log(e, "has not visibility: skipping entry (type", type, ")");
+    if(e.element && !!e.element.querySelector) {
+      console.log(
+        "has not visibility? <type", type, ">",
+        Array.from(e.element.querySelectorAll('h4').map('textContent'))
+      );
+    } else
+      console.debug(type, "discarged", e.element, "has no parsed data");
     return;
   } else {
     console.debug("handlePost", e);
@@ -27,7 +33,8 @@ function handlePost(type, e) {
     timelineId: state.timelineId,
     from: e.data.from,
     kind: e.data.type,
-    offset: e.element.offsetTop,
+    offsetTop: e.element.offsetTop,
+    offsetBottom: e.element.offsetBottom,
   };
 
   if (impression.visibility === "public") {
@@ -54,9 +61,20 @@ function handleTimeline(type, e) {
   });
 }
 
+function handleEvent(type, e) {
+  const id = uuid();
+  state.events.push({
+    id,
+    type: e.data.type,
+    path: e.data.path,
+    element: e.element.outerHTML,
+    openingTime: getTimeISO8601()
+  });
+}
+
 function sync() {
   if (state.events.length) {
-    console.log(`Sending ${state.events.length} events`);
+    console.log(`Sending ${state.events.length}, ${state.events.map((e)=>{return e.type})} events`);
     browser.runtime.sendMessage({
       method: "syncEvents",
       params: [state.events]
@@ -64,9 +82,11 @@ function sync() {
     state.events = [];
   }
 }
+
 export default function register(hub) {
   hub.on("newPost", handlePost);
   hub.on("newDarkAdv", handlePost);
   hub.on("newTimeline", handleTimeline);
+  hub.on("scrapedEvent", handleEvent);
   window.setInterval(sync.bind(null, hub), INTERVAL);
 }
