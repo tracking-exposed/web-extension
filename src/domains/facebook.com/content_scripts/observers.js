@@ -38,6 +38,8 @@ function observePosts(hub) {
   /* standard watcher looks for public posts, the 'sad' is special advertising,
    * it looks for sponsored post which are custom audience (aka dark ads) and */
   let watcherStd = null, watcherSad = null, watcherEvent = null;
+  /* this timeout is helpful because facebook update the dom structure after 
+   * dispatching the appropriate indicator */
   const INTERVAL = 5000;
 
   hub.on("startScraping", (_, selectors) => {
@@ -45,18 +47,19 @@ function observePosts(hub) {
       return;
     }
     watcherStd = dom.on(selectors.post, element => {
+      console.log("Selector match now", element.outerHTML.length);
       /* we've to check path now because the watcher is even based */
       const pathname = window.location.pathname;
       if (!pathname.match(selectors.pathname)) {
         return;
       }
 
-      // console.log("observer// post // timeout");
-      window.setTimeout(
+      window.setTimeout(function() {
         hub.send("newPost", {
           data: scrapePost(element),
           element
-        }), INTERVAL);
+        });
+      }, INTERVAL);
     });
 
     watcherSad = dom.on(selectors.darkadv, element => {
@@ -64,17 +67,17 @@ function observePosts(hub) {
       if (!pathname.match(selectors.pathname)) {
         return;
       }
-      // console.log("observer// darkadv // timeout");
+
       window.setTimeout(function() {
-          let ret = scrapeAbove(element);
-          hub.send("newDarkAdv", {
-            element: ret.element,
-            data: _.omit(ret, ['element'])
-          });
-        }, INTERVAL);
+        const data = scrapeAbove(element);
+        hub.send("newDarkAdv", {
+          data,
+          element: data.element
+        });
+      }, INTERVAL);
     });
 
-    watcherEvent = dom.on(selectors.eventPage, element => {
+    watcherEvent = dom.one(selectors.eventPage, element => {
       const pathname = window.location.pathname;
       if (!pathname.match(/\/events/))
         return;
@@ -86,8 +89,8 @@ function observePosts(hub) {
       })
     });
 
-    console.log("Start watching on",
-      selectors.post, selectors.darkadv, selectors.eventPage);
+    /* console.log("Start watching on",
+      selectors.post, selectors.darkadv, selectors.eventPage); */
   });
 
   hub.on("stopScraping", (_, selectors) => {

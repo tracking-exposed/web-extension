@@ -18,10 +18,8 @@ import { terser } from "rollup-plugin-terser";
 import packageJson from "./package.json";
 
 dotenv.config();
-const production = !process.env.ROLLUP_WATCH;
-const build = production ? "districondition" : retrieveGitHead();
-console.log("PAADC production:", production, "PAADC build string:", build);
-
+const production = (!process.env.NODE_ENV == 'development') || !process.env.ROLLUP_WATCH;
+const build = !production ? retrieveGitHead() : "assumeNOgit";
 const config = {
   production,
   build: (production ? "tagged" : build),
@@ -31,7 +29,7 @@ const config = {
         apiEndpoint: "https://paadc.tracking.exposed/api/v1/"
       }
     : {
-        version: "dev",
+        version: packageJson.version + "-dev",
         autologin: true,
         autologinEmail: process.env.AUTOLOGIN_EMAIL,
         autologinPassword: process.env.AUTOLOGIN_PASSWORD,
@@ -72,7 +70,9 @@ function compileManifest() {
   manifest.version = packageJson.version.split("-")[0];
   manifest.version_name = packageJson.version;
   if (production) {
-    manifest.permissions = manifest.permissions.filter(function(d) { return !d.match(/:\/\/localhost/); });
+    manifest.permissions = manifest.permissions.filter(function(d) {
+      return !d.match(/:\/\/localhost/);
+    });
   }
   console.log(manifest.permissions);
   fs.writeFileSync("build/manifest.json", JSON.stringify(manifest, null, 2));
@@ -80,6 +80,7 @@ function compileManifest() {
 
 compileSCSS();
 compileManifest();
+console.log("Configuration is", config);
 
 export default [
   {
@@ -143,7 +144,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -202,7 +203,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }
@@ -283,7 +284,7 @@ export default [
       production && terser()
     ],
     watch: {
-      clearScreen: true,
+      clearScreen: false,
       chokidar: {
         usePolling: true
       }

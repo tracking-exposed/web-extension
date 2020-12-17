@@ -23,10 +23,7 @@ function handleSetConfig(_, e, hub) {
     pathname: e.scrapeOutsideRoot ? /.*/ : /^(\/$|\/watch|\/events)/,
     timeline: "div[role='main']" + NOT_SCRAPED_SELECTOR,
 
-    /* the selector was retrieved via API, it should comeback, but I couldn't fix it 
-       when debugging 
-    post: e.selector + NOT_SCRAPED_SELECTOR,                                 */
-    post: "div[aria-posinset]" + NOT_SCRAPED_SELECTOR,
+    post: e.selector + NOT_SCRAPED_SELECTOR,
 
     /* this selector do not match the entire element, but we should look a few 
        .parentNode above; PLEASE NOTE, the NOT_SCRAPED_SELECTOR isn't here, but in
@@ -53,20 +50,31 @@ function handleSetConfig(_, e, hub) {
 }
 
 function handleElement(_, e) {
-  console.log("Adding class (marker and highlighter) from a [", _, "],",
-    e.element.outerHTML.substr(0, 20), ", in bytes:", e.element.outerHTML.length);
-  e.element.classList.add("webtrex--scraped");
+  /* this receive all the events, because all should be marked.
+     this only work to mark event. It do not mark thing incomplete */
+  if(!e.element || !e.data) {
+    console.log("handleElement can't apply here? dropping", e);
+    return;
+  }
+  if(!e.element.outerHTML && e.element.length) {
+    console.debug("List of elements marked / type", _, e.element.length);
+    e.element.array.forEach(element => {
+      element.classList.add("webtrex--scraped");
+    });
+  } else {
+    console.debug("single element marked / type", _);
+    e.element.classList.add("webtrex--scraped");
+  }
 }
 
 function doNotMark(_, e) {
   /* do not mark because this is marked as a POST, not as darkad */
-  console.log("this special advertising is class-marked by scraper.js and not by scrape.js");
+  console.debug("this special advertising is class-marked by scraper.js and not by scrape.js");
 }
 
 export default function register(hub) {
   hub.on("newTimeline", handleElement);
   hub.on("newPost", handleElement);
   hub.on("newDarkAdv", doNotMark);
-  hub.on("newEventPage", handleElement);
   hub.on("setConfig", handleSetConfig);
 }

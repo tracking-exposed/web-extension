@@ -5,7 +5,6 @@
 // of the `publicWords`, then we might detect a wrong visibility.
 
 const _ = require('lodash');
-const { not_equal } = require("svelte/internal");
 
 // See https://github.com/tracking-exposed/web-extension/issues/42
 // TODO change your browser language and see how 'Public' is localized.
@@ -45,24 +44,25 @@ function infoReducer(listof, attribute) {
   return retval;
 }
 
-function recursiveParent(node, MAX) {
+/* function recursiveParent(node, MAX) {
   console.log("* recursiveParent", node.tagName, "size", node.outerHTML.length);
   if(node.parentNode.outerHTML.length < MAX) {
     return recursiveParent(node.parentNode, MAX);
   }
   return node;
-}
+} */
 
 function checkIfIsAd(e) {
   const candidates = infoReducer(e.querySelectorAll('[aria-label]'), 'aria-label');
   if(!candidates || !candidates.attrs.length)
     return null;
   const sponseredWordFound = _.some(candidates.attrs, function(label) {
+    if(sponsoredText.includes(label))
+      console.log("Matched sponsored content!", label, "in", e);
     return sponsoredText.includes(label);
   });
   if(!sponseredWordFound)
     return null;
-  // console.log("Matched sponsored content!", e);
   return {
     type: 'ad',
     visibility: 'public',
@@ -70,42 +70,54 @@ function checkIfIsAd(e) {
   }
 }
 
-/* core entry function for client-side parsing, configured in scrape.js, this is the only function that 
-   return element because it should overwrite the one grabbed */
+function unReliableSize(elem) {
+  const s = elem.outerHTML.length;
+  const MINIMUM = 10000;
+  if(s > MINIMUM) return false;
+  console.log("size failure", s, elem.outerHTML.substr(0, 200));
+  return true;
+}
+
+/* core entry function for client-side parsing, configured in scrape.js,
+  this is the only function that return element because it should overwrite the one grabbed */
 function scrapeAbove(element) {
   /* this is used for dark ad spotting */
-  const rightElement = recursiveParent(element, 100000);
+  const rightElement = element.closest("div[data-pagelet]"); // ERROR this selector is hardcoded and shouldn't
+  console.log("scrapeAbove(darkad)", rightElement.outerHTML.length);
+  if(unReliableSize(rightElement)) return null;
+
+  /* double check */
+  const classList = rightElement.className.split(/\s+/);
+  if(classList.indexOf('webtrex--scraped') !== -1) {
+    console.log("Element already checked/acquired?", rightElement, "returning");
+    return null;
+  }
+  // rightElement.classList.add("webtrex--scraped");
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(rightElement);
   if(isAd) return _.extend(isAd, { from: 'recursive', element: rightElement });
 
-  const check = rightElement.querySelector('div[aria-posinset]');
-  if(check)
-    check.classList.add("webtrex--scraped");
-  else {
-    console.log("Odd mistake here! double spot!", rightElement);
-    return null;
-  }
-
+  const visibilityInfo = infoReducer(rightElement.querySelectorAll('i[aria-label]'), 'aria-label');
   return {
     type: 'darkadv',
     element: rightElement,
     from: 'recursive',
-    visibilityInfo: infoReducer(rightElement.querySelectorAll('i[aria-label]'), 'aria-label'),
+    visibilityInfo,
   }
 }
 
 function scrapePost(element) {
+  if(unReliableSize(element)) return null;
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(element);
   if(isAd) return _.extend(isAd, {from: 'standard'});
 
-  const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label]'), 'aria-label');
+  const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label][role="img"]'), 'aria-label');
   if(!iconsNfo) {
-    console.debug("Post proven to be a mistake: no attrs found. Dropping w/text: ",
-      element.textContent);
+    // this is like "people you might know"
+    // console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
     return null;
   }
 
@@ -129,18 +141,7 @@ function scrapePost(element) {
   };
 }
 
-function scrapeGrab(element) {
-  /* this is used for events pages */
-  console.log("scrapeGrab for /events -- PLS2CHK", element);
-  // debugger;
-  return {
-    type: 'event',
-    note: 'not really implemented, check near the end of scraper.js'
-  }
-}
-
 module.exports = {
   scrapePost,
   scrapeAbove,
-  scrapeGrab,
 }

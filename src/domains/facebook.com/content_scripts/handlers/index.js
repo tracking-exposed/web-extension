@@ -9,5 +9,5 @@ export default function registerHandlers(hub) {
   sync(hub);
   feed(hub);
   scrape(hub);
-  // shield(hub);
+//  shield(hub);
 }
