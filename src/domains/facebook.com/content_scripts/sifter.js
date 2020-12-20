@@ -1,8 +1,6 @@
-import { scrapePost, scrapeAbove } from "./scraper";
-const TIMELINE_INTERVAL = 1000;
-const POST_INTERVAL = 3000;
-const POST_DELAY = 500;
+import { scrapePost } from "./scraper";
 
+let vhub = null;
 let cache = {};
 /* this function is call by a .filter */
 function sessionCache(e) {
@@ -20,120 +18,141 @@ function sessionCache(e) {
   return true;
 }
 
+const TIMELINE_INTERVAL_ms = 1000;
+let tmlnInterval = null;
+let timelineMatcher = null;
+let timelineCSSSelector = null;
+function timelineWatcher() { // called periodically
+
+  const timeline = document.querySelectorAll(timelineCSSSelector);
+  if(!timeline || !timeline.length)
+    return;
+
+  const location = window.location.href;
+  const pathname = window.location.pathname;
+  if (!pathname.match(timelineMatcher)) {
+    console.debug("Location is consideredn't by web-trex", pathname);
+    return;
+  }
+  console.log("new newsfeed|timeline start now! |expected 1e:", timeline.length);
+  timeline[0].classList.add("webtrex--scraped");
+
+  cache = {};
+  vhub.send("newTimeline", {
+    location,
+    element: timeline
+  });
+
+  /* this is not the right place to do it but until I don't
+  get the tree of dependencies ... */
+  if( window.location.pathname.match(timelineMatcher) &&
+      window.location.pathname.match(/\/events\/(\d+)/)) {
+    console.log("Event page spotted!, scrapedEvent", window.location.pathname);
+    /* todo scrape a bit */
+    vhub.send("scrapedEvent", {
+      data: {
+        path: window.location.pathname,
+        type: 'evelif',
+      },
+      element: timeline[0]
+    })
+    timeline[0].classList.add("webtrex--scraped");
+  }
+}
+
 function findTimeline(hub) {
-  let interval = null;
 
   hub.on("startScraping", (_, selectors) => {
-    if (interval) {
+    if (tmlnInterval) {
       return;
     }
-    // console.log("Start (timeline)", selectors.timeline);
-    interval = setInterval(function() {
-      const timeline = document.querySelectorAll(selectors.timeline);
-      if(!timeline || !timeline.length)
-        return;
-
-      // console.log("timeline(s)?", timeline.length);
-      const location = window.location.href;
-      const pathname = window.location.pathname;
-      if (!pathname.match(selectors.pathname)) {
-        console.debug("Location is consideredn't by web-trex", pathname);
-        return;
-      }
-      timeline[0].classList.add("webtrex--scraped");
-      // console.log("New timeline, added class, cache reset");
-      cache = {};
-      hub.send("newTimeline", {
-        location,
-        element: timeline
-      });
-
-      /* this is not the right place to do it but until I don't
-      get the tree of dependencies ... */
-      if( window.location.pathname.match(selectors.pathname) &&
-          window.location.pathname.match(/\/events\/(\d+)/)) {
-        console.log("Event page spotted!, scrapedEvent", window.location.pathname);
-        /* todo scrape a bit */
-        hub.send("scrapedEvent", {
-          data: {
-            path: window.location.pathname,
-            type: 'evelif',
-          },
-          element: timeline[0]
-        })
-        timeline[0].classList.add("webtrex--scraped");
-      }
-    }, TIMELINE_INTERVAL);
+    timelineCSSSelector = selectors.timeline;
+    timelineMatcher = selectors.pathname;
+    vhub = hub;
+    tmlnInterval = setInterval(timelineWatcher, TIMELINE_INTERVAL_ms);
   });
-
   hub.on("stopScraping", (_, selectors) => {
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-      console.log("Stop scraping (timeline)", selectors.timeline);
+    if (tmlnInterval) {
+      clearInterval(tmlnInterval);
+      tmlnInterval = null;
     }
   });
+}
+
+
+const POST_INTERVAL_ms = 3000;
+const POST_DELAY_ms = 500;
+let postInterval = null;
+let postCSSSelector = null;
+
+function postWatcher() { // called periodically
+  const normalposts = document.querySelectorAll(postCSSSelector);
+  if(normalposts && normalposts.length) {
+    const freshest = Array.from(normalposts).filter(sessionCache);
+    // console.log("matching posts", normalposts.length, "surviving cache check", freshest.length);
+    freshest.forEach(function(p) {
+      window.setTimeout(() => {
+        vhub.send("newPost", {
+          data: scrapePost(p),
+          element: p
+        });
+      }, POST_DELAY_ms);
+    });
+  }
+
+  // after this check we look for dark advertising, this also 
+  // would trigger all the advertising. By using the 'cache'
+  // we avoid the appearence of duplicated package. When, if,
+  // one of the collection break, we might notice on the backend
+  // that only advertising OR only non-advertising is given
+  const darkadv = document.querySelectorAll("div[aria-label] > a[aria-labelledby]");
+  if(darkadv && darkadv.length) {
+    Array.from(darkadv).forEach((dav) => {
+      vhub.send("newDarkAdv", {
+        e: recursiveParent(dav, 60000),
+        data: { visibility: "public", from: 'darkadv' }
+      });
+    })
+  }
+}
+
+function recursiveParent(node, MAX) {
+  return (node.parentNode.outerHTML.length < MAX) ?
+    recursiveParent(node.parentNode, MAX) : node;
 }
 
 function findPosts(hub) {
-  let interval = null;
 
   hub.on("startScraping", (_, selectors) => {
-    if (interval) {
+    if (postInterval) {
       return;
     }
-
-    interval = setInterval(function() {
-      const normalposts = document.querySelectorAll(selectors.post);
-      const potentialdadv = document.querySelectorAll(selectors.darkadv);
-
-      if(normalposts && normalposts.length) {
-        const freshest = Array.from(normalposts).filter(sessionCache);
-        // console.log("matching posts", normalposts.length, "surviving cache check", freshest.length);
-        freshest.forEach(function(p) {
-          window.setTimeout(() => {
-            hub.send("newPost", {
-              data: scrapePost(p),
-              element: p
-            });
-          }, POST_DELAY);
-        });
-      }
-
-      if(potentialdadv && potentialdadv.length) {
-        console.log("(look) dark advertising <no cache|no class>", potentialdadv.length);
-        potentialdadv.forEach(function(pdadv) {
-          const data = scrapeAbove(pdadv);
-          hub.send("newDarkAdv", {
-            data,
-            element: data.element
-          });
-        });
-      }
-
-    }, POST_INTERVAL);
-
+    vhub = hub;
+    postCSSSelector = selectors.post;
+    postInterval = setInterval(postWatcher, POST_INTERVAL_ms);
   });
-
   hub.on("stopScraping", (_, selectors) => {
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-      console.log("Stop (posts)", selectors.timeline);
+    if (postInterval) {
+      clearInterval(postInterval);
+      postInterval = null;
     }
   });
-
 }
 
-
-/* this is never used, TODO find out when it should? */
 function observeWindowUnload(hub) {
   window.addEventListener("beforeunload", e => {
-    hub.event("windowUnload");
+    console.log("Trapped! …So what? Is this handled?");
+    hub.send("windowUnload");
   });
 }
 
+
 export default function start(hub) {
+  // these is an anti pattern in the find* functions, because:
+  // 1) from the observers I switch on intervals
+  // 2) from the intervals I want to invoke a function name
+  // 3) so the variables (selectors and hub) become global in this file.
   findTimeline(hub);
   findPosts(hub);
+  observeWindowUnload(hub);
 }

@@ -23,13 +23,13 @@ var publicWords = [
   "opið" // Icelandic
 ];
 
-// Imported from WhoTargetsMe , 15 Nov 2020, from a MIT license, (originally from Facebook?)
+// Imported from WhoTargetsMe, the 15 Nov 2020, from a MIT license, (originally from Facebook.)
 const sponsoredText = ['Sponsored', 'Sponsorjat','Sponzorované','Спонзорирано', 'Χορηγούμενη',
           'Sponsitud','Sponzorováno','Спонсорирано', 'ממומן', 'Sponsoroitu','Sponsrad',
           'Apmaksāta reklāma','Sponsorlu','Sponsrad','Спонзорисано','Sponzorované','Sponsa',
           'Gesponsord','Sponset','Hirdetés', 'Sponsoreret', 'Sponzorováno', 'Sponsorisé',
           'Commandité', 'Publicidad','Gesponsert', 'Χορηγούμενη', 'Patrocinado', 'Plaćeni oglas',
-          'Sponsorizzata ','Sponsorizzato', 'Sponsorizat', '赞赞助助内内容容', 'ﻢُﻣﻮَّﻟ',
+          'Sponsorizzata','Sponsorizzato', 'Sponsorizat', '赞赞助助内内容容', 'ﻢُﻣﻮَّﻟ',
           'प्रायोजпонзорисано', 'Реклама', '広広告告', 'ได้รับการสนับสนุน', 'Sorowane'];
 
 /* utilities function for client-side parsing */
@@ -44,67 +44,38 @@ function infoReducer(listof, attribute) {
   return retval;
 }
 
-/* function recursiveParent(node, MAX) {
-  console.log("* recursiveParent", node.tagName, "size", node.outerHTML.length);
-  if(node.parentNode.outerHTML.length < MAX) {
-    return recursiveParent(node.parentNode, MAX);
-  }
-  return node;
-} */
-
 function checkIfIsAd(e) {
-  const candidates = infoReducer(e.querySelectorAll('[aria-label]'), 'aria-label');
-  if(!candidates || !candidates.attrs.length)
+  // December 2020 update: it is now worthy to look at the call to action
+  // in the advertising and go up till the right post selection.
+  // this function is the one that decides if a post is a sponsored or not
+  const candidate1 = infoReducer(e.querySelectorAll('i[aria-label]'), 'aria-label');
+  const candidate2 = e.querySelector('a[href^="/ads/about"]');
+  if(!candidate1 || !candidate1.attrs.length || !candidate2)
     return null;
-  const sponseredWordFound = _.some(candidates.attrs, function(label) {
+
+  if(candidate2)
+    return { type: 'ad', visibility: 'public', visibilityInfo: 'guessed', element: e };
+
+  const sponseredWordFound = _.some(candidate1.attrs, function(label) {
     if(sponsoredText.includes(label))
       console.log("Matched sponsored content!", label, "in", e);
     return sponsoredText.includes(label);
   });
   if(!sponseredWordFound)
     return null;
+
   return {
-    type: 'ad',
-    visibility: 'public',
+    type: 'ad', visibility: 'public', element: e,
     visibilityInfo: infoReducer(e.querySelectorAll('[aria-label]'), 'aria-label'),
-  }
+  };
 }
 
 function unReliableSize(elem) {
   const s = elem.outerHTML.length;
   const MINIMUM = 10000;
   if(s > MINIMUM) return false;
-  console.log("size failure", s, elem.outerHTML.substr(0, 200));
+  console.warn("size inconsistent with expectations", s, elem.outerHTML.substr(0, 200));
   return true;
-}
-
-/* core entry function for client-side parsing, configured in scrape.js,
-  this is the only function that return element because it should overwrite the one grabbed */
-function scrapeAbove(element) {
-  /* this is used for dark ad spotting */
-  const rightElement = element.closest("div[data-pagelet]"); // ERROR this selector is hardcoded and shouldn't
-  console.log("scrapeAbove(darkad)", rightElement.outerHTML.length);
-  if(unReliableSize(rightElement)) return null;
-
-  /* double check */
-  const classList = rightElement.className.split(/\s+/);
-  if(classList.indexOf('webtrex--scraped') !== -1) {
-    console.log("Element already checked/acquired?", rightElement, "returning");
-    return null;
-  }
-  // rightElement.classList.add("webtrex--scraped");
-
-  /* first check depends on advertising words. this get marked accordingly client side now */
-  const isAd = checkIfIsAd(rightElement);
-  if(isAd) return _.extend(isAd, { from: 'recursive', element: rightElement });
-
-  const visibilityInfo = infoReducer(rightElement.querySelectorAll('i[aria-label]'), 'aria-label');
-  return {
-    type: 'darkadv',
-    element: rightElement,
-    from: 'recursive',
-    visibilityInfo,
-  }
 }
 
 function scrapePost(element) {
@@ -117,17 +88,22 @@ function scrapePost(element) {
   const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label][role="img"]'), 'aria-label');
   if(!iconsNfo) {
     // this is like "people you might know"
-    // console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
+    console.debug("Post match mistake: (no attrs found! skipping)", element.textContent);
     return null;
   }
 
-  const lastVisibleWord = iconsNfo.attrs.map(function(label) {
-    return label.trim().split(" ").pop().toLowerCase();
-  });
-  const visibility = lastVisibleWord.some(function(fword) {
-    // if(publicWords.includes(fword)) console.log("Seems we have a winner", fword, lastVisibleWord, publicWords);
-    return publicWords.includes(fword);
-  }) ? "public" : "private";
+  let lastVisibleWord, visibility = null;
+  try {
+    lastVisibleWord = iconsNfo.attrs.map(function(label) {
+      return label.trim().split(" ").pop().toLowerCase();
+    });
+    visibility = lastVisibleWord.some(function(fword) {
+      // if(publicWords.includes(fword)) console.log("Seems we have a winner", fword, lastVisibleWord, publicWords);
+      return publicWords.includes(fword);
+    }) ? "public" : "private";
+  } catch(e) {
+    visibility = 'broken';
+  }
 
   console.debug(
     `Post categorized as "${visibility}" +i ${JSON.stringify(iconsNfo)}`
@@ -143,5 +119,5 @@ function scrapePost(element) {
 
 module.exports = {
   scrapePost,
-  scrapeAbove,
+  // scrapeAbove,
 }
