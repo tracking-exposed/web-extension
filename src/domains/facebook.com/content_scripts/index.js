@@ -36,12 +36,10 @@ async function boot() {
   handlers(hub);
   sifter(hub);
 
-/*
- * --- December 2020, temporarly removed the usave of observers because facebook 
- * has deploy an unexpected countermeasure 
+/* --- December 2020, temporarly removed the usave of observers 
+       because facebook deploy unexpected countermeasure
   observers(hub);
-
- * */
+ */
 
   hub.send("updateConfig", profile);
 

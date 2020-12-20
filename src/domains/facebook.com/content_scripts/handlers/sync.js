@@ -12,13 +12,7 @@ var state = {
 
 function handlePost(type, e) {
   if(!e.data) {
-    if(e.element && !!e.element.querySelector) {
-      console.log(
-        "has not visibility? <type", type, ">",
-        Array.from(e.element.querySelectorAll('h4').map('textContent'))
-      );
-    } else
-      console.debug(type, "discarged", e.element, "has no parsed data");
+    console.debug(type, e, "discarged");
     return;
   } else {
     console.debug("handlePost", e);
@@ -74,7 +68,7 @@ function handleEvent(type, e) {
 
 function sync() {
   if (state.events.length) {
-    console.log(`Sending ${state.events.length}, ${state.events.map((e)=>{return e.type})} events`);
+    console.debug(`Sending ${state.events.length} | types: ${state.events.map((e)=>{return e.type})} | visibility: ${state.events.map((e)=>{return e.visibility})}`);
     browser.runtime.sendMessage({
       method: "syncEvents",
       params: [state.events]
