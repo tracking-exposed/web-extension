@@ -34,7 +34,7 @@ function timelineWatcher() { // called periodically
     console.debug("Location is consideredn't by web-trex", pathname);
     return;
   }
-  console.log("new newsfeed|timeline start now! |expected 1e:", timeline.length);
+  console.log("new newsfeed|timeline start now!");
   timeline[0].classList.add("webtrex--scraped");
 
   cache = {};

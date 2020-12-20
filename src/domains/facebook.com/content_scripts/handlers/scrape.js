@@ -53,7 +53,7 @@ function handleElement(_, e) {
   /* this receive all the events, because all should be marked.
      this only work to mark event. It do not mark thing incomplete */
   if(!e.element || !e.data) {
-    console.log("handleElement can't apply here? dropping", e);
+    console.warn("(dropping!) This should happens, for example, with location: ", e);
     return;
   }
   if(!e.element.outerHTML && e.element.length) {
