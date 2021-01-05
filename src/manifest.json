@@ -19,9 +19,7 @@
   "permissions": [
     "storage",
     "cookies",
-    "http://localhost:8100/",
-    "https://*.facebook.com/",
-    "https://*.tracking.exposed/"
+    "https://*.facebook.com/"
   ],
 
   "background": {

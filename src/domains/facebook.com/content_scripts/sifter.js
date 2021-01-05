@@ -42,22 +42,6 @@ function timelineWatcher() { // called periodically
     location,
     element: timeline
   });
-
-  /* this is not the right place to do it but until I don't
-  get the tree of dependencies ... */
-  if( window.location.pathname.match(timelineMatcher) &&
-      window.location.pathname.match(/\/events\/(\d+)/)) {
-    console.log("Event page spotted!, scrapedEvent", window.location.pathname);
-    /* todo scrape a bit */
-    vhub.send("scrapedEvent", {
-      data: {
-        path: window.location.pathname,
-        type: 'evelif',
-      },
-      element: timeline[0]
-    })
-    timeline[0].classList.add("webtrex--scraped");
-  }
 }
 
 function findTimeline(hub) {
@@ -78,7 +62,6 @@ function findTimeline(hub) {
     }
   });
 }
-
 
 const POST_INTERVAL_ms = 3000;
 const POST_DELAY_ms = 500;

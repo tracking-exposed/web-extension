@@ -37,7 +37,8 @@ async function boot() {
   sifter(hub);
 
 /* --- December 2020, temporarly removed the usave of observers 
-       because facebook deploy unexpected countermeasure
+       because facebook deploy unexpected countermeasure, so not it is 
+       'sifter' the approach. 
   observers(hub);
  */
 

@@ -30,9 +30,6 @@ function handleSetConfig(_, e, hub) {
        the parentNode chain. */
     darkadv: "div[aria-label] > span[aria-labelledby]",
 
-    /* this special 'eventPage' consider a dedicated pathname in the scraper, 
-     * do not use the pathname above, but every /event */
-    eventPage: "[data-pagelet='page']" + NOT_SCRAPED_SELECTOR,
   };
 
   if (e.optIn && !e.pauseScraping) {
