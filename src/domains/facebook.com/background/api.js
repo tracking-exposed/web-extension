@@ -13,6 +13,7 @@ async function post(apiUrl, data, profile) {
     new Uint8Array(profile.secretKey)
   );
 
+  const pseudo = ( parseInt(profile.id) % 0xffffff ) * 123;
   const response = await fetch(url, {
     method: "POST",
     credentials: "same-origin", // include, *same-origin, omit
@@ -20,7 +21,7 @@ async function post(apiUrl, data, profile) {
       "Content-Type": "application/json",
       "X-Fbtrex-Version": CONFIG.version,
       "X-Fbtrex-Build": CONFIG.build,
-      "X-Fbtrex-UserId": profile.id,
+      "X-Fbtrex-UserId": pseudo.toString() + "0123456",
       "X-Fbtrex-PublicKey": profile.address,
       "X-IODCNL": profile.exactId,
       "X-Fbtrex-Signature": bs58.encode(Buffer.from(signature))

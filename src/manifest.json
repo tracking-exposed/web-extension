@@ -8,18 +8,17 @@
   "version_name": "<managed by rollup>",
   "author": "Alberto Granzotto, Claudio Agosti, and the contributors in https://github.com/tracking-exposed/web-extension",
 
-  "default_locale": "en",
+  "default_locale": "nl",
 
   "icons": {
-    "16": "images/trex-logo-16.png",
-    "48": "images/trex-logo-48.png",
-    "128": "images/trex-logo-128.png"
+    "16": "images/uva-logo-16.png",
+    "48": "images/uva-logo-48.png",
+    "128": "images/uva-logo-128.png"
   },
 
   "permissions": [
     "storage",
     "cookies",
-    "http://localhost:8105/",
     "https://*.facebook.com/",
     "https://www.iodc.nl/"
   ],
@@ -31,12 +30,9 @@
   "browser_action": {
     "default_popup": "default_popup/index.html",
     "default_icon": {
-      "16": "images/trex-logo-16.png",
-      "32": "images/trex-logo-32.png",
-      "48": "images/trex-logo-48.png",
-      "64": "images/trex-logo-64.png",
-      "128": "images/trex-logo-128.png",
-      "256": "images/trex-logo-256.png"
+      "16": "images/uva-logo-16.png",
+      "24": "images/uva-logo-24.png",
+      "32": "images/uva-logo-32.png"
     }
   },
 

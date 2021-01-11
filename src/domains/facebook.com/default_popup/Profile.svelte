@@ -19,7 +19,7 @@
   <Card>
     <div class="borderless">
       <CardBody>
-      <img src="../images/trex-logo-256.png" alt="University of Amsterdam Logo" />
+      <img src="../images/uva-logo-256.png" alt="University of Amsterdam Logo" />
       <p class="textual">Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt ten alle tijden participatie in het onderzoek stopzetten, zie ook ons <a target=_blank href="https://algorithms.exposed/paadc-privacy-statement/">privacy statement</a>.</p>
     </CardBody>
     <!--

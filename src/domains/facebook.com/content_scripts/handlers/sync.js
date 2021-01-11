@@ -12,7 +12,7 @@ var state = {
 
 function handlePost(type, e) {
   if(!e.data) {
-    console.debug(type, e, "discarged");
+    console.debug(type, e, "discarged because of lacking collected data?");
     return;
   } else {
     console.debug("handlePost", e);
@@ -55,17 +55,6 @@ function handleTimeline(type, e) {
   });
 }
 
-function handleEvent(type, e) {
-  const id = uuid();
-  state.events.push({
-    id,
-    type: e.data.type,
-    path: e.data.path,
-    element: e.element.outerHTML,
-    openingTime: getTimeISO8601()
-  });
-}
-
 function sync() {
   if (state.events.length) {
     console.debug(`Sending ${state.events.length} | types: ${state.events.map((e)=>{return e.type})} | visibility: ${state.events.map((e)=>{return e.visibility})}`);
@@ -81,6 +70,5 @@ export default function register(hub) {
   hub.on("newPost", handlePost);
   hub.on("newDarkAdv", handlePost);
   hub.on("newTimeline", handleTimeline);
-  hub.on("scrapedEvent", handleEvent);
   window.setInterval(sync.bind(null, hub), INTERVAL);
 }

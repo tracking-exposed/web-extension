@@ -16,6 +16,7 @@
       method: "getProfiles",
       params: [true]
     });
+    console.log(profiles, profileInUse);
     if (profileInUse) {
       profiles = profiles.filter(p => p.id != profileInUse.id);
     }
