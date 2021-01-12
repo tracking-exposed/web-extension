@@ -116,9 +116,8 @@ export async function getProfile(id, withPicture = false) {
     await db.set([NAMESPACE, id, "profile"], profile);
   }
 
-  if (withPicture) {
-    profile.picture = await db.get([NAMESPACE, id, "picture"]);
-  }
+  let paadc = await db.get(["PAADC"]);
+  profile.paadc = paadc ? paadc.exactId : null;
 
   return profile;
 }
@@ -153,7 +152,10 @@ export async function loadProfile() {
     token: userInfo.token
   });
 
-  return await db.get([NAMESPACE, profile.id, "profile"]);
+  const ret = await db.get([NAMESPACE, profile.id, "profile"]);
+  const paadc = await db.get(["PAADC"]);
+  ret.paadc = paadc ? paadc.exactId : null;
+  return ret;
 }
 
 

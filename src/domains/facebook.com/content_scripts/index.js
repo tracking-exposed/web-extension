@@ -2,17 +2,6 @@ import handlers from "./handlers";
 import sifter from "./sifter";
 import { Hub } from "src/content_scripts/";
 import Onboarding from "./components/Onboarding.svelte";
-import { toDataURL } from "./utils";
-
-async function retrievePicture(id) {
-  const url = `https://graph.facebook.com/${id}/picture?type=normal`;
-  const data = await toDataURL(url);
-
-  const profile = await browser.runtime.sendMessage({
-    method: "setPicture",
-    params: [data]
-  });
-}
 
 async function boot() {
   if(window.location.hostname !== 'www.facebook.com') return;
@@ -26,10 +15,6 @@ async function boot() {
     method: "loadProfile"
   });
 
-  if (profile) {
-    retrievePicture(profile.id);
-  }
-
   console.info("Profile loaded", profile);
 
   const hub = new Hub();
@@ -40,8 +25,6 @@ async function boot() {
        because facebook deploy unexpected countermeasure
   observers(hub);
  */
-
-  hub.send("updateConfig", profile);
 
   if (profile && !profile.optIn) {
     new Onboarding({ target: document.body, props: { hub } });

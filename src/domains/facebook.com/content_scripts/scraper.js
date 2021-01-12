@@ -83,7 +83,10 @@ function scrapePost(element) {
 
   /* first check depends on advertising words. this get marked accordingly client side now */
   const isAd = checkIfIsAd(element);
-  if(isAd) return _.extend(isAd, {from: 'standard'});
+  if(isAd) {
+    console.debug("Post matched as Adveritising", element, isAd);
+    return _.extend(isAd, {from: 'standard'});
+  }
 
   const iconsNfo = infoReducer(element.querySelectorAll('i[aria-label][role="img"]'), 'aria-label');
   if(!iconsNfo) {
