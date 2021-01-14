@@ -116,9 +116,12 @@ export async function getProfile(id, withPicture = false) {
     await db.set([NAMESPACE, id, "profile"], profile);
   }
 
-  let paadc = await db.get(["PAADC"]);
-  profile.paadc = paadc ? paadc.exactId : null;
-
+  try {
+    let paadc = await db.get(["PAADC"]);
+    profile.paadc = paadc ? paadc.exactId : null;
+  } catch(error) {
+    profile.paadc = null;
+  }
   return profile;
 }
 
@@ -153,8 +156,12 @@ export async function loadProfile() {
   });
 
   const ret = await db.get([NAMESPACE, profile.id, "profile"]);
-  const paadc = await db.get(["PAADC"]);
-  ret.paadc = paadc ? paadc.exactId : null;
+  try {
+    let paadc = await db.get(["PAADC"]);
+    ret.paadc = paadc ? paadc.exactId : null;
+  } catch(error) {
+    ret.paadc = null;
+  }
   return ret;
 }
 

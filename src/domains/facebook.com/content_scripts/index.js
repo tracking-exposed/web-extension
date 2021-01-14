@@ -30,9 +30,11 @@ async function boot() {
     new Onboarding({ target: document.body, props: { hub } });
   }
 
+  // hub.send("updateConfig", profile); remind self this extension can't be disabled, only disinstalled.
+
   // TODO: handling here is specific to the header. Need to be refactored soon to support new stuff
   browser.runtime.onMessage.addListener(({ method, params }, sender) => {
-    console.debug("Configuration updated", method, params);
+    console.debug("Configuration updated (WTIT?)", method, params);
     hub.send("updateConfig", params[0]);
   });
 }
