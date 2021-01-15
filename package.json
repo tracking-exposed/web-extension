@@ -35,7 +35,7 @@
     "clean": "rimraf build",
     "build": "run-s clean _build:watch",
     "build:watch": "run-s clean _build:watch",
-    "dist": "run-s build lint pack",
+    "dist": "run-s _build lint pack",
     "lint": "web-ext lint",
     "pack": "web-ext build",
     "test": "jest",
