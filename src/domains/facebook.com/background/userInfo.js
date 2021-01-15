@@ -3,15 +3,11 @@ import { getProfile } from "./profile";
 import db from "src/background/db";
 
 export async function getUserInfo(profile) {
-  const uniqueMsg = `key ${profile.publicKey}@${
-    profile.id
-  } RAND: ${Math.random()}@${new Date()}`;
+  const uniqueMsg = `RAND:${Math.random()}@${new Date()}`;
   const data = {
     message: uniqueMsg,
-    userId: profile.id,
-    version: "2.0.0",
-    publicKey: profile.publicKey,
-    optin: profile.optin
+    paadcId: profile.exactId,
+    publicKey: profile.publicKey
   };
 
   return api.userInfo(data, profile);

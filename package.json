@@ -1,6 +1,6 @@
 {
   "name": "PAADC",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.11",
@@ -33,7 +33,7 @@
     "_build:watch": "rollup -c -w",
     "start": "run-s build dev",
     "clean": "rimraf build",
-    "build": "run-s clean _build",
+    "build": "run-s clean _build:watch",
     "build:watch": "run-s clean _build:watch",
     "dist": "run-s build lint pack",
     "lint": "web-ext lint",
