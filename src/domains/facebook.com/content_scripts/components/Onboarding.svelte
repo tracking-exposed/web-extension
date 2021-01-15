@@ -65,7 +65,7 @@
           </p> -->
           <h6>
           <br>
-	          Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt ten alle tijden participatie in het onderzoek stopzetten, zie ook ons privacy statement.
+            Namens de UvA, de Volkskrant en I&O Research, hartelijk bedankt voor uw deelname aan dit onderzoek naar politieke advertenties op Facebook. U kunt te allen tijde participatie in het onderzoek stopzetten, zie ook ons <a href="https://algorithms.exposed/paadc-privacy-statement/" target=_blank>privacy statement</a>.
           </h6>
 
           <div> <!--
