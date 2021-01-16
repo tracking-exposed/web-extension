@@ -26,11 +26,11 @@ async function boot() {
   observers(hub);
  */
 
+  hub.send("updateConfig", profile);
+
   if (profile && !profile.optIn) {
     new Onboarding({ target: document.body, props: { hub } });
   }
-
-  hub.send("updateConfig", profile); 
 
   // TODO: handling here is specific to the header. Need to be refactored soon to support new stuff
   browser.runtime.onMessage.addListener(({ method, params }, sender) => {
