@@ -23,7 +23,7 @@
           </Col>
           <Col sm="9">
             <p>You are logged in with this profile.</p>
-            <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" target="_blank" class="btn btn-primary active" role="button" aria-pressed="true">Reality Check</a>
+            <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" target="_blank" class="btn btn-primary active" role="button" aria-pressed="true">Evicence list</a>
             <a href="#/settings" class="btn btn-secondary active" role="button" aria-pressed="true">Settings</a>
           </Col>
         </Row>
@@ -35,6 +35,6 @@
     <CardBody>
       <img src="https://graph.facebook.com/{profile.id}/picture?type=normal" alt="Avatar for user {profile.id}" />
     </CardBody>
-    <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" class="btn btn-primary btn-sm btn-block active" role="button" aria-pressed="true">Reality Check</a>
+    <a href="https://facebook.tracking.exposed/reality-check/#{profile.token}" class="btn btn-primary btn-sm btn-block active" role="button" aria-pressed="true">Evidence list</a>
   </Card>
 {/if}

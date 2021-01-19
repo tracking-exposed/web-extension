@@ -55,18 +55,16 @@
     <div class="outer">
       <div class="inner">
         <Jumbotron class="foobar">
-          <h1>Thank you for joining Trex!</h1>
+          <h1>the Facebook algorithm audit toolkit</h1>
           <p class="lead">
-            We want to make sure you know <a
-              target="_blank"
-              href="https://facebook.tracking.exposed/what-we-collect/">
-              what we collect</a>,
-              and you consent to the processing of personal data that are strictly necessary for the research.
+            fbTREX is tool for let you do analysis, or creative use, of the posts Facebook select for you.
+            Be aware of <a target="_blank" href="https://facebook.tracking.exposed/what-we-collect/">
+              what we collect</a> to offer this auditing tool. You can get in <a href="https://facebook.tracking.exposed/about" target=_blank>touch</a> if you want to plan a research experiment.
           </p>
           <hr />
           <p>
-            By opting in, you give us the right to process a copy of your Facebook timeline.
-            Our interest is research and analysis on personalization algorithms, not personal data exploitation, businesses, or any other exchange.
+            By opting in, you give us the right to process a copy of your Facebook timeline. Public posts and advertising only.<br/>
+            Our purposere it is enable anyone in do audit, analysis, and storytelling of personalization algorithms.
           </p>
 
           <div>
