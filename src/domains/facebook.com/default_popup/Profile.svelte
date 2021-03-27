@@ -8,9 +8,11 @@
 <style>
   .textual {
     padding: 10px;
+    text-align: left;
   }
 
   .borderless {
+    text-align: center;
     border: 0px !important;
   }
 </style>

@@ -12,7 +12,7 @@
 
 <style>
   .main {
-    min-height: 550px;
+    min-height: 150px;
   }
 </style>
 
