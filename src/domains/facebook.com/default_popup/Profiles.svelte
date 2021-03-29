@@ -39,14 +39,11 @@
 
   {#if profiles.length}
     <section class="mb-4">
-      <h2>Other profiles</h2>
-      <Row>
-        {#each profiles as profile}
-          <Col sm="4">
-            <Profile {profile} />
-          </Col>
-        {/each}
-      </Row>
+      <p class="textual">
+        Deze plugin is inactief en verzamelt geen data, u kunt deze verwijderen uit uw browser.
+        <br>
+        Namens de UvA, de Volkskrant en I&O research, hartelijk dank voor deelname aan dit onderzoek naar politieke advertenties op Facebook.
+      </p>
     </section>
   {/if}
 {/if}
